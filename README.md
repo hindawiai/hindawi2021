@@ -19,7 +19,16 @@ Note: Individual files may have independent license and copyright terms
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hindawiai/hindawi2020/master?filepath=Notebooks%2FHindawi2021.6.ipynb)
 
 [Share on WhatsApp](https://api.whatsapp.com/send?text=Mother%20tongue%20based%20programming%20for%20everyone%20https://github.com/hindawiai/hindawi2020/)
-
+<div class="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_HOrXYpwgB8Le8X/view" data-text="Support Project Hindawi" data-color="#528FF0" data-size="large">
+  <script>
+    (function(){
+      var d=document; var x=!d.getElementById('razorpay-embed-btn-js')
+      if(x){ var s=d.createElement('script'); s.defer=!0;s.id='razorpay-embed-btn-js';
+      s.src='https://cdn.razorpay.com/static/embed_btn/bundle.js';d.body.appendChild(s);} else{var rzp=window['__rzp__'];
+      rzp && rzp.init && rzp.init()}})();
+  </script>
+</div>
+    
 ## Quick start
 Execute the following commands on a docker capable system
 ```
