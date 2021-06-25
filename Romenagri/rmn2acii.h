@@ -1,69 +1,70 @@
+<शैली गुरु>
 /*
 Copyright (C) 2003,2004,2005,2006 Abhishek Choudhary
 This file is part of the Romenagri Transliteration System.
 
-The Romenagri Transliteration System is free software; 
-you can redistribute it and/or modify it under the terms of the 
-GNU General Public License as published by the 
-Free Software Foundation; either version 2 of the License, or 
+The Romenagri Transliteration System is मुक्त software;
+you can redistribute it and/or modअगरy it under the terms of the
+GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
-The Romenagri Transliteration System is distributed in the hope 
-that it will be useful, but WITHOUT ANY WARRANTY; without 
-even the implied warranty of MERCHANTABILITY or FITNESS FOR 
-A PARTICULAR PURPOSE. See the GNU General Public License for 
+The Romenagri Transliteration System is distributed in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License क्रम
 more details.
 
 You should have received a copy of the GNU General Public
-License along with this file; see the file COPYING. If
-not, write to the Free Software Foundation,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+License aदीर्घ with this file; see the file COPYING. If
+not, ग_लिखो to the Free Software Foundation,
+51 Franklin Street, Fअगरth Floor, Boston, MA 02110-1301 USA
 */
 
 /*
-Modifications: (Please maintain reverse chronological order)
+Modअगरications: (Please मुख्यtain reverse chronological order)
 
-	dd-mmm-yyyy, Nature of modification,
-                        Name of modifier <alias>,
-			email adress of modifier
+	dd-mmm-yyyy, Nature of modअगरication,
+                        Name of modअगरier <alias>,
+			email adress of modअगरier
 
-	19-Jan-2006, Added the modifications section,
+	19-Jan-2006, Added the modअगरications section,
                         Abhishek Choudhary <hi_pedler>,
 			choudhary@indicybers.net
 
-End of modifications.
+End of modअगरications.
 */
 	
-#ifndef __RMN2ACII_H__
-#define __RMN2ACII_H__
+#अगर_अघोषित __RMN2ACII_H__
+#घोषणा __RMN2ACII_H__
 
-#include <stdio.h>
-#include <string.h>
+#समावेश <मानकपन.स>
+#समावेश <माला.स>
 
-#include "acii.h"
+#समावेश "acii.h"
 
 
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#अगर_घोषित __cplusplus
+बाह्य "C"
+अणु
+#पूर्ण_अगर
 
 /*globals*/
-  extern char *msg, *tst;
-  extern char *lev1;
+  बाह्य अक्षर *msg, *tst;
+  बाह्य अक्षर *lev1;
 
-  extern int level1 (char *tok);
-  extern char *c2s (char t);
-  extern char *lookup (char *key);
-  extern int matra (char *tok);
-  extern int level2a (char *tok);
-  extern int level2b (char *tok, char *lk);
-  extern int level2c (char *tok);
-  extern char *rmn2acii (char *tok);
+  बाह्य पूर्णांक level1 (अक्षर *tok);
+  बाह्य अक्षर *c2s (अक्षर t);
+  बाह्य अक्षर *lookup (अक्षर *key);
+  बाह्य पूर्णांक matra (अक्षर *tok);
+  बाह्य पूर्णांक level2a (अक्षर *tok);
+  बाह्य पूर्णांक level2b (अक्षर *tok, अक्षर *lk);
+  बाह्य पूर्णांक level2c (अक्षर *tok);
+  बाह्य अक्षर *rmn2acii (अक्षर *tok);
 
-#ifdef __cplusplus
-}
-#endif
+#अगर_घोषित __cplusplus
+पूर्ण
+#पूर्ण_अगर
 
-#endif
+#पूर्ण_अगर

@@ -1,32 +1,33 @@
+<शैली गुरु>
 /*
- * $Id: x11int.c,v 1.6 1996/04/23 08:36:54 couet Exp $
+ * $Id: x11पूर्णांक.c,v 1.6 1996/04/23 08:36:54 couet Exp $
  *
- * $Log: x11int.c,v $
+ * $Log: x11पूर्णांक.c,v $
  * Revision 2.0 1999/02/27       Mario Stipcevic, line dash styles 3.4q1
  * Revision 1.9 1999/01/01       Mario Stipcevic
  *  Added graphics rotation (ixrotate)
  * Revision 1.8 1998/10/10       Mario Stipcevic
  * Revision 1.7 1997/07/01       Mario Stipcevic
- * ixldgif able to load gifs using standard 6x6x6 color map
+ * ixldgअगर able to load gअगरs using standard 6x6x6 color map
  * (216 color indexes, from 32-247 )
  * Revision 1.6  1996/04/23 08:36:54  couet
- * - The test on "display" in ixopnds was not correct. In the case of Paw++
- *   the display is set outside the ixopnds routine and in that case the
+ * - The test on "display" in ixopnds was not correct. In the हाल of Paw++
+ *   the display is set outside the ixopnds routine and in that हाल the
  *   graphics contexts was not initialized. Now the variable isdisp is tested.
  *
  * Revision 1.5  1996/04/19 16:23:52  maartenb
- * - Use XFreeFontNames() to free fontlist
+ * - Use XFreeFontNames() to मुक्त fontlist
  *
  * Revision 1.4  1996/04/19 13:23:00  couet
- * - free(fontlist) was misplaced
+ * - मुक्त(fontlist) was misplaced
  *
  * Revision 1.3  1996/04/19 12:10:31  couet
- * - Free fontlist to avoid memory leak
+ * - Free fontlist to aव्योम memory leak
  *
  * Revision 1.2  1996/04/18 14:36:12  couet
- * - ixopnds exit with return code 0 if the display is already open.
+ * - ixopnds निकास with वापस code 0 अगर the display is alपढ़ोy खोलो.
  *
- * - Modify the way the fonts are managed to avoid memory leak.
+ * - Modअगरy the way the fonts are managed to aव्योम memory leak.
  *
  * Revision 1.1.1.1  1996/02/14 13:10:26  mclareni
  * Higz
@@ -35,365 +36,365 @@
 /*CMZ :  2.07/20 12/12/95  11.17.55  by  O.Couet*/
 /*-- Author : O.Couet*/
 /*
- * Fortran interface to X11 window routines for HIGZ
+ * Fortran पूर्णांकerface to X11 winकरोw routines क्रम HIGZ
  */
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <math.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xatom.h>
-#include <X11/cursorfont.h>
-#include <X11/keysym.h>
+#समावेश <मानकपन.स>
+#समावेश <माला.स>
+#समावेश <मानककोष.स>
+#समावेश <प्रकार.स>
+#समावेश <गणित.स>
+#समावेश <X11/Xlib.h>
+#समावेश <X11/Xutil.h>
+#समावेश <X11/Xatom.h>
+#समावेश <X11/cursorfont.h>
+#समावेश <X11/keysym.h>
 
-#define max(a,b) ((a) > (b) ? (a) : (b))
-#define min(a,b) ((a) < (b) ? (a) : (b))
+#घोषणा max(a,b) ((a) > (b) ? (a) : (b))
+#घोषणा min(a,b) ((a) < (b) ? (a) : (b))
 
-#define forever while(1)
-#define LNULL 0L
+#घोषणा क्रमever जबतक(1)
+#घोषणा Lशून्य 0L
 
-#define MAXWN 16                 /* maximum number of windows                 */
-static struct {
-  int      open;                 /* 1 if the window is open, 0 if not         */
-  int      motif;                /* 1 if the window is a motif window         */
-  int      wid;                  /* window identification number from ixopnwi */
-  int      bgcol;                /* window's background color index (patlette)*/
-  Drawable motif_window;         /* adress of the Motif window                */
-  int      double_buffer;        /* 1 if the double buffer is on, 0 if not    */
-  Drawable drawing;              /* drawing area, equal to window or buffer   */
-  Drawable window;               /* X11 window                                */
-  Drawable buffer;               /* pixmap used for double buffer             */
-  int width;                     /* width of the window                       */
-  int height;                    /* height of the window                      */
-  int clip;                      /* 1 if the clipping is on                   */
-  int xclip;                     /* x coordinate of the clipping rectangle    */
-  int yclip;                     /* y coordinate of the clipping rectangle    */
-  int wclip;                     /* width of the clipping rectangle           */
-  int hclip;                     /* height of the clipping rectangle          */
-} windows[MAXWN],                /* windows : list of the opened windows      */
-  *cws, *tws, *ttws;             /* cws : pointer to the current window       */
-                                 /* tws : temporary pointer                   */
-                                 /* ttws: yet another temporary pointer       */
-static int bitmask[]={1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096,
-      8192, 16384, 32768, 65536};/* powers of 2, bitmask in ixwptrq()          */
+#घोषणा MAXWN 16                 /* maximum number of winकरोws                 */
+अटल काष्ठा अणु
+  पूर्णांक      खोलो;                 /* 1 अगर the winकरोw is खोलो, 0 अगर not         */
+  पूर्णांक      motअगर;                /* 1 अगर the winकरोw is a motअगर winकरोw         */
+  पूर्णांक      wid;                  /* winकरोw identअगरication number from ixopnwi */
+  पूर्णांक      bgcol;                /* winकरोw's background color index (patlette)*/
+  Drawable motअगर_winकरोw;         /* adress of the Motअगर winकरोw                */
+  पूर्णांक      द्विगुन_buffer;        /* 1 अगर the द्विगुन buffer is on, 0 अगर not    */
+  Drawable drawing;              /* drawing area, equal to winकरोw or buffer   */
+  Drawable winकरोw;               /* X11 winकरोw                                */
+  Drawable buffer;               /* pixmap used क्रम द्विगुन buffer             */
+  पूर्णांक width;                     /* width of the winकरोw                       */
+  पूर्णांक height;                    /* height of the winकरोw                      */
+  पूर्णांक clip;                      /* 1 अगर the clipping is on                   */
+  पूर्णांक xclip;                     /* x coordinate of the clipping rectangle    */
+  पूर्णांक yclip;                     /* y coordinate of the clipping rectangle    */
+  पूर्णांक wclip;                     /* width of the clipping rectangle           */
+  पूर्णांक hclip;                     /* height of the clipping rectangle          */
+पूर्ण winकरोws[MAXWN],                /* winकरोws : list of the खोलोed winकरोws      */
+  *cws, *tws, *ttws;             /* cws : poपूर्णांकer to the current winकरोw       */
+                                 /* tws : temporary poपूर्णांकer                   */
+                                 /* ttws: yet another temporary poपूर्णांकer       */
+अटल पूर्णांक biपंचांगask[]=अणु1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096,
+      8192, 16384, 32768, 65536पूर्ण;/* घातers of 2, biपंचांगask in ixwptrq()          */
 
-Drawable oldwin;                 /* allows to save the current opened window  */
-static int ispix = 0;            /* if ispix=1 a pixmap has been opened       */
+Drawable oldwin;                 /* allows to save the current खोलोed winकरोw  */
+अटल पूर्णांक ispix = 0;            /* अगर ispix=1 a pixmap has been खोलोed       */
 
-static XClassHint class_hints = {"higz", "HIGZ"}; /* Class name is HIGZ       */
+अटल XClassHपूर्णांक class_hपूर्णांकs = अणु"higz", "HIGZ"पूर्ण; /* Class name is HIGZ       */
 
-static Display *display;
-static int isdisp = 0;           /* if isdisp=1 the display has been opened   */
-static Screen *screen;
-static int screen_number;
-static char vendor[132];         /* output of XServerVendor                   */
+अटल Display *display;
+अटल पूर्णांक isdisp = 0;           /* अगर isdisp=1 the display has been खोलोed   */
+अटल Screen *screen;
+अटल पूर्णांक screen_number;
+अटल अक्षर venकरोr[132];         /* output of XServerVenकरोr                   */
 
-static Window (*motif_open) ();  /* external routine to open a motif window   */
-static void (*motif_init) ();    /* external routine to init a motif window   */
-static void (*motif_close) ();   /* external routine to close a motif window  */
+अटल Winकरोw (*motअगर_खोलो) ();  /* बाह्यal routine to खोलो a motअगर winकरोw   */
+अटल व्योम (*motअगर_init) ();    /* बाह्यal routine to init a motअगर winकरोw   */
+अटल व्योम (*motअगर_बंद) ();   /* बाह्यal routine to बंद a motअगर winकरोw  */
 
-static int external_int = 0;
-static Drawable external_window;
+अटल पूर्णांक बाह्यal_पूर्णांक = 0;
+अटल Drawable बाह्यal_winकरोw;
 
-static Pixmap pixmp; /* temporary, Mario, delete if not used */
+अटल Pixmap pixmp; /* temporary, Mario, delete अगर not used */
 
-static int do_raise = 0;         /* if do_raise =1 cws is raised in ixupdwi   */
+अटल पूर्णांक करो_उठाओ = 0;         /* अगर करो_उठाओ =1 cws is उठाओd in ixupdwi   */
 
 /*
- * colors[1]           : foreground also used for b/w screen
- * colors[0]           : background also used for b/w screen
+ * colors[1]           : क्रमeground also used क्रम b/w screen
+ * colors[0]           : background also used क्रम b/w screen
  * colors[2..MAXCOL-1] : colors which can be set by IXSETCO
  */
-static int colored;              /* Flag if color screen                      */
-static Colormap colormap;        /* Maba's Colormap                           */
+अटल पूर्णांक colored;              /* Flag अगर color screen                      */
+अटल Colormap colormap;        /* Maba's Colormap                           */
 
-#define MAXCOL 256
-static struct {
-  int defined;
-  unsigned long pixel;
-  float red;
-  float green;
-  float blue;
-} colors[MAXCOL] = {0, 0, 255., 255., 255.};
-
-/*
- * Primitives Graphic Contexts global for all windows
- */
-#define MAXGC 7
-static GC gclist[MAXGC];
-static GC *gcline = &gclist[0];  /* Polylines                                 */
-static GC *gcmark = &gclist[1];  /* Polymarker                                */
-static GC *gcfill = &gclist[2];  /* Fill areas                                */
-static GC *gctext = &gclist[3];  /* Text                                      */
-static GC *gcinvt = &gclist[4];  /* Inverse text                              */
-static GC *gcdash = &gclist[5];  /* Dashed lines                              */
-static GC *gcpxmp = &gclist[6];  /* Pixmap management                         */
-static GC GCbuff[1];
-static GC *gcbuff = &GCbuff[0];  /* GC for buffer pixmap (M.S. 05.98)         */
-
-static unsigned long gc_mask = GCForeground | GCBackground;
-static XGCValues gc_return;
-
-static draw_mode = 0;            /* Current draw mode as set by ixdrmde() M.S.*/
+#घोषणा MAXCOL 256
+अटल काष्ठा अणु
+  पूर्णांक defined;
+  अचिन्हित दीर्घ pixel;
+  भग्न red;
+  भग्न green;
+  भग्न blue;
+पूर्ण colors[MAXCOL] = अणु0, 0, 255., 255., 255.पूर्ण;
 
 /*
- * Input echo Graphic Context global for all windows
+ * Primitives Graphic Contexts global क्रम all winकरोws
  */
-static GC gcecho;                           /* input echo                     */
-static XGCValues gcechov;
+#घोषणा MAXGC 7
+अटल GC gclist[MAXGC];
+अटल GC *gcline = &gclist[0];  /* Polylines                                 */
+अटल GC *gcmark = &gclist[1];  /* Polymarker                                */
+अटल GC *gcfill = &gclist[2];  /* Fill areas                                */
+अटल GC *gctext = &gclist[3];  /* Text                                      */
+अटल GC *gcinvt = &gclist[4];  /* Inverse text                              */
+अटल GC *gcdash = &gclist[5];  /* Dashed lines                              */
+अटल GC *gcpxmp = &gclist[6];  /* Pixmap management                         */
+अटल GC GCbuff[1];
+अटल GC *gcbuff = &GCbuff[0];  /* GC क्रम buffer pixmap (M.S. 05.98)         */
 
-static int fill_hollow;                     /* Flag if fill style is hollow   */
-static int fill_border;                     /* Flag to fill border also       */
-static Pixmap fill_pattern = (Pixmap)LNULL; /* Fill pattern                   */
-static int current_fasi = 0;                /* Current fill area style index  */
-static int text_align = 0;                  /* Align text left, center, right */
+अटल अचिन्हित दीर्घ gc_mask = GCForeground | GCBackground;
+अटल XGCValues gc_वापस;
 
-static int rotate_fl = 0, scale_fl = 0, trans_fl = 0;
-static double r_angle = 0;                  /* Rotation angle in radians      */
-static double Rsi = 0, Rco = 1, f10=100000; /* Rotation sine and cosine       */
-static int xRO = 0, yRO = 0;                /* Central point for rotation     */
-static int xOrig = 0, yOrig = 0;            /* Translated new origin          */
-static double scalex=1, scaley=1;           /* Scaling matrix                 */
+अटल draw_mode = 0;            /* Current draw mode as set by ixdrmde() M.S.*/
+
+/*
+ * Input echo Graphic Context global क्रम all winकरोws
+ */
+अटल GC gcecho;                           /* input echo                     */
+अटल XGCValues gcechov;
+
+अटल पूर्णांक fill_hollow;                     /* Flag अगर fill style is hollow   */
+अटल पूर्णांक fill_border;                     /* Flag to fill border also       */
+अटल Pixmap fill_pattern = (Pixmap)Lशून्य; /* Fill pattern                   */
+अटल पूर्णांक current_fasi = 0;                /* Current fill area style index  */
+अटल पूर्णांक text_align = 0;                  /* Align text left, center, right */
+
+अटल पूर्णांक rotate_fl = 0, scale_fl = 0, trans_fl = 0;
+अटल द्विगुन r_angle = 0;                  /* Rotation angle in radians      */
+अटल द्विगुन Rsi = 0, Rco = 1, f10=100000; /* Rotation sine and cosine       */
+अटल पूर्णांक xRO = 0, yRO = 0;                /* Central poपूर्णांक क्रम rotation     */
+अटल पूर्णांक xOrig = 0, yOrig = 0;            /* Translated new origin          */
+अटल द्विगुन scalex=1, scaley=1;           /* Scaling matrix                 */
 
 /*
  * Text management
  */
-#define MAXFONT 4
-static struct {
+#घोषणा MAXFONT 4
+अटल काष्ठा अणु
   XFontStruct *id;
-  char name[80];                            /* font name                      */
-} font[MAXFONT];                            /* list of fonts loaded           */
-static XFontStruct *text_font;              /* current font                   */
-static int current_font_number = 0;         /* current font number in font[]  */
+  अक्षर name[80];                            /* font name                      */
+पूर्ण font[MAXFONT];                            /* list of fonts loaded           */
+अटल XFontStruct *text_font;              /* current font                   */
+अटल पूर्णांक current_font_number = 0;         /* current font number in font[]  */
 
 /*
- * keep style values for line GC
+ * keep style values क्रम line GC
  */
-static int line_width = 0;
-static int line_style = LineSolid;
-static int cap_style  = CapButt;
-static int join_style = JoinMiter;
-static char dash_list[16];
-static int dash_length = 0;
-static int dash_offset = 0;
-static int dash_nseg = 1; /* Mario */
+अटल पूर्णांक line_width = 0;
+अटल पूर्णांक line_style = LineSolid;
+अटल पूर्णांक cap_style  = CapButt;
+अटल पूर्णांक join_style = JoinMiter;
+अटल अक्षर dash_list[16];
+अटल पूर्णांक dash_length = 0;
+अटल पूर्णांक dash_offset = 0;
+अटल पूर्णांक dash_nseg = 1; /* Mario */
 
 /*
  * event masks
  */
-static unsigned long mouse_mask = ButtonPressMask   | ButtonReleaseMask |
-                                  EnterWindowMask   | LeaveWindowMask   |
-                                  PointerMotionMask | KeyPressMask      |
+अटल अचिन्हित दीर्घ mouse_mask = ButtonPressMask   | ButtonReleaseMask |
+                                  EnterWinकरोwMask   | LeaveWinकरोwMask   |
+                                  Poपूर्णांकerMotionMask | KeyPressMask      |
                                   KeyReleaseMask;
-static unsigned long keybd_mask = ButtonPressMask | KeyPressMask |
-                                  EnterWindowMask | LeaveWindowMask;
+अटल अचिन्हित दीर्घ keybd_mask = ButtonPressMask | KeyPressMask |
+                                  EnterWinकरोwMask | LeaveWinकरोwMask;
 
 /*
  * last cursor positions
  */
-static int xloc  = 0;
-static int yloc  = 0;
-static int xlocp = 0;
-static int ylocp = 0;
+अटल पूर्णांक xloc  = 0;
+अटल पूर्णांक yloc  = 0;
+अटल पूर्णांक xlocp = 0;
+अटल पूर्णांक ylocp = 0;
 
 /*
  * data to create an invisible cursor
  */
-static char null_cursor_bits[] = {
+अटल अक्षर null_cursor_bits[] = अणु
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-static Cursor null_cursor = (Cursor)LNULL;
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00पूर्ण;
+अटल Cursor null_cursor = (Cursor)Lशून्य;
 
 /*
- * data to create fill area interior style
+ * data to create fill area पूर्णांकerior style
  */
-#define Hatches_type static unsigned char
+#घोषणा Hatches_type अटल अचिन्हित अक्षर
 
-Hatches_type         p1_bits[] = {
+Hatches_type         p1_bits[] = अणु
    0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55,
    0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55,
-   0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55};
-Hatches_type         p2_bits[] = {
+   0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55पूर्ण;
+Hatches_type         p2_bits[] = अणु
    0x44, 0x44, 0x11, 0x11, 0x44, 0x44, 0x11, 0x11, 0x44, 0x44, 0x11, 0x11,
    0x44, 0x44, 0x11, 0x11, 0x44, 0x44, 0x11, 0x11, 0x44, 0x44, 0x11, 0x11,
-   0x44, 0x44, 0x11, 0x11, 0x44, 0x44, 0x11, 0x11};
-Hatches_type         p3_bits[] = {
+   0x44, 0x44, 0x11, 0x11, 0x44, 0x44, 0x11, 0x11पूर्ण;
+Hatches_type         p3_bits[] = अणु
    0x00, 0x00, 0x44, 0x44, 0x00, 0x00, 0x11, 0x11, 0x00, 0x00, 0x44, 0x44,
    0x00, 0x00, 0x11, 0x11, 0x00, 0x00, 0x44, 0x44, 0x00, 0x00, 0x11, 0x11,
-   0x00, 0x00, 0x44, 0x44, 0x00, 0x00, 0x11, 0x11};
-Hatches_type         p4_bits[] = {
+   0x00, 0x00, 0x44, 0x44, 0x00, 0x00, 0x11, 0x11पूर्ण;
+Hatches_type         p4_bits[] = अणु
    0x80, 0x80, 0x40, 0x40, 0x20, 0x20, 0x10, 0x10, 0x08, 0x08, 0x04, 0x04,
    0x02, 0x02, 0x01, 0x01, 0x80, 0x80, 0x40, 0x40, 0x20, 0x20, 0x10, 0x10,
-   0x08, 0x08, 0x04, 0x04, 0x02, 0x02, 0x01, 0x01};
-Hatches_type         p5_bits[] = {
+   0x08, 0x08, 0x04, 0x04, 0x02, 0x02, 0x01, 0x01पूर्ण;
+Hatches_type         p5_bits[] = अणु
    0x20, 0x20, 0x40, 0x40, 0x80, 0x80, 0x01, 0x01, 0x02, 0x02, 0x04, 0x04,
    0x08, 0x08, 0x10, 0x10, 0x20, 0x20, 0x40, 0x40, 0x80, 0x80, 0x01, 0x01,
-   0x02, 0x02, 0x04, 0x04, 0x08, 0x08, 0x10, 0x10};
-Hatches_type         p6_bits[] = {
+   0x02, 0x02, 0x04, 0x04, 0x08, 0x08, 0x10, 0x10पूर्ण;
+Hatches_type         p6_bits[] = अणु
    0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44,
    0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44,
-   0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44};
-Hatches_type         p7_bits[] = {
+   0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44पूर्ण;
+Hatches_type         p7_bits[] = अणु
    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
    0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff,
-   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff};
-Hatches_type         p8_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xffपूर्ण;
+Hatches_type         p8_bits[] = अणु
    0x11, 0x11, 0xb8, 0xb8, 0x7c, 0x7c, 0x3a, 0x3a, 0x11, 0x11, 0xa3, 0xa3,
    0xc7, 0xc7, 0x8b, 0x8b, 0x11, 0x11, 0xb8, 0xb8, 0x7c, 0x7c, 0x3a, 0x3a,
-   0x11, 0x11, 0xa3, 0xa3, 0xc7, 0xc7, 0x8b, 0x8b};
-Hatches_type         p9_bits[] = {
+   0x11, 0x11, 0xa3, 0xa3, 0xc7, 0xc7, 0x8b, 0x8bपूर्ण;
+Hatches_type         p9_bits[] = अणु
    0x10, 0x10, 0x10, 0x10, 0x28, 0x28, 0xc7, 0xc7, 0x01, 0x01, 0x01, 0x01,
    0x82, 0x82, 0x7c, 0x7c, 0x10, 0x10, 0x10, 0x10, 0x28, 0x28, 0xc7, 0xc7,
-   0x01, 0x01, 0x01, 0x01, 0x82, 0x82, 0x7c, 0x7c};
-Hatches_type         p10_bits[] = {
+   0x01, 0x01, 0x01, 0x01, 0x82, 0x82, 0x7c, 0x7cपूर्ण;
+Hatches_type         p10_bits[] = अणु
    0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0xff, 0xff, 0x01, 0x01, 0x01, 0x01,
    0x01, 0x01, 0xff, 0xff, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0xff, 0xff,
-   0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0xff, 0xff};
-Hatches_type         p11_bits[] = {
+   0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0xff, 0xffपूर्ण;
+Hatches_type         p11_bits[] = अणु
    0x08, 0x08, 0x49, 0x49, 0x2a, 0x2a, 0x1c, 0x1c, 0x2a, 0x2a, 0x49, 0x49,
    0x08, 0x08, 0x00, 0x00, 0x80, 0x80, 0x94, 0x94, 0xa2, 0xa2, 0xc1, 0xc1,
-   0xa2, 0xa2, 0x94, 0x94, 0x80, 0x80, 0x00, 0x00};
-Hatches_type         p12_bits[] = {
+   0xa2, 0xa2, 0x94, 0x94, 0x80, 0x80, 0x00, 0x00पूर्ण;
+Hatches_type         p12_bits[] = अणु
    0x1c, 0x1c, 0x22, 0x22, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x22, 0x22,
    0x1c, 0x1c, 0x00, 0x00, 0xc1, 0xc1, 0x22, 0x22, 0x14, 0x14, 0x14, 0x14,
-   0x14, 0x14, 0x22, 0x22, 0xc1, 0xc1, 0x00, 0x00};
-Hatches_type         p13_bits[] = {
+   0x14, 0x14, 0x22, 0x22, 0xc1, 0xc1, 0x00, 0x00पूर्ण;
+Hatches_type         p13_bits[] = अणु
    0x01, 0x01, 0x82, 0x82, 0x44, 0x44, 0x28, 0x28, 0x10, 0x10, 0x28, 0x28,
    0x44, 0x44, 0x82, 0x82, 0x01, 0x01, 0x82, 0x82, 0x44, 0x44, 0x28, 0x28,
-   0x10, 0x10, 0x28, 0x28, 0x44, 0x44, 0x82, 0x82};
-Hatches_type         p14_bits[] = {
+   0x10, 0x10, 0x28, 0x28, 0x44, 0x44, 0x82, 0x82पूर्ण;
+Hatches_type         p14_bits[] = अणु
    0xff, 0xff, 0x11, 0x10, 0x11, 0x10, 0x11, 0x10, 0xf1, 0x1f, 0x11, 0x11,
    0x11, 0x11, 0x11, 0x11, 0xff, 0x11, 0x01, 0x11, 0x01, 0x11, 0x01, 0x11,
-   0xff, 0xff, 0x01, 0x10, 0x01, 0x10, 0x01, 0x10};
-Hatches_type         p15_bits[] = {
+   0xff, 0xff, 0x01, 0x10, 0x01, 0x10, 0x01, 0x10पूर्ण;
+Hatches_type         p15_bits[] = अणु
    0x22, 0x22, 0x55, 0x55, 0x22, 0x22, 0x00, 0x00, 0x88, 0x88, 0x55, 0x55,
    0x88, 0x88, 0x00, 0x00, 0x22, 0x22, 0x55, 0x55, 0x22, 0x22, 0x00, 0x00,
-   0x88, 0x88, 0x55, 0x55, 0x88, 0x88, 0x00, 0x00};
-Hatches_type         p16_bits[] = {
+   0x88, 0x88, 0x55, 0x55, 0x88, 0x88, 0x00, 0x00पूर्ण;
+Hatches_type         p16_bits[] = अणु
    0x0e, 0x0e, 0x11, 0x11, 0xe0, 0xe0, 0x00, 0x00, 0x0e, 0x0e, 0x11, 0x11,
    0xe0, 0xe0, 0x00, 0x00, 0x0e, 0x0e, 0x11, 0x11, 0xe0, 0xe0, 0x00, 0x00,
-   0x0e, 0x0e, 0x11, 0x11, 0xe0, 0xe0, 0x00, 0x00};
-Hatches_type         p17_bits[] = {
+   0x0e, 0x0e, 0x11, 0x11, 0xe0, 0xe0, 0x00, 0x00पूर्ण;
+Hatches_type         p17_bits[] = अणु
    0x44, 0x44, 0x22, 0x22, 0x11, 0x11, 0x00, 0x00, 0x44, 0x44, 0x22, 0x22,
    0x11, 0x11, 0x00, 0x00, 0x44, 0x44, 0x22, 0x22, 0x11, 0x11, 0x00, 0x00,
-   0x44, 0x44, 0x22, 0x22, 0x11, 0x11, 0x00, 0x00};
-Hatches_type         p18_bits[] = {
+   0x44, 0x44, 0x22, 0x22, 0x11, 0x11, 0x00, 0x00पूर्ण;
+Hatches_type         p18_bits[] = अणु
    0x11, 0x11, 0x22, 0x22, 0x44, 0x44, 0x00, 0x00, 0x11, 0x11, 0x22, 0x22,
    0x44, 0x44, 0x00, 0x00, 0x11, 0x11, 0x22, 0x22, 0x44, 0x44, 0x00, 0x00,
-   0x11, 0x11, 0x22, 0x22, 0x44, 0x44, 0x00, 0x00};
-Hatches_type         p19_bits[] = {
+   0x11, 0x11, 0x22, 0x22, 0x44, 0x44, 0x00, 0x00पूर्ण;
+Hatches_type         p19_bits[] = अणु
    0xe0, 0x03, 0x98, 0x0c, 0x84, 0x10, 0x42, 0x21, 0x42, 0x21, 0x21, 0x42,
    0x19, 0x4c, 0x07, 0xf0, 0x19, 0x4c, 0x21, 0x42, 0x42, 0x21, 0x42, 0x21,
-   0x84, 0x10, 0x98, 0x0c, 0xe0, 0x03, 0x80, 0x00};
-Hatches_type         p20_bits[] = {
+   0x84, 0x10, 0x98, 0x0c, 0xe0, 0x03, 0x80, 0x00पूर्ण;
+Hatches_type         p20_bits[] = अणु
    0x22, 0x22, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x22, 0x22, 0x44, 0x44,
    0x44, 0x44, 0x44, 0x44, 0x22, 0x22, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11,
-   0x22, 0x22, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44};
-Hatches_type         p21_bits[] = {
+   0x22, 0x22, 0x44, 0x44, 0x44, 0x44, 0x44, 0x44पूर्ण;
+Hatches_type         p21_bits[] = अणु
    0xf1, 0xf1, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x1f, 0x1f, 0x01, 0x01,
    0x01, 0x01, 0x01, 0x01, 0xf1, 0xf1, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10,
-   0x1f, 0x1f, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01};
-Hatches_type         p22_bits[] = {
+   0x1f, 0x1f, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01पूर्ण;
+Hatches_type         p22_bits[] = अणु
    0x8f, 0x8f, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0xf8, 0xf8, 0x80, 0x80,
    0x80, 0x80, 0x80, 0x80, 0x8f, 0x8f, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
-   0xf8, 0xf8, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80};
-Hatches_type         p23_bits[] = {
+   0xf8, 0xf8, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80पूर्ण;
+Hatches_type         p23_bits[] = अणु
    0xAA, 0xAA, 0x55, 0x55, 0x6a, 0x6a, 0x74, 0x74, 0x78, 0x78, 0x74, 0x74,
    0x6a, 0x6a, 0x55, 0x55, 0xAA, 0xAA, 0x55, 0x55, 0x6a, 0x6a, 0x74, 0x74,
-   0x78, 0x78, 0x74, 0x74, 0x6a, 0x6a, 0x55, 0x55};
-Hatches_type         p24_bits[] = {
+   0x78, 0x78, 0x74, 0x74, 0x6a, 0x6a, 0x55, 0x55पूर्ण;
+Hatches_type         p24_bits[] = अणु
    0x80, 0x00, 0xc0, 0x00, 0xea, 0xa8, 0xd5, 0x54, 0xea, 0xa8, 0xd5, 0x54,
    0xeb, 0xe8, 0xd5, 0xd4, 0xe8, 0xe8, 0xd4, 0xd4, 0xa8, 0xe8, 0x54, 0xd5,
-   0xa8, 0xea, 0x54, 0xd5, 0xfc, 0xff, 0xfe, 0xff};
-Hatches_type         p25_bits[] = {
+   0xa8, 0xea, 0x54, 0xd5, 0xfc, 0xff, 0xfe, 0xffपूर्ण;
+Hatches_type         p25_bits[] = अणु
    0x80, 0x00, 0xc0, 0x00, 0xe0, 0x00, 0xf0, 0x00, 0xff, 0xf0, 0xff, 0xf0,
    0xfb, 0xf0, 0xf9, 0xf0, 0xf8, 0xf0, 0xf8, 0x70, 0xf8, 0x30, 0xff, 0xf0,
-   0xff, 0xf8, 0xff, 0xfc, 0xff, 0xfe, 0xff, 0xff};
+   0xff, 0xf8, 0xff, 0xfc, 0xff, 0xfe, 0xff, 0xffपूर्ण;
 
 
-#define MAXMK 100
-static struct {
-  int type;
-  int n;
-  XPoint xy[MAXMK];
-} marker;                        /* point list to draw marker          */
+#घोषणा MAXMK 100
+अटल काष्ठा अणु
+  पूर्णांक type;
+  पूर्णांक n;
+  XPoपूर्णांक xy[MAXMK];
+पूर्ण marker;                        /* poपूर्णांक list to draw marker          */
 
 /*
  *    Define some marker types ala PAW
  */
-static short boxm[5][2] = {-1,-1, -1,1, 1,1, 1,-1, -1,-1};
-static float tupm[4][2] = {0.,1., 1.1547,-1., -1.1547,-1., 0.,1.};
-static float tdnm[4][2] = {0.,-1., -1.1547,1., 1.1547,1., 0.,-1.}; 
+अटल लघु boxm[5][2] = अणु-1,-1, -1,1, 1,1, 1,-1, -1,-1पूर्ण;
+अटल भग्न tupm[4][2] = अणु0.,1., 1.1547,-1., -1.1547,-1., 0.,1.पूर्ण;
+अटल भग्न tdnm[4][2] = अणु0.,-1., -1.1547,1., 1.1547,1., 0.,-1.पूर्ण;
 
 /*
  * Define some line dash styles (1..4)
  */
-static short tdash[5][4] = {0,0,0,0,  6,6,0,0,  6,3,1,3,  1,6,0,0,  1,3,0,0};
+अटल लघु tdash[5][4] = अणु0,0,0,0,  6,6,0,0,  6,3,1,3,  1,6,0,0,  1,3,0,0पूर्ण;
 
 /*
- *    Own/standard Color Palette corespondance table (in ixldgif())
+ *    Own/standard Color Palette corespondance table (in ixldgअगर())
  */
-static unsigned char tpal[256];
-static char stdset=0; /* Std. Palette flag (in ixldgif()) */
+अटल अचिन्हित अक्षर tpal[256];
+अटल अक्षर stdset=0; /* Std. Palette flag (in ixldgअगर()) */
 
 /*
  *    Set input on or off
  */
-void
+व्योम
   setinput(inp)
-int inp;
-{
-  XSetWindowAttributes attributes;
-  unsigned long attr_mask = 0;
+पूर्णांक inp;
+अणु
+  XSetWinकरोwAttributes attributes;
+  अचिन्हित दीर्घ attr_mask = 0;
 
-  if( inp == 1 ) {
+  अगर( inp == 1 ) अणु
     attributes.event_mask = mouse_mask | keybd_mask;
     attr_mask |= CWEventMask;
-    XChangeWindowAttributes ( display, cws->window, attr_mask, &attributes);
-  }
-  else {
+    XChangeWinकरोwAttributes ( display, cws->winकरोw, attr_mask, &attributes);
+  पूर्ण
+  अन्यथा अणु
      attr_mask = 0;
      attributes.event_mask = NoEventMask;
      attr_mask |= CWEventMask;
-     XChangeWindowAttributes ( display, cws->window, attr_mask, &attributes);
-  }
-}
+     XChangeWinकरोwAttributes ( display, cws->winकरोw, attr_mask, &attributes);
+  पूर्ण
+पूर्ण
 
 
 /*
- * set the foreground color in GC
+ * set the क्रमeground color in GC
  */
-void
+व्योम
   setcolor( gc, ci )
 GC gc;
-int ci;
-{
-  if( colored && ( ci < 0 || ci >= MAXCOL || !colors[ci].defined ) )
-    {
+पूर्णांक ci;
+अणु
+  अगर( colored && ( ci < 0 || ci >= MAXCOL || !colors[ci].defined ) )
+    अणु
      ci = 0;
-    }
-  else if (!colored && ci < 0 )
-    {
+    पूर्ण
+  अन्यथा अगर (!colored && ci < 0 )
+    अणु
      ci = 0;
-    }
-  else if (!colored && ci > 0 )
-    {
+    पूर्ण
+  अन्यथा अगर (!colored && ci > 0 )
+    अणु
      ci = 1;
-    }
+    पूर्ण
 
   XSetForeground( display, gc, colors[ci].pixel );
 
-  /* make sure that foreground and background are different */
-  if ( XGetGCValues( display, gc, gc_mask, &gc_return) ) {
-     if ( gc_return.foreground == gc_return.background )
+  /* make sure that क्रमeground and background are dअगरferent */
+  अगर ( XGetGCValues( display, gc, gc_mask, &gc_वापस) ) अणु
+     अगर ( gc_वापस.क्रमeground == gc_वापस.background )
         XSetBackground( display, gc, colors[!ci].pixel );
-  } else {
-     printf("**** Error: Cannot get GC values \n");
-  }
-}
+  पूर्ण अन्यथा अणु
+     म_लिखो("**** Error: Cannot get GC values \n");
+  पूर्ण
+पूर्ण
 
 
 
@@ -401,179 +402,179 @@ int ci;
  *    INTEGER FUNCTION IXOPNDS(HOST)
  *    CHARACTER*(*) HOST  : host name
  *
- *    Open the display. Return -1 if the opening fails
+ *    Open the display. Return -1 अगर the खोलोing fails
  */
-int
+पूर्णांक
   ixopnds( host )
-char host[128];
-{
-  int lenhst;
+अक्षर host[128];
+अणु
+  पूर्णांक lenhst;
   Pixmap pixmp1,pixmp2;
-  XColor fore,back;
-  char **fontlist;
-  int fontcount;
-  int i;
-  extern char *getenv();
- 
-  lenhst=strlen(host);
+  XColor क्रमe,back;
+  अक्षर **fontlist;
+  पूर्णांक fontcount;
+  पूर्णांक i;
+  बाह्य अक्षर *दो_पर्या();
+
+  lenhst=म_माप(host);
 
 /*
- *              Try to open the DISPLAY
+ *              Try to खोलो the DISPLAY
  */
-  if ( !isdisp ) {
-     if( display == NULL ) {
-        if( lenhst == 0 ) {
-           display = XOpenDisplay( getenv( "DISPLAY" ) );
-        } else {
+  अगर ( !isdisp ) अणु
+     अगर( display == शून्य ) अणु
+        अगर( lenhst == 0 ) अणु
+           display = XOpenDisplay( दो_पर्या( "DISPLAY" ) );
+        पूर्ण अन्यथा अणु
            display = XOpenDisplay( host );
-        }
-        if( display == NULL ) { fprintf(stderr, "The DISPLAY %s cannot be opened !\n", getenv("DISPLAY") ); return( -1 ); }
-     }
-  } else {
-     return( 0 );
-  }
+        पूर्ण
+        अगर( display == शून्य ) अणु ख_लिखो(मानक_त्रुटि, "The DISPLAY %s cannot be opened !\n", दो_पर्या("DISPLAY") ); वापस( -1 ); पूर्ण
+     पूर्ण
+  पूर्ण अन्यथा अणु
+     वापस( 0 );
+  पूर्ण
 
   screen_number = DefaultScreen( display );
   screen        = ScreenOfDisplay( display, screen_number);
   colored       = DisplayPlanes( display, screen_number ) > 1;
 
-  if (colored) colormap = DefaultColormap( display, screen_number);
+  अगर (colored) colormap = DefaultColormap( display, screen_number);
 
-  colors[1].defined = 1; /* default foreground */
+  colors[1].defined = 1; /* शेष क्रमeground */
   colors[1].pixel = BlackPixel( display, screen_number );
-  colors[0].defined = 1; /* default background */ 
+  colors[0].defined = 1; /* शेष background */
   colors[0].pixel = WhitePixel( display, screen_number );
 
 /*
- *              Inquire the the XServer Vendor
+ *              Inquire the the XServer Venकरोr
  */
-  strcpy (vendor,XServerVendor(display));
+  म_नकल (venकरोr,XServerVenकरोr(display));
 
 /*
  *              Create primitives graphic contexts
  */
-  for ( i = 0; i < MAXGC; i++ )
-     gclist[i] = XCreateGC( display, RootWindow( display, screen_number ),
-                             0, NULL );
-     GCbuff[0] = XCreateGC( display, RootWindow( display, screen_number ),
-                             0, NULL );
-  if ( XGetGCValues( display, *gctext, gc_mask, &gc_return) ) {
-     XSetForeground( display, *gcinvt, gc_return.background );
-     XSetBackground( display, *gcinvt, gc_return.foreground );
-  } else {
-     printf("**** Error: Cannot get GC values \n");
-  }
+  क्रम ( i = 0; i < MAXGC; i++ )
+     gclist[i] = XCreateGC( display, RootWinकरोw( display, screen_number ),
+                             0, शून्य );
+     GCbuff[0] = XCreateGC( display, RootWinकरोw( display, screen_number ),
+                             0, शून्य );
+  अगर ( XGetGCValues( display, *gctext, gc_mask, &gc_वापस) ) अणु
+     XSetForeground( display, *gcinvt, gc_वापस.background );
+     XSetBackground( display, *gcinvt, gc_वापस.क्रमeground );
+  पूर्ण अन्यथा अणु
+     म_लिखो("**** Error: Cannot get GC values \n");
+  पूर्ण
 
 /*
  *              Create input echo graphic context
  */
-  gcechov.foreground = BlackPixel( display, screen_number );
+  gcechov.क्रमeground = BlackPixel( display, screen_number );
   gcechov.background = WhitePixel( display, screen_number );
-  if(strstr(vendor,"Hewlett")) {
+  अगर(म_माला(venकरोr,"Hewlett")) अणु
      gcechov.function   = GXxor;
-  } else {
+  पूर्ण अन्यथा अणु
      gcechov.function   = GXinvert;
-  }
-  gcecho = XCreateGC( display, RootWindow( display, screen_number ),
+  पूर्ण
+  gcecho = XCreateGC( display, RootWinकरोw( display, screen_number ),
                       GCForeground | GCBackground | GCFunction,
                       &gcechov );
 /*
- *              Load a default Font
+ *              Load a शेष Font
  */
-  for ( i = 0; i < MAXFONT; i++ ) {
-     font[i].id = NULL;
-     strcpy( font[i].name, " " );
-  }
+  क्रम ( i = 0; i < MAXFONT; i++ ) अणु
+     font[i].id = शून्य;
+     म_नकल( font[i].name, " " );
+  पूर्ण
   fontlist = XListFonts( display, "*courier*", 1, &fontcount );
-  if ( fontcount != 0 ) {
+  अगर ( fontcount != 0 ) अणु
      font[current_font_number].id = XLoadQueryFont( display, fontlist[0] );
      text_font = font[current_font_number].id;
-     strcpy( font[current_font_number].name, "*courier*" );
+     म_नकल( font[current_font_number].name, "*courier*" );
      current_font_number++;
      XFreeFontNames(fontlist);
-  } else {
-     printf("No default font loaded \n");
-  }
+  पूर्ण अन्यथा अणु
+     म_लिखो("No default font loaded \n");
+  पूर्ण
 /*
  *              Create a null cursor
  */
-  pixmp1 = XCreateBitmapFromData(display,
-                                 RootWindow( display, screen_number ),
+  pixmp1 = XCreateBiपंचांगapFromData(display,
+                                 RootWinकरोw( display, screen_number ),
                                  null_cursor_bits, 16, 16);
-  pixmp2 = XCreateBitmapFromData(display,
-                                 RootWindow( display, screen_number ),
+  pixmp2 = XCreateBiपंचांगapFromData(display,
+                                 RootWinकरोw( display, screen_number ),
                                  null_cursor_bits, 16, 16);
-  null_cursor = XCreatePixmapCursor(display,pixmp1,pixmp2,&fore,&back,0,0);
+  null_cursor = XCreatePixmapCursor(display,pixmp1,pixmp2,&क्रमe,&back,0,0);
 
   isdisp = 1;
-  return( 0 );
-}
+  वापस( 0 );
+पूर्ण
 
 
 /*
  *    INTEGER FUNCTION IXOPNWI(X,Y,W,H,TITLE,FLAG)
- *    INTEGER X,Y         : initial window position
- *    INTEGER W,H         : initial window width and height
- *    CHARACTER*(*) TITLE : window title
- *    INTEGER FLAG        : FLAG<>1 allows to open a non MOTIF window
- *                          even if ixmotif has been called.
+ *    INTEGER X,Y         : initial winकरोw position
+ *    INTEGER W,H         : initial winकरोw width and height
+ *    CHARACTER*(*) TITLE : winकरोw title
+ *    INTEGER FLAG        : FLAG<>1 allows to खोलो a non MOTIF winकरोw
+ *                          even अगर ixmotअगर has been called.
  *
- *    Open window and returns window number which can be used with IXSELWIN
- *    return -1 if window creation fails
+ *    Open winकरोw and वापसs winकरोw number which can be used with IXSELWIN
+ *    वापस -1 अगर winकरोw creation fails
  */
-int
+पूर्णांक
   ixopnwi( x, y, w, h, title, flag)
-int x, y;
-int w, h;
-char title[80];
-int flag;
-{
-  XSetWindowAttributes attributes;
-  unsigned long attr_mask = 0;
-  char long_title[256];
-  char host_name[64];
-  XWMHints wm_hints;
-  XSizeHints size_hints;
+पूर्णांक x, y;
+पूर्णांक w, h;
+अक्षर title[80];
+पूर्णांक flag;
+अणु
+  XSetWinकरोwAttributes attributes;
+  अचिन्हित दीर्घ attr_mask = 0;
+  अक्षर दीर्घ_title[256];
+  अक्षर host_name[64];
+  XWMHपूर्णांकs wm_hपूर्णांकs;
+  XSizeHपूर्णांकs size_hपूर्णांकs;
   XEvent event;
-  int wid, i;
-  int xval, yval;
-  unsigned int wval, hval, border, depth;
-  Window root;
+  पूर्णांक wid, i;
+  पूर्णांक xval, yval;
+  अचिन्हित पूर्णांक wval, hval, border, depth;
+  Winकरोw root;
 
-  if (external_int == 1) {
-     XGetGeometry( display, external_window, &root,
+  अगर (बाह्यal_पूर्णांक == 1) अणु
+     XGetGeometry( display, बाह्यal_winकरोw, &root,
                    &xval, &yval, &wval, &hval, &border, &depth );
-  }
-  else {
+  पूर्ण
+  अन्यथा अणु
      xval = x;
      yval = y;
      wval = w;
      hval = h;
-  }
+  पूर्ण
 
 /*
- *              Select next free window number
+ *              Select next मुक्त winकरोw number
  */
-      for ( wid = 0; wid < MAXWN; wid++ )
-         if ( !windows[wid].open ) {
-            windows[wid].open = 1;
-            cws = &windows[wid];
+      क्रम ( wid = 0; wid < MAXWN; wid++ )
+         अगर ( !winकरोws[wid].खोलो ) अणु
+            winकरोws[wid].खोलो = 1;
+            cws = &winकरोws[wid];
             cws->wid = wid;
-            break;
-         }
+            अवरोध;
+         पूर्ण
 /*
- *              Create a Motif window
+ *              Create a Motअगर winकरोw
  */
-      if (motif_open != NULL && flag == 0) {
-          cws->motif_window = (*motif_open) (wid+1, xval, yval, wval, hval);
-          if ( !cws->motif_window ) return( -1 );
-          XGetGeometry( display, cws->motif_window, &root,
+      अगर (motअगर_खोलो != शून्य && flag == 0) अणु
+          cws->motअगर_winकरोw = (*motअगर_खोलो) (wid+1, xval, yval, wval, hval);
+          अगर ( !cws->motअगर_winकरोw ) वापस( -1 );
+          XGetGeometry( display, cws->motअगर_winकरोw, &root,
                         &xval, &yval, &wval, &hval, &border, &depth );
-      }
+      पूर्ण
 
-      if ( wid == MAXWN ) return( -1 );
+      अगर ( wid == MAXWN ) वापस( -1 );
 /*
- *              Create window
+ *              Create winकरोw
  */
       attributes.background_pixel = colors[0].pixel;
       attr_mask |= CWBackPixel;
@@ -583,151 +584,151 @@ int flag;
       attr_mask |= CWEventMask;
       attributes.backing_store = Always;
       attr_mask |= CWBackingStore;
-      if ( colored ) {
+      अगर ( colored ) अणु
          attributes.colormap = colormap;
          attr_mask |= CWColormap;
-      }
-      if (motif_open != NULL && flag == 0) {
-         cws->window = XCreateWindow(display, cws->motif_window,
+      पूर्ण
+      अगर (motअगर_खोलो != शून्य && flag == 0) अणु
+         cws->winकरोw = XCreateWinकरोw(display, cws->motअगर_winकरोw,
                        xval, yval, wval, hval, 0, CopyFromParent,
                        InputOutput, CopyFromParent,
                        attr_mask, &attributes );
-         cws->motif = 1;
-      } else {
-         if (external_int == 1) {
-            cws->window = XCreateWindow(display, external_window,
+         cws->motअगर = 1;
+      पूर्ण अन्यथा अणु
+         अगर (बाह्यal_पूर्णांक == 1) अणु
+            cws->winकरोw = XCreateWinकरोw(display, बाह्यal_winकरोw,
                           xval, yval, wval, hval, 0, CopyFromParent,
                           InputOutput, CopyFromParent,
                           attr_mask, &attributes );
-            external_int = 0;
-            cws->motif = 1;
-            cws->motif_window = external_window;
-         } else {
-            cws->motif = 0;
-            cws->window = XCreateWindow(display,
-                          RootWindow( display, screen_number),
+            बाह्यal_पूर्णांक = 0;
+            cws->motअगर = 1;
+            cws->motअगर_winकरोw = बाह्यal_winकरोw;
+         पूर्ण अन्यथा अणु
+            cws->motअगर = 0;
+            cws->winकरोw = XCreateWinकरोw(display,
+                          RootWinकरोw( display, screen_number),
                           xval, yval, wval, hval, 1, CopyFromParent,
                           InputOutput, CopyFromParent,
                           attr_mask, &attributes );
-            strcpy( long_title, title );
-            if (long_title[0] != '-') {
-               strcat( long_title, " @ " );
-               gethostname( host_name, sizeof( host_name ) );
-               strcat( long_title, host_name );
-            } else {
-               long_title[0] = ' ';
-            }
-            XStoreName( display, cws->window, long_title );
-            XSetIconName( display, cws->window, long_title );
-         }
-      }
+            म_नकल( दीर्घ_title, title );
+            अगर (दीर्घ_title[0] != '-') अणु
+               म_जोड़ो( दीर्घ_title, " @ " );
+               gethostname( host_name, माप( host_name ) );
+               म_जोड़ो( दीर्घ_title, host_name );
+            पूर्ण अन्यथा अणु
+               दीर्घ_title[0] = ' ';
+            पूर्ण
+            XStoreName( display, cws->winकरोw, दीर्घ_title );
+            XSetIconName( display, cws->winकरोw, दीर्घ_title );
+         पूर्ण
+      पूर्ण
 /*
- *              Set window manager hints
+ *              Set winकरोw manager hपूर्णांकs
  */
-      memset( &wm_hints, 0, sizeof(wm_hints));
-      wm_hints.flags = InputHint;
-      wm_hints.input = False;  /* don't grab input focus */
-      XSetWMHints( display, cws->window, &wm_hints );
+      स_रखो( &wm_hपूर्णांकs, 0, माप(wm_hपूर्णांकs));
+      wm_hपूर्णांकs.flags = InputHपूर्णांक;
+      wm_hपूर्णांकs.input = False;  /* करोn't grab input focus */
+      XSetWMHपूर्णांकs( display, cws->winकरोw, &wm_hपूर्णांकs );
 /*
- *              Set window size hints
+ *              Set winकरोw size hपूर्णांकs
  */
-      memset( &size_hints, 0, sizeof(size_hints));
-      size_hints.flags = USPosition | USSize;
-      size_hints.x = xval;
-      size_hints.y = yval;
-      size_hints.width = wval;
-      size_hints.height = hval;
-      XSetNormalHints( display, cws->window, &size_hints );
+      स_रखो( &size_hपूर्णांकs, 0, माप(size_hपूर्णांकs));
+      size_hपूर्णांकs.flags = USPosition | USSize;
+      size_hपूर्णांकs.x = xval;
+      size_hपूर्णांकs.y = yval;
+      size_hपूर्णांकs.width = wval;
+      size_hपूर्णांकs.height = hval;
+      XSetNormalHपूर्णांकs( display, cws->winकरोw, &size_hपूर्णांकs );
 
-      XMoveWindow( display, cws->window, xval, yval );
-      XResizeWindow( display, cws->window, wval, hval );
-      XMapWindow( display, cws->window );
+      XMoveWinकरोw( display, cws->winकरोw, xval, yval );
+      XResizeWinकरोw( display, cws->winकरोw, wval, hval );
+      XMapWinकरोw( display, cws->winकरोw );
 /*
       XFlush( display );
- *              Set the Class Hint
+ *              Set the Class Hपूर्णांक
  */
-      XSetClassHint(display, cws->window, &class_hints);
+      XSetClassHपूर्णांक(display, cws->winकरोw, &class_hपूर्णांकs);
 /*
- *              Initialise the window structure
+ *              Initialise the winकरोw काष्ठाure
  */
-      cws->drawing        = cws->window;
-      cws->buffer         = (Drawable)NULL;
-      cws->double_buffer  = (int)NULL;
-      cws->clip           = (int)NULL;
+      cws->drawing        = cws->winकरोw;
+      cws->buffer         = (Drawable)शून्य;
+      cws->द्विगुन_buffer  = (पूर्णांक)शून्य;
+      cws->clip           = (पूर्णांक)शून्य;
       cws->width          = wval;
       cws->height         = hval;
       cws->bgcol          = 0;
 
-/*    Raise (and unclip) the window */
+/*    Raise (and unclip) the winकरोw */
 
-      for( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], None );
-      XRaiseWindow( display, cws->window );
+      क्रम( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], None );
+      XRaiseWinकरोw( display, cws->winकरोw );
 
   XFlush( display );
   XSync( display, 1 );
 
-  return( wid );
-}
+  वापस( wid );
+पूर्ण
 
 /*
  *    SUBROUTINE IXRSCWI(WID, W, H)
- *    INTEGER WID  : Window identifier.
+ *    INTEGER WID  : Winकरोw identअगरier.
  *    INTEGER W    : Width
  *    INTEGER H    : Heigth
  *
- *    Rescale the window WID
+ *    Rescale the winकरोw WID
  */
-void
+व्योम
    ixrscwi(wid, w, h)
-  int wid;
-  int w;
-  int h;
-{
-  int i;
+  पूर्णांक wid;
+  पूर्णांक w;
+  पूर्णांक h;
+अणु
+  पूर्णांक i;
 
-  tws = &windows[wid];
+  tws = &winकरोws[wid];
 /*
-  if (!tws->open) return;
+  अगर (!tws->खोलो) वापस;
 */
 
-  XResizeWindow( display, tws->window, w, h );
+  XResizeWinकरोw( display, tws->winकरोw, w, h );
 
-  if( tws->double_buffer ) {
+  अगर( tws->द्विगुन_buffer ) अणु
      XFreePixmap(display,tws->buffer);
-     tws->buffer = XCreatePixmap(display, RootWindow( display, screen_number),
+     tws->buffer = XCreatePixmap(display, RootWinकरोw( display, screen_number),
                    w, h, DefaultDepth(display,screen_number));
-     for( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], None );
+     क्रम( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], None );
      setcolor( *gcpxmp, 0);
      XFillRectangle( display, tws->buffer, *gcpxmp, 0, 0, w, h);
      setcolor( *gcpxmp, 1);
      tws->drawing = tws->buffer;
-  }
+  पूर्ण
   tws->width  = w;
   tws->height = h;
   XFlush( display );
-}
+पूर्ण
 
 /*
  *    SUBROUTINE IXMOVWI(WID, X, Y)
- *    INTEGER WID  : Window identifier.
+ *    INTEGER WID  : Winकरोw identअगरier.
  *    INTEGER X    : Width
  *    INTEGER Y    : Heigth
  *
- *    Move the window WID
+ *    Move the winकरोw WID
  */
-void
+व्योम
    ixmovwi(wid, x, y)
-  int wid;
-  int x;
-  int y;
-{
-  int i;
+  पूर्णांक wid;
+  पूर्णांक x;
+  पूर्णांक y;
+अणु
+  पूर्णांक i;
 
-  tws = &windows[wid];
-  if (!tws->open) return;
+  tws = &winकरोws[wid];
+  अगर (!tws->खोलो) वापस;
 
-  XMoveWindow( display, tws->window, x, y );
-}
+  XMoveWinकरोw( display, tws->winकरोw, x, y );
+पूर्ण
 
 /*
  *    INTEGER FUNCTION IXOPNPX(W, H)
@@ -735,15 +736,15 @@ void
  *
  *    Open a new pixmap.
  */
-int
+पूर्णांक
   ixopnpx(w, h)
-int w, h;
-{
+पूर्णांक w, h;
+अणु
   Drawable pixtemp;
-  Window root;
-  unsigned int wval, hval;
-  int xx, yy, i ;
-  unsigned int ww, hh, border, depth;
+  Winकरोw root;
+  अचिन्हित पूर्णांक wval, hval;
+  पूर्णांक xx, yy, i ;
+  अचिन्हित पूर्णांक ww, hh, border, depth;
   wval = w;
   hval = h;
 
@@ -751,10 +752,10 @@ int w, h;
 
 /*
   oldwin = cws->drawing;
-  pixtemp = XCreatePixmap(display, RootWindow( display, screen_number),
+  pixtemp = XCreatePixmap(display, RootWinकरोw( display, screen_number),
             wval, hval, DefaultDepth(display,screen_number));
   ispix = 1;
-  for( i = 0; i < MAXGC; i++ )
+  क्रम( i = 0; i < MAXGC; i++ )
     XSetClipMask( display, gclist[i], None );
   cws->drawing = pixtemp;
   setcolor( *gcpxmp, 0);
@@ -764,8 +765,8 @@ int w, h;
 
 
   pixtemp = cws->drawing;
-  return ( pixtemp );
-}
+  वापस ( pixtemp );
+पूर्ण
 
 
 /*
@@ -774,33 +775,33 @@ int w, h;
  *
  *    Clear the pixmap PIX.
  */
-void
+व्योम
   ixclrpx(pix )
 Drawable pix;
-{
-  Window root;
-  int xx, yy;
-  unsigned int ww, hh, border, depth;
+अणु
+  Winकरोw root;
+  पूर्णांक xx, yy;
+  अचिन्हित पूर्णांक ww, hh, border, depth;
   XGetGeometry( display, pix, &root, &xx, &yy, &ww, &hh, &border, &depth );
   setcolor( *gcpxmp, 0);
   XFillRectangle( display, pix, *gcpxmp,0 ,0 ,ww ,hh);
   setcolor( *gcpxmp, 1);
   XFlush( display );
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXCLPX
  *
- *    Close the current opened pixmap.
+ *    Close the current खोलोed pixmap.
  */
-void
+व्योम
   ixclpx()
-{
+अणु
   XFlush( display );
   cws->drawing = oldwin;
   ispix = 0;
-}
+पूर्ण
 
 
 /*
@@ -810,23 +811,23 @@ void
  *
  *    Copy the pixmap PIX at the position XPOS YPOS.
  */
-void
+व्योम
   ixcppx(pix, xpos, ypos)
 Drawable pix;
-int xpos, ypos;
-{
-  Window root;
-  int xx, yy;
+पूर्णांक xpos, ypos;
+अणु
+  Winकरोw root;
+  पूर्णांक xx, yy;
   XEvent event;
-  unsigned int ww, hh, border, depth;
+  अचिन्हित पूर्णांक ww, hh, border, depth;
   XGetGeometry( display, pix, &root, &xx, &yy, &ww, &hh, &border, &depth );
 
-  XCopyArea(display,pix,cws->window,*gcpxmp,0,0,ww,hh,xpos,ypos);
+  XCopyArea(display,pix,cws->winकरोw,*gcpxmp,0,0,ww,hh,xpos,ypos);
 /*
-printf("pix geometry =  %d %d %d %d %d %d %d pos = %d %d que=%d\n", pix, xx, yy, ww, hh, border, depth, xpos, ypos, XEventsQueued( display, QueuedAlready));
+म_लिखो("pix geometry =  %d %d %d %d %d %d %d pos = %d %d que=%d\n", pix, xx, yy, ww, hh, border, depth, xpos, ypos, XEventsQueued( display, QueuedAlपढ़ोy));
 */
   XFlush( display );
-}
+पूर्ण
 
 
 /*
@@ -836,96 +837,96 @@ printf("pix geometry =  %d %d %d %d %d %d %d pos = %d %d que=%d\n", pix, xx, yy,
  *    INTEGER LENNAME     : pixmap name length
  *    CHARACTER*(*) PXNAME: pixmap name
  *
- *    Write the pixmap IPX in the bitmap file PXNAME.
+ *    Write the pixmap IPX in the biपंचांगap file PXNAME.
  */
-void
+व्योम
   ixwrpx(pix, w, h, pxname )
-char pxname[128];
+अक्षर pxname[128];
 Drawable pix;
-int w, h;
-{
-  unsigned int wval, hval;
+पूर्णांक w, h;
+अणु
+  अचिन्हित पूर्णांक wval, hval;
   wval = w;
   hval = h;
-  XWriteBitmapFile(display, pxname, pix, wval, hval, -1, -1);
-}
+  XWriteBiपंचांगapFile(display, pxname, pix, wval, hval, -1, -1);
+पूर्ण
 
 /*
-void
+व्योम
   ixrdpx( pix, w, h, pxname )
 Drawable *pix;
-int *w, *h;
-char pxname[128];
-{
-  int x_hot_return, y_hot_return;
-  unsigned int width, height;
-  char data[10000];
-  int i;
-  Window root;
-  int xx, yy;
-  unsigned int ww, hh, border, depth=1;
-  unsigned long fg = 0, bg = 1;
+पूर्णांक *w, *h;
+अक्षर pxname[128];
+अणु
+  पूर्णांक x_hot_वापस, y_hot_वापस;
+  अचिन्हित पूर्णांक width, height;
+  अक्षर data[10000];
+  पूर्णांक i;
+  Winकरोw root;
+  पूर्णांक xx, yy;
+  अचिन्हित पूर्णांक ww, hh, border, depth=1;
+  अचिन्हित दीर्घ fg = 0, bg = 1;
 
-  
-  i=XReadBitmapFileData(pxname,&width,&height,data,&x_hot_return,&y_hot_return);
+
+  i=XReadBiपंचांगapFileData(pxname,&width,&height,data,&x_hot_वापस,&y_hot_वापस);
   *w = width;
   *h = height;
-  *pix=XCreatePixmapFromBitmapData(display,RootWindow( display, screen_number),data,width,height,fg,bg,depth);
+  *pix=XCreatePixmapFromBiपंचांगapData(display,RootWinकरोw( display, screen_number),data,width,height,fg,bg,depth);
   XGetGeometry( display, *pix, &root, &xx, &yy, &ww, &hh, &border, &depth );
 
-  printf("XReadBitmapFile: %d %d %d depth = %d\n", i, BitmapSuccess, *pix, depth);
-}
+  म_लिखो("XReadBitmapFile: %d %d %d depth = %d\n", i, BiपंचांगapSuccess, *pix, depth);
+पूर्ण
 */
 
 /*
  *    SUBROUTINE IXWIPX(PIX, XPOS, YPOS)
  *    INTEGER PIX : Pixmap address
- *    INTEGER XPOS, YPOS : Position in the current window
+ *    INTEGER XPOS, YPOS : Position in the current winकरोw
  *
  *    Copy the area at the position XPOS YPOS in the current
- *    window in the pixmap PIX. The area copied has the size
+ *    winकरोw in the pixmap PIX. The area copied has the size
  *    of the pixmap PIX.
  */
-void
+व्योम
   ixwipx(pix, xpos, ypos )
 Drawable pix;
-int xpos, ypos;
-{
-  Window root;
-  int xx, yy;
-  unsigned int ww, hh, border, depth;
-  XGetGeometry( display, cws->window, &root, &xx, &yy, &ww, &hh, &border, &depth );
+पूर्णांक xpos, ypos;
+अणु
+  Winकरोw root;
+  पूर्णांक xx, yy;
+  अचिन्हित पूर्णांक ww, hh, border, depth;
+  XGetGeometry( display, cws->winकरोw, &root, &xx, &yy, &ww, &hh, &border, &depth );
 
-printf("window Depth = %d\n", depth);
+म_लिखो("window Depth = %d\n", depth);
   XGetGeometry( display, pix, &root, &xx, &yy, &ww, &hh, &border, &depth );
-printf("pix Depth = %d\n", depth);
-  XCopyArea(display,cws->window,pix,*gcpxmp,xpos,ypos,ww,hh,0,0);
-}
+म_लिखो("pix Depth = %d\n", depth);
+  XCopyArea(display,cws->winकरोw,pix,*gcpxmp,xpos,ypos,ww,hh,0,0);
+पूर्ण
 
-/* IXGETPX 
+/* IXGETPX
  *
  */
 Drawable
   ixgetpx( xpos, ypos, width, height )
-int xpos, ypos, width, height;
-{
-  Window root;
+पूर्णांक xpos, ypos, width, height;
+अणु
+  Winकरोw root;
   Drawable pix;
-  int xx, yy;
-  unsigned int ww, hh, border, depth;
+  पूर्णांक xx, yy;
+  अचिन्हित पूर्णांक ww, hh, border, depth;
 
-  pix = XCreatePixmap(display, RootWindow( display, screen_number),
+  pix = XCreatePixmap(display, RootWinकरोw( display, screen_number),
         width, height, DefaultDepth(display,screen_number));
 /*
-  XGetGeometry( display, cws->window, &root, &xx, &yy, &ww, &hh, &border, &depth );
-printf("window Depth = %d\n", depth);
+  XGetGeometry( display, cws->winकरोw, &root, &xx, &yy, &ww, &hh, &border, &depth );
+म_लिखो("window Depth = %d\n", depth);
   XGetGeometry( display, pix, &root, &xx, &yy, &ww, &hh, &border, &depth );
-printf("pix Depth = %d\n", depth);
+म_लिखो("pix Depth = %d\n", depth);
 */
-  XCopyArea(display, cws->window, pix, *gcpxmp, xpos,ypos, width,height, 0,0);
+  XCopyArea(display, cws->winकरोw, pix, *gcpxmp, xpos,ypos, width,height, 0,0);
 
-  return (pix);
-}
+  वापस (pix);
+पूर्ण
 
 /*
  *    SUBROUTINE IXRMPX(PIX)
@@ -933,209 +934,209 @@ printf("pix Depth = %d\n", depth);
  *
  *    Remove the pixmap PIX.
  */
-void
+व्योम
   ixrmpx(pix)
 Drawable pix;
-{
+अणु
   XFreePixmap(display,pix);
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXCLSDS
  *
- *    Delete all windows and close connection
+ *    Delete all winकरोws and बंद connection
  */
-void
+व्योम
   ixclsds()
-{
-  int Motif = (int)NULL;
-  int i;
+अणु
+  पूर्णांक Motअगर = (पूर्णांक)शून्य;
+  पूर्णांक i;
 
-  if(display == NULL) return;
+  अगर(display == शून्य) वापस;
 
-  for( i = 0; i < MAXFONT; i++ ) {
-    if ( font[i].id ) {
+  क्रम( i = 0; i < MAXFONT; i++ ) अणु
+    अगर ( font[i].id ) अणु
        XFreeFont ( display, font[i].id);
-       font[i].id = NULL;
-    }
-  }
+       font[i].id = शून्य;
+    पूर्ण
+  पूर्ण
 
-  for( i = 0; i < MAXWN; i++ ) {
-    windows[i].open = 0;
-    if( windows[i].motif )
-       Motif = 1;
-  }
-  if(display != NULL && Motif == (int)NULL) XCloseDisplay( display );
-  display = NULL;
-  cws     = NULL;
-  tws     = NULL;
+  क्रम( i = 0; i < MAXWN; i++ ) अणु
+    winकरोws[i].खोलो = 0;
+    अगर( winकरोws[i].motअगर )
+       Motअगर = 1;
+  पूर्ण
+  अगर(display != शून्य && Motअगर == (पूर्णांक)शून्य) XCloseDisplay( display );
+  display = शून्य;
+  cws     = शून्य;
+  tws     = शून्य;
   isdisp  = 0;
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXCLSWI
  *
- *    Delete current window
- *    Modified by Mario Stipcevic to close specific or current window
- *    win >= MAXWN return without any action
- *    win <  0     close the current window
- *    win          close the window 'wid', if it exists. If not, just exit.
- *                 If closed window is the last, perform ixclsds()
+ *    Delete current winकरोw
+ *    Modअगरied by Mario Stipcevic to बंद specअगरic or current winकरोw
+ *    win >= MAXWN वापस without any action
+ *    win <  0     बंद the current winकरोw
+ *    win          बंद the winकरोw 'wid', अगर it exists. If not, just निकास.
+ *                 If बंदd winकरोw is the last, perक्रमm ixclsds()
  */
-void
+व्योम
   ixclswi(win)
-int win;
-{
-  int wid, flag;
+पूर्णांक win;
+अणु
+  पूर्णांक wid, flag;
   XEvent event;
 
-  if (win >= MAXWN) return;
-  if (win < 0) tws = cws;
-  if (win >= 0 &&  windows[win].open) {
-   tws = &windows[win];
-  } else {
-   if (win >= 0) return;
-  }
-  if (tws == cws) flag = 1;
+  अगर (win >= MAXWN) वापस;
+  अगर (win < 0) tws = cws;
+  अगर (win >= 0 &&  winकरोws[win].खोलो) अणु
+   tws = &winकरोws[win];
+  पूर्ण अन्यथा अणु
+   अगर (win >= 0) वापस;
+  पूर्ण
+  अगर (tws == cws) flag = 1;
 
-  XDestroyWindow( display, tws->window );
+  XDestroyWinकरोw( display, tws->winकरोw );
 
-  if( tws->double_buffer ) XFreePixmap( display, tws->buffer);
+  अगर( tws->द्विगुन_buffer ) XFreePixmap( display, tws->buffer);
 
-  if (tws->motif && motif_close != NULL) {
-      for( wid = 0; wid < MAXWN; wid++ ) {
-           if (tws->motif_window == windows[wid].motif_window) {
-               (*motif_close) (wid+1);
-               break; }
-      }
-  }
+  अगर (tws->motअगर && motअगर_बंद != शून्य) अणु
+      क्रम( wid = 0; wid < MAXWN; wid++ ) अणु
+           अगर (tws->motअगर_winकरोw == winकरोws[wid].motअगर_winकरोw) अणु
+               (*motअगर_बंद) (wid+1);
+               अवरोध; पूर्ण
+      पूर्ण
+  पूर्ण
 
-  tws->open = (int)NULL;
+  tws->खोलो = (पूर्णांक)शून्य;
 
   XFlush( display );
-  while (XEventsQueued(display,QueuedAlready) > 0) XNextEvent(display,&event);
+  जबतक (XEventsQueued(display,QueuedAlपढ़ोy) > 0) XNextEvent(display,&event);
 
-  if (flag) {
+  अगर (flag) अणु
 
-   for( wid = MAXWN - 1; wid >= 0; wid-- )
-    if( windows[wid].open ) {
-     cws = &windows[wid];
-     return;
-    }
+   क्रम( wid = MAXWN - 1; wid >= 0; wid-- )
+    अगर( winकरोws[wid].खोलो ) अणु
+     cws = &winकरोws[wid];
+     वापस;
+    पूर्ण
 
-    ixclsds(); /* no open window left */
-   }
-}
+    ixclsds(); /* no खोलो winकरोw left */
+   पूर्ण
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSELWI(WID)
- *    INTEGER WID : window number returned by IXOPNWI
+ *    INTEGER WID : winकरोw number वापसed by IXOPNWI
  *
- *    Select and raise a window to which subsequent output is directed
+ *    Select and उठाओ a winकरोw to which subsequent output is directed
  */
-void
+व्योम
   ixselwi( wid )
-int wid;
-{
+पूर्णांक wid;
+अणु
   XRectangle region;
-  int i, bcolor;
-   
-  if (wid != -1) {
-   if( wid < 0 || wid >= MAXWN || !windows[wid].open ) return;
-   cws = &windows[wid];
-  }
+  पूर्णांक i, bcolor;
 
-  if ( cws->clip && !ispix && !cws->double_buffer ) {
+  अगर (wid != -1) अणु
+   अगर( wid < 0 || wid >= MAXWN || !winकरोws[wid].खोलो ) वापस;
+   cws = &winकरोws[wid];
+  पूर्ण
+
+  अगर ( cws->clip && !ispix && !cws->द्विगुन_buffer ) अणु
     region.x      = cws->xclip;
     region.y      = cws->yclip;
     region.width  = cws->wclip;
     region.height = cws->hclip;
-    for( i = 0; i < MAXGC; i++ )
+    क्रम( i = 0; i < MAXGC; i++ )
       XSetClipRectangles( display, gclist[i], 0, 0, &region, 1, YXBanded );
-  } else {
-    for( i = 0; i < MAXGC; i++ )
+  पूर्ण अन्यथा अणु
+    क्रम( i = 0; i < MAXGC; i++ )
       XSetClipMask( display, gclist[i], None );
-  }
+  पूर्ण
 
-  /* Set background color for this window (Mario S.) */
+  /* Set background color क्रम this winकरोw (Mario S.) */
   bcolor = cws->bgcol;
-  if (bcolor == 0) {
+  अगर (bcolor == 0) अणु
    colors[0].pixel = WhitePixel( display, screen_number );
-  } else {
+  पूर्ण अन्यथा अणु
    colors[0] = colors[bcolor];
-  }
-  XSetWindowBackground( display, cws->drawing, colors[0].pixel );
+  पूर्ण
+  XSetWinकरोwBackground( display, cws->drawing, colors[0].pixel );
 
-  XRaiseWindow( display, cws->window );
+  XRaiseWinकरोw( display, cws->winकरोw );
   XFlush( display );
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXGETGE(WID,X,Y,W,H)
- *    INTEGER WID : window identifier
- *    INTEGER X,Y : window position (output)
- *    INTEGER W,H : window size (output)
+ *    INTEGER WID : winकरोw identअगरier
+ *    INTEGER X,Y : winकरोw position (output)
+ *    INTEGER W,H : winकरोw size (output)
  *
- *    Return position and size of window wid
- *    if wid < 0 the size of the display is returned
+ *    Return position and size of winकरोw wid
+ *    अगर wid < 0 the size of the display is वापसed
  */
-void
+व्योम
    ixgetge( wid, x, y, w, h )
-int wid;
-int *x, *y;
-unsigned int *w, *h;
-{
-  Window temp_win;
-  Display *tmp_display;
+पूर्णांक wid;
+पूर्णांक *x, *y;
+अचिन्हित पूर्णांक *w, *h;
+अणु
+  Winकरोw temp_win;
+  Display *पंचांगp_display;
 
-  /* If workstation not opened, return root display geometry */
-  if (display == NULL) {
+  /* If workstation not खोलोed, वापस root display geometry */
+  अगर (display == शून्य) अणु
     *x = 0;
     *y = 0;
     *w = 0;
     *h = 0;
-    if( wid < 0 ) {
-     tmp_display = XOpenDisplay( getenv( "DISPLAY" ) );
-     screen_number = DefaultScreen( tmp_display );
-     *w = DisplayWidth(tmp_display,screen_number);
-     *h = DisplayHeight(tmp_display,screen_number);
-     XCloseDisplay( tmp_display );
-     return;
-    }
-  }
-  if( wid < 0 ) {
+    अगर( wid < 0 ) अणु
+     पंचांगp_display = XOpenDisplay( दो_पर्या( "DISPLAY" ) );
+     screen_number = DefaultScreen( पंचांगp_display );
+     *w = DisplayWidth(पंचांगp_display,screen_number);
+     *h = DisplayHeight(पंचांगp_display,screen_number);
+     XCloseDisplay( पंचांगp_display );
+     वापस;
+    पूर्ण
+  पूर्ण
+  अगर( wid < 0 ) अणु
     *x = 0;
     *y = 0;
     *w = DisplayWidth(display,screen_number);
     *h = DisplayHeight(display,screen_number);
-  } else {
-    Window root;
-    unsigned int border, depth;
-    unsigned int width, height;
+  पूर्ण अन्यथा अणु
+    Winकरोw root;
+    अचिन्हित पूर्णांक border, depth;
+    अचिन्हित पूर्णांक width, height;
 
-    tws = &windows[wid];
+    tws = &winकरोws[wid];
     XGetGeometry(display, tws->drawing, &root, x, y,
                  &width, &height, &border, &depth);
-    (void) XTranslateCoordinates (display, tws->window,
-                                 RootWindow( display, screen_number),
+    (व्योम) XTranslateCoordinates (display, tws->winकरोw,
+                                 RootWinकरोw( display, screen_number),
                                    0, 0, x, y, &temp_win);
-    if( width > 0 && height > 0 ) {
+    अगर( width > 0 && height > 0 ) अणु
       tws->width  = width;
       tws->height = height;
-    }
-    if( width > 1 && height > 1 ) {
+    पूर्ण
+    अगर( width > 1 && height > 1 ) अणु
       *w=tws->width-1;
       *h=tws->height-1;
-    } else {
+    पूर्ण अन्यथा अणु
       *w=1;
       *h=1;
-    }
-  }
-}
+    पूर्ण
+  पूर्ण
+पूर्ण
 
 
 /*
@@ -1144,260 +1145,260 @@ unsigned int *w, *h;
  *
  *    Get maximum number of planes
  */
-void
+व्योम
    ixgetpl(nplanes)
-int *nplanes;
-{
+पूर्णांक *nplanes;
+अणु
    *nplanes = DisplayPlanes( display, screen_number );
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXRSIZ(WID)
- *    INTEGER WID     : window to be resized
+ *    INTEGER WID     : winकरोw to be resized
  *
- *    Resize the current window if necessary
+ *    Resize the current winकरोw अगर necessary
  */
-void
+व्योम
    ixrsiz(wid)
-int wid;
-{
-  int i;
-  int xval, yval;
-  Window root;
-  unsigned int wval, hval, border, depth;
+पूर्णांक wid;
+अणु
+  पूर्णांक i;
+  पूर्णांक xval, yval;
+  Winकरोw root;
+  अचिन्हित पूर्णांक wval, hval, border, depth;
 
-  tws = &windows[wid];
+  tws = &winकरोws[wid];
 
-  if( !tws->motif ) return;
+  अगर( !tws->motअगर ) वापस;
 
-  XGetGeometry( display, tws->motif_window, &root,
+  XGetGeometry( display, tws->motअगर_winकरोw, &root,
                 &xval, &yval, &wval, &hval, &border, &depth );
-  XResizeWindow( display, tws->window, wval, hval );
+  XResizeWinकरोw( display, tws->winकरोw, wval, hval );
 
-  if( tws->double_buffer ) {
+  अगर( tws->द्विगुन_buffer ) अणु
      XFreePixmap(display,tws->buffer);
-     tws->buffer = XCreatePixmap(display, RootWindow( display, screen_number),
+     tws->buffer = XCreatePixmap(display, RootWinकरोw( display, screen_number),
                    wval, hval, DefaultDepth(display,screen_number));
-     for( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], None );
+     क्रम( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], None );
      setcolor( *gcpxmp, 0);
      XFillRectangle( display, tws->buffer, *gcpxmp, 0, 0, wval, hval);
      setcolor( *gcpxmp, 1);
      tws->drawing        = tws->buffer;
-  }
+  पूर्ण
   tws->width = wval;
   tws->height = hval;
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXGETWI(WKID,IDG)
- *    INTEGER WKID : Workstation identifier (input)
- *    INTEGER IDG  : Window identifier (output)
+ *    INTEGER WKID : Workstation identअगरier (input)
+ *    INTEGER IDG  : Winकरोw identअगरier (output)
  *
- *    Return the X11 window identifier according to the
- *    Window id returned by IXOPNWI.
+ *    Return the X11 winकरोw identअगरier according to the
+ *    Winकरोw id वापसed by IXOPNWI.
  */
-void
+व्योम
    ixgetwi (wkid, idg)
-   int wkid;
-   Window *idg;
-{
-   *idg = windows[wkid].window;
-}
+   पूर्णांक wkid;
+   Winकरोw *idg;
+अणु
+   *idg = winकरोws[wkid].winकरोw;
+पूर्ण
 
 /*
  *    SUBROUTINE IXCLRWI
  *
- *    Clear current window
+ *    Clear current winकरोw
  */
-void
+व्योम
   ixclrwi()
-{
+अणु
 
-  if ( !cws->buffer ) {
+  अगर ( !cws->buffer ) अणु
 /*
-  if ( !ispix && !cws->double_buffer ) {
-     XSetWindowBackground( display, cws->drawing, colors[0].pixel );
+  अगर ( !ispix && !cws->द्विगुन_buffer ) अणु
+     XSetWinकरोwBackground( display, cws->drawing, colors[0].pixel );
 */
-     XClearWindow( display, cws->drawing );
-  } else {
+     XClearWinकरोw( display, cws->drawing );
+  पूर्ण अन्यथा अणु
      setcolor( *gcbuff, 0);
      XFillRectangle( display, cws->buffer, *gcbuff,
                      0, 0, cws->width, cws->height );
      setcolor( *gcbuff, 1);
-  }
-  do_raise = 1;
+  पूर्ण
+  करो_उठाओ = 1;
   XFlush( display );
-}
+पूर्ण
 
 
 /*
- * Change the background for the current window to bcolor Pallete index
+ * Change the background क्रम the current winकरोw to bcolor Pallete index
 */
-void
+व्योम
   ixsetbg( bcolor )
-  int bcolor;
-{
+  पूर्णांक bcolor;
+अणु
   cws->bgcol = bcolor;
-  if (bcolor == 0) { 
+  अगर (bcolor == 0) अणु
    colors[0].pixel = WhitePixel( display, screen_number );
-  } else {
+  पूर्ण अन्यथा अणु
    colors[0] = colors[bcolor];
-  }
+  पूर्ण
 
-  XSetWindowBackground( display, cws->drawing, colors[0].pixel );
-  do_raise = 1;
-}
+  XSetWinकरोwBackground( display, cws->drawing, colors[0].pixel );
+  करो_उठाओ = 1;
+पूर्ण
 
 /*
  *    SUBROUTINE IXUPDWI(MODE)
- *    INTEGER MODE : (1) or (11) The window is raised
- *                   (0) or (10) The window is not raised
+ *    INTEGER MODE : (1) or (11) The winकरोw is उठाओd
+ *                   (0) or (10) The winकरोw is not उठाओd
  *                   (0) or (1)  no synchonisation between client and server
  *                  (10) or (11) synchonisation between client and server
  *
- *    Update display and raise current window to top of stack.
+ *    Update display and उठाओ current winकरोw to top of stack.
  *    Synchronise client and server once (not permanent).
- *    Copy the pixmap cws->buffer on the window cws-> window
- *    if the double buffer is on.
+ *    Copy the pixmap cws->buffer on the winकरोw cws-> winकरोw
+ *    अगर the द्विगुन buffer is on.
  */
-void
+व्योम
   ixupdwi(mode)
-  int mode;
-{
-  if (display == NULL) return;
-  if ( mode == 1 || mode == 11 ) {
-     if ( do_raise ) {
-        XRaiseWindow( display, cws->window );
-        do_raise = 0;
-     }
-  }
-  if ( cws->buffer ) {
-     XCopyArea( display, cws->buffer, cws->window,
+  पूर्णांक mode;
+अणु
+  अगर (display == शून्य) वापस;
+  अगर ( mode == 1 || mode == 11 ) अणु
+     अगर ( करो_उठाओ ) अणु
+        XRaiseWinकरोw( display, cws->winकरोw );
+        करो_उठाओ = 0;
+     पूर्ण
+  पूर्ण
+  अगर ( cws->buffer ) अणु
+     XCopyArea( display, cws->buffer, cws->winकरोw,
                 *gcbuff, 0, 0, cws->width, cws->height, 0, 0 );
-  }
-  if ( mode == 0 || mode == 1 ) {
+  पूर्ण
+  अगर ( mode == 0 || mode == 1 ) अणु
     XFlush( display );
-  } else {
+  पूर्ण अन्यथा अणु
     XSync( display ,0);
-  }
-}
+  पूर्ण
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXCLIP(WID,X,Y,W,H)
- *    INTEGER WID : Window indentifier
+ *    INTEGER WID : Winकरोw indentअगरier
  *    INTEGER X,Y : origin of clipping rectangle
  *    INTEGER W,H : size of clipping rectangle;
  *
- *    Set clipping region for the window wid
+ *    Set clipping region क्रम the winकरोw wid
  */
-void
+व्योम
   ixclip( wid, x, y, w, h )
-int wid;
-int x, y;
-int w, h;
-{
+पूर्णांक wid;
+पूर्णांक x, y;
+पूर्णांक w, h;
+अणु
   XRectangle region;
-  int i;
+  पूर्णांक i;
 
-  tws = &windows[wid];
+  tws = &winकरोws[wid];
   tws->xclip = x;
   tws->yclip = y;
   tws->wclip = w;
   tws->hclip = h;
   tws->clip  = 1;
-  if ( cws->clip && !ispix && !cws->double_buffer ) {
+  अगर ( cws->clip && !ispix && !cws->द्विगुन_buffer ) अणु
     region.x      = cws->xclip;
     region.y      = cws->yclip;
     region.width  = cws->wclip;
     region.height = cws->hclip;
-    for( i = 0; i < MAXGC; i++ )
+    क्रम( i = 0; i < MAXGC; i++ )
       XSetClipRectangles( display, gclist[i], 0, 0, &region, 1, YXBanded );
-  }
-}
+  पूर्ण
+पूर्ण
 
 /* BASIC implementation of clipping function: */
-void
+व्योम
   ixclip1( wid, x1, y1, x2, y2 )
-int wid;
-int x1, y1;
-int x2, y2;
-{
-  int w, h;
+पूर्णांक wid;
+पूर्णांक x1, y1;
+पूर्णांक x2, y2;
+अणु
+  पूर्णांक w, h;
   w = x2 - x1 + 1;
   h = y2 - y1 + 1;
-  ixclip( wid, x1, y1, w, h);   
-}
+  ixclip( wid, x1, y1, w, h);
+पूर्ण
 
 /*
  *    SUBROUTINE IXNOCLI(WID)
- *    INTEGER WID : Window indentifier
+ *    INTEGER WID : Winकरोw indentअगरier
  *
- *    Switch off the clipping for the window wid
+ *    Switch off the clipping क्रम the winकरोw wid
  */
-void
+व्योम
   ixnocli(wid)
-int wid;
-{
-  int i;
+पूर्णांक wid;
+अणु
+  पूर्णांक i;
 
-  tws       = &windows[wid];
-  tws->clip = (int)NULL;
+  tws       = &winकरोws[wid];
+  tws->clip = (पूर्णांक)शून्य;
 
-  for( i = 0; i < MAXGC; i++ )
+  क्रम( i = 0; i < MAXGC; i++ )
     XSetClipMask( display, gclist[i], None );
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSETCO(CINDEX,R,G,B)
  *    INTEGER CINDEX : color index
- *    REAL R,G,B     : red, green, blue intensities between 0.0 and 1.0
+ *    REAL R,G,B     : red, green, blue पूर्णांकensities between 0.0 and 1.0
  *
- *    Set color intensities for given color index
+ *    Set color पूर्णांकensities क्रम given color index
  */
-#define BIGGEST_RGB_VALUE 65535
+#घोषणा BIGGEST_RGB_VALUE 65535
 
-void
+व्योम
   ixsetco( cindex, r, g, b )
-int cindex;
-int r, g, b;
-{
+पूर्णांक cindex;
+पूर्णांक r, g, b;
+अणु
   XColor xcol;
 
-  if( colored && cindex >= 0 && cindex < MAXCOL ) {
-   xcol.red   = (unsigned short)( (r /255.) * BIGGEST_RGB_VALUE );
-   xcol.green = (unsigned short)( (g /255.) * BIGGEST_RGB_VALUE );
-   xcol.blue  = (unsigned short)( (b /255.) * BIGGEST_RGB_VALUE );
+  अगर( colored && cindex >= 0 && cindex < MAXCOL ) अणु
+   xcol.red   = (अचिन्हित लघु)( (r /255.) * BIGGEST_RGB_VALUE );
+   xcol.green = (अचिन्हित लघु)( (g /255.) * BIGGEST_RGB_VALUE );
+   xcol.blue  = (अचिन्हित लघु)( (b /255.) * BIGGEST_RGB_VALUE );
    xcol.flags = DoRed || DoGreen || DoBlue;
-   if( colors[cindex].defined == 1 ) {
-    /* printf("Warning: color = %d redefined\n", cindex); */
+   अगर( colors[cindex].defined == 1 ) अणु
+    /* म_लिखो("Warning: color = %d redefined\n", cindex); */
     colors[cindex].defined = 0;
-    XFreeColors(display, colormap, &colors[cindex].pixel, 1, NULL);
-   }
-   if( XAllocColor( display, colormap, &xcol ) != (Status)NULL ) {
+    XFreeColors(display, colormap, &colors[cindex].pixel, 1, शून्य);
+   पूर्ण
+   अगर( XAllocColor( display, colormap, &xcol ) != (Status)शून्य ) अणु
     colors[cindex].defined = 1;
     colors[cindex].pixel   = xcol.pixel;
     colors[cindex].red     = r;
     colors[cindex].green   = g;
     colors[cindex].blue    = b;
-   }
-  }
-}
+   पूर्ण
+  पूर्ण
+पूर्ण
 
 
-void
-  ixgetcol( index, r, g, b)
-int index; /* input */
-int *r, *g, *b; /* output */
-{
+व्योम
+  ixअ_लोol( index, r, g, b)
+पूर्णांक index; /* input */
+पूर्णांक *r, *g, *b; /* output */
+अणु
   *r = colors[index].red;
   *g = colors[index].green;
   *b = colors[index].blue;
-  return ;
-}
+  वापस ;
+पूर्ण
 
 /*
  *    SUBROUTINE IXSETLN(WIDTH)
@@ -1405,21 +1406,21 @@ int *r, *g, *b; /* output */
  *
  *    Set line width
  */
-void
+व्योम
   ixsetln( width )
-int width;
-{
-  if( width == 1) {
+पूर्णांक width;
+अणु
+  अगर( width == 1) अणु
      line_width = 0;
-  }
-  else {
+  पूर्ण
+  अन्यथा अणु
      line_width = width;
-  }
+  पूर्ण
   XSetLineAttributes( display, *gcline, line_width,
               line_style, cap_style, join_style );
   XSetLineAttributes( display, *gcdash, line_width,
               line_style, cap_style, join_style );
-}
+पूर्ण
 
 
 /*
@@ -1428,606 +1429,606 @@ int width;
  *    INTEGER DASH(N) : dash segment lengths
  *
  *    Set line style:
- *    if N.EQ.0 use solid lines
- *    if N.LT.0 use predefined tdash[][] dashed style of type -N (1..4)
- *    if N.GT.0 use dashed lines described by DASH(N), 2 <= N <= 10 (even)
- *    e.g. N=4,DASH=(6,3,1,3) gives a dashed-dotted line with 6 dots,
- *    followed by 3 blanks followed by 1 dot followed by 3 blanks
+ *    अगर N.EQ.0 use solid lines
+ *    अगर N.LT.0 use predefined tdash[][] dashed style of type -N (1..4)
+ *    अगर N.GT.0 use dashed lines described by DASH(N), 2 <= N <= 10 (even)
+ *    e.g. N=4,DASH=(6,3,1,3) gives a dashed-करोtted line with 6 करोts,
+ *    followed by 3 blanks followed by 1 करोt followed by 3 blanks
  */
-void
+व्योम
   ixsetls( n, dash )
-int n;
-short *dash;
-{
-  int i, j;
-  if (n > 16) n = 16;
-  if( n == 0 ) {
+पूर्णांक n;
+लघु *dash;
+अणु
+  पूर्णांक i, j;
+  अगर (n > 16) n = 16;
+  अगर( n == 0 ) अणु
     line_style = LineSolid;
     dash_nseg = 1;
     XSetLineAttributes( display, *gcline, line_width,
               line_style, cap_style, join_style );
-    return;
-  }
+    वापस;
+  पूर्ण
 
   dash_length = 0;
   dash_offset = 0;
   line_style = LineOnOffDash;
 
-  if ( n > 0 ) /* input type */
-  {
+  अगर ( n > 0 ) /* input type */
+  अणु
    dash_nseg = n;
-   for( i = 0; i < n; i++ ) {
+   क्रम( i = 0; i < n; i++ ) अणु
     dash_list[i] = dash[i];
     dash_length += dash_list[i];
-   }
-  }
+   पूर्ण
+  पूर्ण
 
-  if ( n < 0 ) /* predefined types */
-  {
+  अगर ( n < 0 ) /* predefined types */
+  अणु
    n = -n;
-   switch (n) {
-           case 1: j = 2;
-                   break;
-           case 2: j = 4;
-                   break;
-           case 3: j = 2;
-                   break;
-           case 4: j = 2;
-                   break;
-   }
+   चयन (n) अणु
+           हाल 1: j = 2;
+                   अवरोध;
+           हाल 2: j = 4;
+                   अवरोध;
+           हाल 3: j = 2;
+                   अवरोध;
+           हाल 4: j = 2;
+                   अवरोध;
+   पूर्ण
    dash_nseg = j;
-   for( i = 0; i < j; i++ ) {
+   क्रम( i = 0; i < j; i++ ) अणु
     dash_list[i] = tdash[n][i];
     dash_length += dash_list[i];
-   }
-  }
+   पूर्ण
+  पूर्ण
   XSetLineAttributes( display, *gcdash, line_width,
              line_style, cap_style, join_style );
-}
+पूर्ण
 
-void
+व्योम
   ixsetld( lt )
-int lt;
-/* Set dashing style via 16-bit integer mask. Use lower 16 bits */
-{
- int i=0, j, n=0, m, mask=1, flag, offset=0;
- short dash[16];
+पूर्णांक lt;
+/* Set dashing style via 16-bit पूर्णांकeger mask. Use lower 16 bits */
+अणु
+ पूर्णांक i=0, j, n=0, m, mask=1, flag, offset=0;
+ लघु dash[16];
 
  flag=lt & mask;
- while(i<16) {
+ जबतक(i<16) अणु
   j = 0;
   m = lt & mask;
-  while(i<16 && (lt & mask)==m) {
+  जबतक(i<16 && (lt & mask)==m) अणु
    i++; j++; lt >>= 1;
-  }
+  पूर्ण
   dash[n++]=j;
- }
- if(!flag) {
+ पूर्ण
+ अगर(!flag) अणु
   offset = dash[0];
-  for(i=1; i<n; i++) dash[i-1]=dash[i];
+  क्रम(i=1; i<n; i++) dash[i-1]=dash[i];
   dash[n-1]=offset;
   offset=-offset;
-  if(n%2 != 0) {n--; dash[n-1]+=dash[n];}
- } else {
-  if(n%2 != 0) {n--; dash[0]+=dash[n]; offset = dash[n];}
- }
+  अगर(n%2 != 0) अणुn--; dash[n-1]+=dash[n];पूर्ण
+ पूर्ण अन्यथा अणु
+  अगर(n%2 != 0) अणुn--; dash[0]+=dash[n]; offset = dash[n];पूर्ण
+ पूर्ण
 /*
- printf("n =%d offset=%d\n", n, offset);
- for(i=0; i<n; i++) printf("i=%d dash=%d\n", i, dash[i]);
+ म_लिखो("n =%d offset=%d\n", n, offset);
+ क्रम(i=0; i<n; i++) म_लिखो("i=%d dash=%d\n", i, dash[i]);
 */
  ixsetls( n, dash );
  dash_offset = offset;
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSETLC(CINDEX)
  *    INTEGER CINDEX : color index defined my IXSETCOL
  *
- *    Set color index for lines
+ *    Set color index क्रम lines
  */
-void
+व्योम
   ixsetlc( cindex )
-int cindex;
-{
+पूर्णांक cindex;
+अणु
   setcolor( *gcline, cindex );
   setcolor( *gcdash, cindex );
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXLINE(N,XY)
- *    INTEGER N         : number of points
- *    INTEGER*2 XY(2,N) : list of points
+ *    INTEGER N         : number of poपूर्णांकs
+ *    INTEGER*2 XY(2,N) : list of poपूर्णांकs
  *
- *    Draw a line through all points
+ *    Draw a line through all poपूर्णांकs
  */
-void
+व्योम
   ixline( n, Rxy )
-int n;
-XPoint *Rxy;
-{
- XPoint *xy;
- int i;
+पूर्णांक n;
+XPoपूर्णांक *Rxy;
+अणु
+ XPoपूर्णांक *xy;
+ पूर्णांक i;
 
- if (rotate_fl || scale_fl || trans_fl) {
-  xy = (XPoint *)calloc(n, sizeof(XPoint));
-  for (i = 0; i < n; i++) {
+ अगर (rotate_fl || scale_fl || trans_fl) अणु
+  xy = (XPoपूर्णांक *)सुस्मृति(n, माप(XPoपूर्णांक));
+  क्रम (i = 0; i < n; i++) अणु
    xy[i].x=xOrig+Rco*scalex*(Rxy[i].x-xRO)+Rsi*scaley*(Rxy[i].y-yRO);
    xy[i].y=yOrig-Rsi*scalex*(Rxy[i].x-xRO)+Rco*scaley*(Rxy[i].y-yRO);
-  }
- } else {
+  पूर्ण
+ पूर्ण अन्यथा अणु
   xy = Rxy;
- }
+ पूर्ण
 /*
-printf("1: %d, %d, %d, %d, %d, %d, %d, %d\n",Rxy[0].x,Rxy[0].y,Rxy[1].x,Rxy[1].y, Rxy[2].x,Rxy[2].y, Rxy[3].x,Rxy[3].y);
-printf("2: %d, %d, %d, %d, %d, %d, %d, %d\n",xy[0].x,xy[0].y,xy[1].x,xy[1].y, xy[2].x,xy[2].y,xy[3].x,xy[3].y);
-printf("3: Rsi=%f, Rco=%f, sx=%f, sy=%f, xO=%d, yO=%d, xRO=%d, yRO=%d\n",Rsi, Rco, scalex, scaley, xOrig, yOrig, xRO, yRO);
+म_लिखो("1: %d, %d, %d, %d, %d, %d, %d, %d\n",Rxy[0].x,Rxy[0].y,Rxy[1].x,Rxy[1].y, Rxy[2].x,Rxy[2].y, Rxy[3].x,Rxy[3].y);
+म_लिखो("2: %d, %d, %d, %d, %d, %d, %d, %d\n",xy[0].x,xy[0].y,xy[1].x,xy[1].y, xy[2].x,xy[2].y,xy[3].x,xy[3].y);
+म_लिखो("3: Rsi=%f, Rco=%f, sx=%f, sy=%f, xO=%d, yO=%d, xRO=%d, yRO=%d\n",Rsi, Rco, scalex, scaley, xOrig, yOrig, xRO, yRO);
 */
 
- if ( n > 1 )
-    {
-       if( line_style == LineSolid )
-         if (cws->buffer) {
+ अगर ( n > 1 )
+    अणु
+       अगर( line_style == LineSolid )
+         अगर (cws->buffer) अणु
           XDrawLines( display, cws->buffer, *gcline, xy, n, CoordModeOrigin );
-         } else {
+         पूर्ण अन्यथा अणु
           XDrawLines( display, cws->drawing, *gcline, xy, n, CoordModeOrigin );
-         }
-       else {
-         int i;
+         पूर्ण
+       अन्यथा अणु
+         पूर्णांक i;
          XSetDashes( display, *gcdash,
              dash_offset, dash_list, dash_nseg );
          XDrawLines( display, cws->drawing, *gcdash, xy, n, CoordModeOrigin );
 
          /* calculate length of line to update dash offset */
 /* Doesn't work well anyway (Mario)
-         for( i = 1; i < n; i++ ) {
-          int dx = xy[i].x - xy[i-1].x;
-          int dy = xy[i].y - xy[i-1].y;
-          if( dx < 0 ) dx = - dx;
-          if( dy < 0 ) dy = - dy;
+         क्रम( i = 1; i < n; i++ ) अणु
+          पूर्णांक dx = xy[i].x - xy[i-1].x;
+          पूर्णांक dy = xy[i].y - xy[i-1].y;
+          अगर( dx < 0 ) dx = - dx;
+          अगर( dy < 0 ) dy = - dy;
           dash_offset += dx > dy ? dx : dy;
-         }
+         पूर्ण
          dash_offset %= dash_length;
 */
-       }
-    }
- else
-    {
-     XDrawPoint(display, cws->drawing,
+       पूर्ण
+    पूर्ण
+ अन्यथा
+    अणु
+     XDrawPoपूर्णांक(display, cws->drawing,
         line_style == LineSolid ? *gcline : *gcdash, xy[0].x, xy[0].y);
-    }
-   do_raise = 1;
-}
+    पूर्ण
+   करो_उठाओ = 1;
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSETMS(TYPE,N,XY)
  *    INTEGER TYPE      : marker type
  *    INTEGER N         : length of marker description
- *    INTEGER*2 XY(2,N) : list of points describing marker shape
+ *    INTEGER*2 XY(2,N) : list of poपूर्णांकs describing marker shape
  *
  *    Set marker style:
- *    if N.EQ.0 marker is a single point
- *    if TYPE.EQ.0 marker is hollow circle of diameter N
- *    if TYPE.EQ.1 marker is filled circle of diameter N
- *    if TYPE.EQ.2 marker is a hollow polygon describe by line XY
- *    if TYPE.EQ.3 marker is a filled polygon describe by line XY
- *    if TYPE.EQ.4 marker is described by segmented line XY
+ *    अगर N.EQ.0 marker is a single poपूर्णांक
+ *    अगर TYPE.EQ.0 marker is hollow circle of diameter N
+ *    अगर TYPE.EQ.1 marker is filled circle of diameter N
+ *    अगर TYPE.EQ.2 marker is a hollow polygon describe by line XY
+ *    अगर TYPE.EQ.3 marker is a filled polygon describe by line XY
+ *    अगर TYPE.EQ.4 marker is described by segmented line XY
  *    e.g. TYPE=4,N=4,XY=(-3,0,3,0,0,-3,0,3) sets a plus shape of 7x7 pixels
  */
-void
-  ixsetms( type, n, xy )
-int type;
-int n;
-XPoint *xy;
-{
-  int i;
+व्योम
+  ixseपंचांगs( type, n, xy )
+पूर्णांक type;
+पूर्णांक n;
+XPoपूर्णांक *xy;
+अणु
+  पूर्णांक i;
 
   marker.type = type;
   marker.n = n < MAXMK ? n : MAXMK;
-  if( marker.type >= 2 )
-    for( i = 0; i < marker.n; i++ )
+  अगर( marker.type >= 2 )
+    क्रम( i = 0; i < marker.n; i++ )
       marker.xy[i] = xy[i];
-}
+पूर्ण
 
 
-/*   SUBROUTINE IXSETMTS( TYPE, SIZE )    
- *   Author: Mario Stipcevic           
+/*   SUBROUTINE IXSETMTS( TYPE, SIZE )
+ *   Author: Mario Stipcevic
  * A set of predefined markers ala PAW */
 /* type  0 or 20 = filled circle
  *       1 or 21 = filled box
- *       2 or 22 = filled triangle pointing up
- *       3 or 23 = filled triangle pointing down
+ *       2 or 22 = filled triangle poपूर्णांकing up
+ *       3 or 23 = filled triangle poपूर्णांकing करोwn
  *       4 or 24 = hollow circle
  *       5 or 25 = hollow box
- *       6 or 26 = hollow triangle pointing up
- *       7 or 27 = hollow triangle pointing down
+ *       6 or 26 = hollow triangle poपूर्णांकing up
+ *       7 or 27 = hollow triangle poपूर्णांकing करोwn
 */
-void
-  ixsetmts( type, size )
-int type;
-int size;
-{
- int i, fill;
- float siz;
- short int xy[10][2];
- 
+व्योम
+  ixseपंचांगts( type, size )
+पूर्णांक type;
+पूर्णांक size;
+अणु
+ पूर्णांक i, fill;
+ भग्न siz;
+ लघु पूर्णांक xy[10][2];
+
  fill = 3;
  siz = (1 + size) / 2.;
- if (type >= 20) type = type - 20;
- if (type >= 4) fill = 2;
- if (type == 0) { ixsetms( 1, size, xy ); return; }
- if (type == 4) { ixsetms( 0, size, xy ); return; }
- if (type == 1 || type == 5) { 
-  for(i = 0; i < 5; xy[i][0]=siz*boxm[i][0], xy[i][1]=siz*boxm[i][1], i++);
-  ixsetms( fill, 5, xy ); return; }
- if (type == 2 || type == 6) { 
-  for(i = 0; i < 4; xy[i][0]=siz*tupm[i][0], xy[i][1]=siz*tupm[i][1], i++);
-  ixsetms( fill, 4, xy ); return; }
- if (type == 3 || type == 7) { 
-  for(i = 0; i < 4; xy[i][0]=siz*tdnm[i][0], xy[i][1]=siz*tdnm[i][1], i++);
-  ixsetms( fill, 4, xy ); return; }
+ अगर (type >= 20) type = type - 20;
+ अगर (type >= 4) fill = 2;
+ अगर (type == 0) अणु ixseपंचांगs( 1, size, xy ); वापस; पूर्ण
+ अगर (type == 4) अणु ixseपंचांगs( 0, size, xy ); वापस; पूर्ण
+ अगर (type == 1 || type == 5) अणु
+  क्रम(i = 0; i < 5; xy[i][0]=siz*boxm[i][0], xy[i][1]=siz*boxm[i][1], i++);
+  ixseपंचांगs( fill, 5, xy ); वापस; पूर्ण
+ अगर (type == 2 || type == 6) अणु
+  क्रम(i = 0; i < 4; xy[i][0]=siz*tupm[i][0], xy[i][1]=siz*tupm[i][1], i++);
+  ixseपंचांगs( fill, 4, xy ); वापस; पूर्ण
+ अगर (type == 3 || type == 7) अणु
+  क्रम(i = 0; i < 4; xy[i][0]=siz*tdnm[i][0], xy[i][1]=siz*tdnm[i][1], i++);
+  ixseपंचांगs( fill, 4, xy ); वापस; पूर्ण
 
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSETMC(CINDEX)
  *    INTEGER CINDEX : color index defined my IXSETCOL
  *
- *    Set color index for markers
+ *    Set color index क्रम markers
  */
-void
-  ixsetmc( cindex )
-int cindex;
-{
+व्योम
+  ixseपंचांगc( cindex )
+पूर्णांक cindex;
+अणु
   setcolor( *gcmark, cindex );
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXMARKE(N,XY)
- *    INTEGER N         : number of points
- *    INTEGER*2 XY(2,N) : list of points
+ *    INTEGER N         : number of poपूर्णांकs
+ *    INTEGER*2 XY(2,N) : list of poपूर्णांकs
  *
- *    Draw a marker at each point
+ *    Draw a marker at each poपूर्णांक
  */
-void
+व्योम
    ixmarke( n, Rxy )
-int n;
-XPoint *Rxy;
-{
-  XPoint *xy;
-  int i;
+पूर्णांक n;
+XPoपूर्णांक *Rxy;
+अणु
+  XPoपूर्णांक *xy;
+  पूर्णांक i;
   Drawable d;
 
-  if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+  अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
-  if (rotate_fl || scale_fl || trans_fl) {
-   xy = (XPoint *)calloc(n, sizeof(XPoint));
-   for (i = 0; i < n; i++) {
+  अगर (rotate_fl || scale_fl || trans_fl) अणु
+   xy = (XPoपूर्णांक *)सुस्मृति(n, माप(XPoपूर्णांक));
+   क्रम (i = 0; i < n; i++) अणु
     xy[i].x=xOrig+Rco*scalex*(Rxy[i].x-xRO)+Rsi*scaley*(Rxy[i].y-yRO)+.5;
     xy[i].y=yOrig-Rsi*scalex*(Rxy[i].x-xRO)+Rco*scaley*(Rxy[i].y-yRO)+.5;
-   }
-  } else {
+   पूर्ण
+  पूर्ण अन्यथा अणु
    xy = Rxy;
-  }
+  पूर्ण
 
-  do_raise = 1;
-  if( marker.n <= 0 )
-    XDrawPoints( display, d, *gcmark, xy, n, CoordModeOrigin );
-  else {
-    int r = marker.n / 2;
-    int m;
+  करो_उठाओ = 1;
+  अगर( marker.n <= 0 )
+    XDrawPoपूर्णांकs( display, d, *gcmark, xy, n, CoordModeOrigin );
+  अन्यथा अणु
+    पूर्णांक r = marker.n / 2;
+    पूर्णांक m;
 
-    for( m = 0; m < n; m++ ) {
-      int hollow = 0;
+    क्रम( m = 0; m < n; m++ ) अणु
+      पूर्णांक hollow = 0;
 
-      switch( marker.type ) {
-      int i;
+      चयन( marker.type ) अणु
+      पूर्णांक i;
 
-      case 0:        /* hollow circle */
+      हाल 0:        /* hollow circle */
       XDrawArc( display, d, *gcmark,
           xy[m].x - r, xy[m].y - r, marker.n, marker.n, 0, 360 * 64 );
-      break;
+      अवरोध;
 
-      case 1:        /* filled circle */
+      हाल 1:        /* filled circle */
       XFillArc( display, d, *gcmark,
           xy[m].x - r, xy[m].y - r, marker.n, marker.n, 0, 360 * 64 );
     /* For Xlibs with ugly XFillArc: */
       XDrawArc( display, d, *gcmark,
           xy[m].x - r, xy[m].y - r, marker.n, marker.n, 0, 360 * 64 );
-      break;
+      अवरोध;
 
-      case 2:        /* hollow polygon */
+      हाल 2:        /* hollow polygon */
       hollow = 1;
-      case 3:        /* filled polygon */
-      for( i = 0; i < marker.n; i++ ) {
+      हाल 3:        /* filled polygon */
+      क्रम( i = 0; i < marker.n; i++ ) अणु
         marker.xy[i].x += xy[m].x;
         marker.xy[i].y += xy[m].y;
-      }
-      if( hollow )
+      पूर्ण
+      अगर( hollow )
         XDrawLines( display, d, *gcmark,
               marker.xy, marker.n, CoordModeOrigin );
-      else
+      अन्यथा
         XFillPolygon( display, d, *gcmark,
                 marker.xy, marker.n, Nonconvex, CoordModeOrigin );
-      for( i = 0; i < marker.n; i++ ) {
+      क्रम( i = 0; i < marker.n; i++ ) अणु
         marker.xy[i].x -= xy[m].x;
         marker.xy[i].y -= xy[m].y;
-      }
-      break;
+      पूर्ण
+      अवरोध;
 
-      case 4:        /* segmented line */
-      for( i = 0; i < marker.n; i += 2 )
+      हाल 4:        /* segmented line */
+      क्रम( i = 0; i < marker.n; i += 2 )
         XDrawLine( display, d, *gcmark,
              xy[m].x + marker.xy[i].x, xy[m].y + marker.xy[i].y,
              xy[m].x + marker.xy[i+1].x, xy[m].y + marker.xy[i+1].y );
-      break;
-      }
-    }
-  }
-}
+      अवरोध;
+      पूर्ण
+    पूर्ण
+  पूर्ण
+पूर्ण
 
 /*
  *    SUBROUTINE IXCIRC(x0, y0, r, angle1, angle2, aspect)
  *    Author: Mario Stipcevic
- *    Simple interface to ixarc for QB's CIRCLE
+ *    Simple पूर्णांकerface to ixarc क्रम QB's CIRCLE
  */
-int
+पूर्णांक
    ixcirc( x0, y0, r, phi1, phi2, aspect )
-int x0, y0, r;
-float phi1, phi2, aspect; /* start and stop angles in radians */
-{
-  static float f = 57.295779512;
-  ixarc(x0, y0, r, (int)(aspect*r+.5), (int)(f*phi1+.5), (int)(f*phi2+.5), 0);
-}
+पूर्णांक x0, y0, r;
+भग्न phi1, phi2, aspect; /* start and stop angles in radians */
+अणु
+  अटल भग्न f = 57.295779512;
+  ixarc(x0, y0, r, (पूर्णांक)(aspect*r+.5), (पूर्णांक)(f*phi1+.5), (पूर्णांक)(f*phi2+.5), 0);
+पूर्ण
 
 /*
- *    SUBROUTINE IXARC(x0, y0, rh, rv, angle1, angle2, ifill)
+ *    SUBROUTINE IXARC(x0, y0, rh, rv, angle1, angle2, अगरill)
  *    Author: Mario Stipcevic
  *
- *    Draw an arc 
- *    center: (x0, y0) 
+ *    Draw an arc
+ *    center: (x0, y0)
  *    horiz. and vert. radii: rh, rv
  *    start and stop angles in degrees: angle1, angle2
- *    ifill= 0 (hollow), 1 (filled)
+ *    अगरill= 0 (hollow), 1 (filled)
  */
-int
-   ixarc( Rx0, Ry0, rx, ry, ang1, ang2, ifill )
-int Rx0, Ry0, rx, ry, ang1, ang2, ifill;
-{
-  int x, y;
-  int ang;
-  static float f = 57.295779512;
+पूर्णांक
+   ixarc( Rx0, Ry0, rx, ry, ang1, ang2, अगरill )
+पूर्णांक Rx0, Ry0, rx, ry, ang1, ang2, अगरill;
+अणु
+  पूर्णांक x, y;
+  पूर्णांक ang;
+  अटल भग्न f = 57.295779512;
   Drawable d;
 
-  if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+  अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
-  if (rotate_fl || scale_fl || trans_fl) {
+  अगर (rotate_fl || scale_fl || trans_fl) अणु
    x = xOrig + Rco * scalex * (Rx0 - xRO) + Rsi * scaley * (Ry0 - yRO)+.5;
    y = yOrig - Rsi * scalex * (Rx0 - xRO) + Rco * scaley * (Ry0 - yRO)+.5;
-   rx = fabs(scalex) * rx;
-   ry = fabs(scaley) * ry;
-   if (scalex < 0 && scaley < 0) {
+   rx = भ_असल(scalex) * rx;
+   ry = भ_असल(scaley) * ry;
+   अगर (scalex < 0 && scaley < 0) अणु
     ang1 = 180 + ang1; ang2 = 180 + ang2;
-   } else {
-    if (scalex < 0.) {ang = ang2; ang2 = 180 - ang1; ang1 = 180 - ang;} 
-    if (scaley < 0.) {ang = ang2; ang2 = -ang1; ang1 = -ang;}
-   }
+   पूर्ण अन्यथा अणु
+    अगर (scalex < 0.) अणुang = ang2; ang2 = 180 - ang1; ang1 = 180 - ang;पूर्ण
+    अगर (scaley < 0.) अणुang = ang2; ang2 = -ang1; ang1 = -ang;पूर्ण
+   पूर्ण
    ang1 = ang1 + r_angle * f;
    ang2 = ang2 + r_angle * f;
-  } else {
+  पूर्ण अन्यथा अणु
    x = Rx0;
    y = Ry0;
-  }
+  पूर्ण
 
-  do_raise = 1;
-  while (ang2 < ang1) ang2 += 360;
-  while (ang1 < -360) { ang1 = 360 + ang1; ang2 = 360 + ang2; }
-  while (ang2 > 360) { ang1 = -360 + ang1; ang2 = -360 + ang2; }
-/* printf("ixarc2: ang1=%d, ang2=%d\n", ang1, ang2); */
+  करो_उठाओ = 1;
+  जबतक (ang2 < ang1) ang2 += 360;
+  जबतक (ang1 < -360) अणु ang1 = 360 + ang1; ang2 = 360 + ang2; पूर्ण
+  जबतक (ang2 > 360) अणु ang1 = -360 + ang1; ang2 = -360 + ang2; पूर्ण
+/* म_लिखो("ixarc2: ang1=%d, ang2=%d\n", ang1, ang2); */
   ang2 = ang2 - ang1; /* Length of the arc, as required by XDrawArc */
 
-  switch( ifill ) {
-  case 0:        /* hollow arc */
+  चयन( अगरill ) अणु
+  हाल 0:        /* hollow arc */
        XDrawArc( display, d, *gcline,
                   x - rx, y - ry, 2 * rx, 2 * ry, ang1 * 64, ang2 * 64 );
-  break;
+  अवरोध;
 
-  case 1:        /* filled arc */
+  हाल 1:        /* filled arc */
        XFillArc( display, d, *gcfill,
                   x - rx, y - ry, 2 * rx, 2 * ry, ang1 * 64, ang2 * 64 );
        XDrawArc( display, d, *gcfill,
                   x - rx, y - ry, 2 * rx, 2 * ry, ang1 * 64, ang2 * 64 );
-  break;
-  }
-}
+  अवरोध;
+  पूर्ण
+पूर्ण
 
 /*
  *    SUBROUTINE IXSETFS(STYLE,FASI)
- *    INTEGER STYLE : fill area interior style hollow or solid
+ *    INTEGER STYLE : fill area पूर्णांकerior style hollow or solid
  *
  *    Set fill area style
  */
-void
+व्योम
   ixsetfs( style, fasi )
-int style;
-int fasi;
-{
+पूर्णांक style;
+पूर्णांक fasi;
+अणु
   fill_border = 0;
-  if ( fasi == 0 ) style = 0;
-  switch( style ) {
+  अगर ( fasi == 0 ) style = 0;
+  चयन( style ) अणु
 
-  case 1:         /* fill interior with solid color */
+  हाल 1:         /* fill पूर्णांकerior with solid color */
     fill_hollow = 0;
     XSetFillStyle( display, *gcfill, FillSolid );
-    break;
+    अवरोध;
 
-  case 2:         /* fill interior + border with solid color */
+  हाल 2:         /* fill पूर्णांकerior + border with solid color */
     fill_hollow = 0;
     fill_border = 1;
     XSetFillStyle( display, *gcfill, FillSolid );
-    break;
+    अवरोध;
 
-  case 3:         /* hatch */
+  हाल 3:         /* hatch */
     fill_hollow = 0;
     XSetFillStyle( display, *gcfill, FillStippled );
-    if( fasi != current_fasi ) {
-      if( fill_pattern != (Pixmap)NULL ) {
+    अगर( fasi != current_fasi ) अणु
+      अगर( fill_pattern != (Pixmap)शून्य ) अणु
         XFreePixmap( display, fill_pattern );
-        fill_pattern = (Pixmap)NULL;
-      }
-      switch( fasi ) {
-        case 1: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p3_bits, 16, 16);
-                break;
-        case 2: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p2_bits, 16, 16);
-                break;
-        case 3: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p1_bits, 16, 16);
-                break;
-        case 4: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p4_bits, 16, 16);
-                break;
-        case 5: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p5_bits, 16, 16);
-                break;
-        case 6: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p6_bits, 16, 16);
-                break;
-        case 7: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p7_bits, 16, 16);
-                break;
-        case 8: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p8_bits, 16, 16);
-                break;
-        case 9: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p9_bits, 16, 16);
-                break;
-        case 10:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p10_bits, 16, 16);
-                break;
-        case 11:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p11_bits, 16, 16);
-                break;
-        case 12:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p12_bits, 16, 16);
-                break;
-        case 13:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p13_bits, 16, 16);
-                break;
-        case 14:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p14_bits, 16, 16);
-                break;
-        case 15:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p15_bits, 16, 16);
-                break;
-        case 16:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p16_bits, 16, 16);
-                break;
-        case 17:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p17_bits, 16, 16);
-                break;
-        case 18:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p18_bits, 16, 16);
-                break;
-        case 19:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p19_bits, 16, 16);
-                break;
-        case 20:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p20_bits, 16, 16);
-                break;
-        case 21:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p21_bits, 16, 16);
-                break;
-        case 22:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p22_bits, 16, 16);
-                break;
-        case 23:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p23_bits, 16, 16);
-                break;
-        case 24:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p24_bits, 16, 16);
-                break;
-        case 25:fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p25_bits, 16, 16);
-                break;
-       default: fill_pattern = XCreateBitmapFromData(display,
-                RootWindow( display, screen_number), p2_bits, 16, 16);
-                break;
-      }
+        fill_pattern = (Pixmap)शून्य;
+      पूर्ण
+      चयन( fasi ) अणु
+        हाल 1: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p3_bits, 16, 16);
+                अवरोध;
+        हाल 2: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p2_bits, 16, 16);
+                अवरोध;
+        हाल 3: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p1_bits, 16, 16);
+                अवरोध;
+        हाल 4: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p4_bits, 16, 16);
+                अवरोध;
+        हाल 5: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p5_bits, 16, 16);
+                अवरोध;
+        हाल 6: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p6_bits, 16, 16);
+                अवरोध;
+        हाल 7: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p7_bits, 16, 16);
+                अवरोध;
+        हाल 8: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p8_bits, 16, 16);
+                अवरोध;
+        हाल 9: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p9_bits, 16, 16);
+                अवरोध;
+        हाल 10:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p10_bits, 16, 16);
+                अवरोध;
+        हाल 11:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p11_bits, 16, 16);
+                अवरोध;
+        हाल 12:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p12_bits, 16, 16);
+                अवरोध;
+        हाल 13:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p13_bits, 16, 16);
+                अवरोध;
+        हाल 14:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p14_bits, 16, 16);
+                अवरोध;
+        हाल 15:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p15_bits, 16, 16);
+                अवरोध;
+        हाल 16:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p16_bits, 16, 16);
+                अवरोध;
+        हाल 17:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p17_bits, 16, 16);
+                अवरोध;
+        हाल 18:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p18_bits, 16, 16);
+                अवरोध;
+        हाल 19:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p19_bits, 16, 16);
+                अवरोध;
+        हाल 20:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p20_bits, 16, 16);
+                अवरोध;
+        हाल 21:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p21_bits, 16, 16);
+                अवरोध;
+        हाल 22:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p22_bits, 16, 16);
+                अवरोध;
+        हाल 23:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p23_bits, 16, 16);
+                अवरोध;
+        हाल 24:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p24_bits, 16, 16);
+                अवरोध;
+        हाल 25:fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p25_bits, 16, 16);
+                अवरोध;
+       शेष: fill_pattern = XCreateBiपंचांगapFromData(display,
+                RootWinकरोw( display, screen_number), p2_bits, 16, 16);
+                अवरोध;
+      पूर्ण
       XSetStipple( display, *gcfill, fill_pattern );
       current_fasi = fasi;
-    }
-    break;
+    पूर्ण
+    अवरोध;
 
-  default:
+  शेष:
     fill_hollow = 1;
-  }
-}
+  पूर्ण
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSETFC(CINDEX)
  *    INTEGER CINDEX : color index defined my IXSETCOL
  *
- *    Set color index for fill areas
+ *    Set color index क्रम fill areas
  */
-void
+व्योम
   ixsetfc( cindex )
-int cindex;
-{
+पूर्णांक cindex;
+अणु
   setcolor( *gcfill, cindex );
 
   /* invalidate fill pattern */
-  if( fill_pattern != (Pixmap)NULL ) {
+  अगर( fill_pattern != (Pixmap)शून्य ) अणु
     XFreePixmap( display, fill_pattern );
-    fill_pattern = (Pixmap)NULL;
-  }
-}
+    fill_pattern = (Pixmap)शून्य;
+  पूर्ण
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXFLARE(N,XY)
- *    INTEGER N         : number of points
- *    INTEGER*2 XY(2,N) : list of points
+ *    INTEGER N         : number of poपूर्णांकs
+ *    INTEGER*2 XY(2,N) : list of poपूर्णांकs
  *
  *    Fill area described by polygon
  */
-void
+व्योम
   ixflare( n, Rxy )
-int n;
-XPoint *Rxy;
-{
-  XPoint *xy;
-  int i;
+पूर्णांक n;
+XPoपूर्णांक *Rxy;
+अणु
+  XPoपूर्णांक *xy;
+  पूर्णांक i;
   Drawable d;
 
-  if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+  अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
-  if (rotate_fl || scale_fl || trans_fl) {
-   xy = (XPoint *)calloc(n, sizeof(XPoint));
-   for (i = 0; i < n; i++) {
+  अगर (rotate_fl || scale_fl || trans_fl) अणु
+   xy = (XPoपूर्णांक *)सुस्मृति(n, माप(XPoपूर्णांक));
+   क्रम (i = 0; i < n; i++) अणु
     xy[i].x=xOrig+Rco*scalex*(Rxy[i].x-xRO)+Rsi*scaley*(Rxy[i].y-yRO)+.5;
     xy[i].y=yOrig-Rsi*scalex*(Rxy[i].x-xRO)+Rco*scaley*(Rxy[i].y-yRO)+.5;
-   }
-  } else {
+   पूर्ण
+  पूर्ण अन्यथा अणु
    xy = Rxy;
-  }
+  पूर्ण
 
-  if( fill_hollow )
+  अगर( fill_hollow )
     XDrawLines( display, d, *gcfill, xy, n, CoordModeOrigin );
-  else {
-   if( fill_border )
+  अन्यथा अणु
+   अगर( fill_border )
     XDrawLines( display, d, *gcfill, xy, n, CoordModeOrigin );
     XFillPolygon( display, d, *gcfill,
                   xy, n, Nonconvex, CoordModeOrigin );
-  }
-  do_raise = 1;
-}
+  पूर्ण
+  करो_उठाओ = 1;
+पूर्ण
 
 
 /*
@@ -2035,122 +2036,122 @@ XPoint *Rxy;
  *    INTEGER TXALH : horizontal text alignment
  *    INTEGER TXALV : vertical text alignment
  */
-void
+व्योम
   ixsetta( txalh, txalv )
-int txalh;
-int txalv;
-{
-  switch ( txalh ) {
+पूर्णांक txalh;
+पूर्णांक txalv;
+अणु
+  चयन ( txalh ) अणु
 
-  case 0 :
-  case 1 : switch ( txalv) {
-           case 0 : 
-           case 1 : text_align = 7;
-                    break;
-           case 2 : text_align = 4;
-                    break;
-           case 3 : text_align = 1;
-                    break;
-           }
-           break;
-  case 2 : switch ( txalv) {
-           case 0 : 
-           case 1 : text_align = 8;
-                    break;
-           case 2 : text_align = 5;
-                    break;
-           case 3 : text_align = 2;
-                    break;
-           }
-           break;
-  case 3 : switch ( txalv) {
-           case 0 : 
-           case 1 : text_align = 9;
-                    break;
-           case 2 : text_align = 6;
-                    break;
-           case 3 : text_align = 3;
-                    break;
-           }
-           break;
-  }
-}
+  हाल 0 :
+  हाल 1 : चयन ( txalv) अणु
+           हाल 0 :
+           हाल 1 : text_align = 7;
+                    अवरोध;
+           हाल 2 : text_align = 4;
+                    अवरोध;
+           हाल 3 : text_align = 1;
+                    अवरोध;
+           पूर्ण
+           अवरोध;
+  हाल 2 : चयन ( txalv) अणु
+           हाल 0 :
+           हाल 1 : text_align = 8;
+                    अवरोध;
+           हाल 2 : text_align = 5;
+                    अवरोध;
+           हाल 3 : text_align = 2;
+                    अवरोध;
+           पूर्ण
+           अवरोध;
+  हाल 3 : चयन ( txalv) अणु
+           हाल 0 :
+           हाल 1 : text_align = 9;
+                    अवरोध;
+           हाल 2 : text_align = 6;
+                    अवरोध;
+           हाल 3 : text_align = 3;
+                    अवरोध;
+           पूर्ण
+           अवरोध;
+  पूर्ण
+पूर्ण
 
 
 /*
  *    FUNCTION IXSETTF(MODE,LENFNT,FONTNAME)
  *    INTEGER MODE       : loading flag
- *            MODE=0     : search if the font exist
- *            MODE=1     : search the font and load it if it exist
+ *            MODE=0     : search अगर the font exist
+ *            MODE=1     : search the font and load it अगर it exist
  *    INTEGER LENFNT     : font name length
  *    CHARACTER*(*) FONT : font name
  *
- *    Set text font to specified name. This function returns 0 if
- *    the specified font is found, 1 if not.
+ *    Set text font to specअगरied name. This function वापसs 0 अगर
+ *    the specअगरied font is found, 1 अगर not.
  */
-int
+पूर्णांक
   ixsettf( mode, fontname )
-int mode;
-char fontname[128];
-{
-  char **fontlist;
-  int fontcount;
-  int i;
+पूर्णांक mode;
+अक्षर fontname[128];
+अणु
+  अक्षर **fontlist;
+  पूर्णांक fontcount;
+  पूर्णांक i;
 
-  if ( mode != 0 ) {
-     for ( i = 0; i < MAXFONT; i++ ) {
-        if (strcmp(fontname, font[i].name) == 0) {
+  अगर ( mode != 0 ) अणु
+     क्रम ( i = 0; i < MAXFONT; i++ ) अणु
+        अगर (म_भेद(fontname, font[i].name) == 0) अणु
            text_font = font[i].id;
            XSetFont( display, *gctext, text_font->fid);
            XSetFont( display, *gcinvt, text_font->fid);
-           return(0);
-        }
-     }
-  }
+           वापस(0);
+        पूर्ण
+     पूर्ण
+  पूर्ण
 
   fontlist = XListFonts( display, fontname, 1, &fontcount);
 
-  if ( fontcount != 0 ) {
-     if ( mode != 0 ) {
-        if ( font[current_font_number].id )
+  अगर ( fontcount != 0 ) अणु
+     अगर ( mode != 0 ) अणु
+        अगर ( font[current_font_number].id )
            XFreeFont ( display, font[current_font_number].id);
         font[current_font_number].id = XLoadQueryFont( display, fontlist[0]);
 	text_font = font[current_font_number].id;
         XSetFont( display, *gctext, text_font->fid);
         XSetFont( display, *gcinvt, text_font->fid);
-        strcpy (font[current_font_number].name,fontname);
+        म_नकल (font[current_font_number].name,fontname);
         current_font_number++;
-        if ( current_font_number == MAXFONT ) current_font_number = 0;
-     }
+        अगर ( current_font_number == MAXFONT ) current_font_number = 0;
+     पूर्ण
      XFreeFontNames(fontlist);
-     return(0);
-  }
-  else {
-     return(1);
-  }
-}
+     वापस(0);
+  पूर्ण
+  अन्यथा अणु
+     वापस(1);
+  पूर्ण
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXSETTC(CINDEX)
  *    INTEGER CINDEX : color index defined by IXSETCOL
  *
- *    Set color index for text
+ *    Set color index क्रम text
  */
-void
+व्योम
   ixsettc( cindex )
-int cindex;
-{
+पूर्णांक cindex;
+अणु
   setcolor( *gctext, cindex );
 
-  if ( XGetGCValues( display, *gctext, gc_mask, &gc_return) ) {
-     XSetForeground( display, *gcinvt, gc_return.background );
-     XSetBackground( display, *gcinvt, gc_return.foreground );
-  } else {
-     printf("**** Error: Cannot get GC values \n");
-  }
+  अगर ( XGetGCValues( display, *gctext, gc_mask, &gc_वापस) ) अणु
+     XSetForeground( display, *gcinvt, gc_वापस.background );
+     XSetBackground( display, *gcinvt, gc_वापस.क्रमeground );
+  पूर्ण अन्यथा अणु
+     म_लिखो("**** Error: Cannot get GC values \n");
+  पूर्ण
   XSetBackground( display, *gctext, colors[0].pixel );
-}
+पूर्ण
 
 
 /*
@@ -2160,50 +2161,50 @@ int cindex;
  *            MODE=1     : the background is drawn
  *    INTEGER X,Y        : text position
  *    REAL    ANGLE      : text angle in degrees
- *    REAL    MGN        : magnification factor
+ *    REAL    MGN        : magnअगरication factor
  *    INTEGER LENTXT     : text length
  *    CHARACTER*(*) TEXT : text string
  *
  *    Draw a text string using current font
  */
-void
+व्योम
   ixtext( mode, Rx, Ry, Rangle, mgn, text )
-char text[256];
-int mode;
-int Rx, Ry;
-float Rangle;
-float mgn;
-{
-  int x, y;
-  float angle;
+अक्षर text[256];
+पूर्णांक mode;
+पूर्णांक Rx, Ry;
+भग्न Rangle;
+भग्न mgn;
+अणु
+  पूर्णांक x, y;
+  भग्न angle;
   Drawable d;
 
-  if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+  अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
-  if (rotate_fl || scale_fl || trans_fl) {
+  अगर (rotate_fl || scale_fl || trans_fl) अणु
    x = xOrig + Rco * scalex * (Rx - xRO) + Rsi * scaley * (Ry - yRO)+.5;
    y = yOrig - Rsi * scalex * (Rx - xRO) + Rco * scaley * (Ry - yRO)+.5;
    angle = Rangle + r_angle * 57.295779512;
-  } else {
+  पूर्ण अन्यथा अणु
    x = Rx; y = Ry; angle = Rangle;
-  }
+  पूर्ण
 
-  if (mgn != 1.) XRotSetMagnification(mgn);
+  अगर (mgn != 1.) XRotSetMagnअगरication(mgn);
 
-  switch ( mode ) {
+  चयन ( mode ) अणु
 
-  case 0 : XRotDrawAlignedString( display, text_font, angle,
+  हाल 0 : XRotDrawAlignedString( display, text_font, angle,
            d, *gctext, x, y, text, text_align);
-           break;
+           अवरोध;
 
-  case 1 : XRotDrawAlignedImageString( display, text_font, angle,
+  हाल 1 : XRotDrawAlignedImageString( display, text_font, angle,
            d, *gctext, x, y, text, text_align);
-           break;
+           अवरोध;
 
-  default: break;
-  }
-  do_raise = 1;
-}
+  शेष: अवरोध;
+  पूर्ण
+  करो_उठाओ = 1;
+पूर्ण
 
 
 /*
@@ -2213,22 +2214,22 @@ float mgn;
  *    INTEGER LMES        : message length
  *    CHARACTER*(*) MESS  : message
  *
- *    Return the size of a character string
+ *    Return the size of a अक्षरacter string
  */
-void
+व्योम
   ixtxtl( w, h, mess )
-char mess[256];
-int *w;
-int *h;
-{
-   *w = XTextWidth( text_font, mess, strlen(mess) );
+अक्षर mess[256];
+पूर्णांक *w;
+पूर्णांक *h;
+अणु
+   *w = XTextWidth( text_font, mess, म_माप(mess) );
    *h = text_font->ascent;
-}
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXBOX(X1,X2,Y1,Y2,MODE)
- *    INTEGER X1,Y1 : left down corner
+ *    INTEGER X1,Y1 : left करोwn corner
  *    INTEGER X2,Y2 : right up corner
  *    INTEGER MODE : drawing mode
  *
@@ -2237,17 +2238,17 @@ int *h;
  *
  *    Draw a box
  */
-void
+व्योम
   ixbox( x1, x2, y1, y2, mode)
-int x1, x2, y1, y2;
-int mode;
-{
- short xy[5][2];
+पूर्णांक x1, x2, y1, y2;
+पूर्णांक mode;
+अणु
+ लघु xy[5][2];
  Drawable d;
 
- if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+ अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
- if (rotate_fl || scale_fl || trans_fl || mode == 0) {
+ अगर (rotate_fl || scale_fl || trans_fl || mode == 0) अणु
 
      xy[0][0]=x1; xy[0][1]=y1;
      xy[1][0]=x2; xy[1][1]=y1;
@@ -2255,132 +2256,132 @@ int mode;
      xy[3][0]=x1; xy[3][1]=y2;
      xy[4][0]=x1; xy[4][1]=y1;
 
-     switch ( mode ) {
+     चयन ( mode ) अणु
 
-     case 0 : /* Draw holow rectangle using lines (M.S.) */ 
+     हाल 0 : /* Draw holow rectangle using lines (M.S.) */
                          ixline(5, xy);
-              break;
+              अवरोध;
 
-     case 1 : /* Draw filled rectangle using flare (M.S.) */ 
+     हाल 1 : /* Draw filled rectangle using flare (M.S.) */
                          ixflare(5, xy);
-              break;
-     }
- } else {
-     switch ( mode ) {
+              अवरोध;
+     पूर्ण
+ पूर्ण अन्यथा अणु
+     चयन ( mode ) अणु
 
-/*   case 0 : XDrawRectangle( display, d, *gcline,
+/*   हाल 0 : XDrawRectangle( display, d, *gcline,
                               min(x1,x2), min(y1,y2),
-                              abs(x2-x1), abs(y2-y1));
-              break;     Doesn't work for dashes.
+                              असल(x2-x1), असल(y2-y1));
+              अवरोध;     Doesn't work क्रम dashes.
 */
-  
-     case 1 : XFillRectangle( display, d, *gcfill,
+
+     हाल 1 : XFillRectangle( display, d, *gcfill,
                               min(x1,x2), min(y1,y2),
-                              abs(x2-x1), abs(y2-y1));
-              break;
-     }
- }
- do_raise = 1;
-}
+                              असल(x2-x1), असल(y2-y1));
+              अवरोध;
+     पूर्ण
+ पूर्ण
+ करो_उठाओ = 1;
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXCA(X1,X2,Y1,Y2,NX,NY,IC)
- *    INTEGER X1,Y1 : left down corner
+ *    INTEGER X1,Y1 : left करोwn corner
  *    INTEGER X2,Y2 : right up corner
  *    INTEGER NX,NY : array size
  *    INTEGER IC : array
  *
- *    Draw a cell array. The drawing is done with the pixel presicion
- *    if (X2-X1)/NX (or Y) is not a exact pixel number the position of
+ *    Draw a cell array. The drawing is करोne with the pixel presicion
+ *    अगर (X2-X1)/NX (or Y) is not a exact pixel number the position of
  *    the top rigth corner may be wrong.
  */
-void
+व्योम
   ixca(x1, x2, y1, y2, nx, ny, ic)
-int *x1, *x2, *y1, *y2, *nx, *ny;
-int ic[];
-{
-   int i,j,icol,ix,iy,w,h,current_icol;
+पूर्णांक *x1, *x2, *y1, *y2, *nx, *ny;
+पूर्णांक ic[];
+अणु
+   पूर्णांक i,j,icol,ix,iy,w,h,current_icol;
 
    current_icol = -1;
    w            = max((*x2-*x1)/(*nx),1);
    h            = max((*y1-*y2)/(*ny),1);
    ix           = *x1;
 
-   for ( i=0; i<*nx; i++ ) {
+   क्रम ( i=0; i<*nx; i++ ) अणु
       iy = *y1-h;
-      for ( j=0; j<*ny; j++ ) {
+      क्रम ( j=0; j<*ny; j++ ) अणु
          icol = ic[i+(*nx*j)];
-         if(icol != current_icol){
+         अगर(icol != current_icol)अणु
             XSetForeground( display, *gcfill, colors[icol].pixel );
             current_icol = icol;
-         }
+         पूर्ण
          XFillRectangle( display, cws->drawing, *gcfill, ix, iy, w, h);
          iy = iy-h;
-      }
+      पूर्ण
       ix = ix+w;
-   }
-}
+   पूर्ण
+पूर्ण
 
 
 /*
  *    SUBROUTINE IXDRMDE(MODE)
  *    INTEGER MODE : drawing mode
- *    Changed (enhanced) by Mario 
+ *    Changed (enhanced) by Mario
  *            MODE=1 copy src
  *            MODE=2 src xor dest
  *            MODE=3 invert (not dest)
  *            MODE=4 src and dest
  *            MODE=5 not (src xor dest)
- *            MODE=16 set the suitable mode for cursor echo according to
- *                   the vendor.
+ *            MODE=16 set the suitable mode क्रम cursor echo according to
+ *                   the venकरोr.
  *
  *    Set the drawing mode
  */
-void
+व्योम
   ixdrmde( mode )
-  int mode;
-{
-  int i;
+  पूर्णांक mode;
+अणु
+  पूर्णांक i;
   draw_mode = mode;
-  switch ( mode ) {
+  चयन ( mode ) अणु
 
-     case 1 :
-     for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXcopy);
-     break;
+     हाल 1 :
+     क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXcopy);
+     अवरोध;
 
-     case 2 :
-     for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXxor);
-     break;
+     हाल 2 :
+     क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXxor);
+     अवरोध;
 
-     case 3 :
-     for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXinvert);
-     break;
+     हाल 3 :
+     क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXinvert);
+     अवरोध;
 
-     case 4 :
-     for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXand);
-     break;
+     हाल 4 :
+     क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXand);
+     अवरोध;
 
-     case 5 :
-     for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXequiv);
-     break;
+     हाल 5 :
+     क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXequiv);
+     अवरोध;
 
-     case 16:
-     if(strstr(vendor,"Hewlett")) {
-      for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXinvert);
-     } else {
-      for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXxor);
-     }
-     break;
+     हाल 16:
+     अगर(म_माला(venकरोr,"Hewlett")) अणु
+      क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXinvert);
+     पूर्ण अन्यथा अणु
+      क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], GXxor);
+     पूर्ण
+     अवरोध;
 
-     default:
+     शेष:
      mode = -mode;
-     if ( mode >= 0 && mode <= 15 ) {
-      for ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], mode);
-     }
-     break;
-  }
-}
+     अगर ( mode >= 0 && mode <= 15 ) अणु
+      क्रम ( i = 0; i < MAXGC; i++ ) XSetFunction( display, gclist[i], mode);
+     पूर्ण
+     अवरोध;
+  पूर्ण
+पूर्ण
 
 
 /*
@@ -2392,21 +2393,21 @@ void
  *
  *    Set synchronisation on or off
  */
-void
+व्योम
   ixsync( mode )
-  int mode;
-{
-  switch ( mode ) {
+  पूर्णांक mode;
+अणु
+  चयन ( mode ) अणु
 
-     case 1 :
+     हाल 1 :
      XSynchronize(display,1);
-     break;
+     अवरोध;
 
-     default:
+     शेष:
      XSynchronize(display,0);
-     break;
-  }
-}
+     अवरोध;
+  पूर्ण
+पूर्ण
 
 
 /*
@@ -2414,27 +2415,27 @@ void
  *
  *    Output parameters:
  *
- *    INTEGER IX : X coordinate of pointer
- *    INTEGER IY : Y coordinate of pointer
- *    (both coordinates are relative to the origin of the root window)
+ *    INTEGER IX : X coordinate of poपूर्णांकer
+ *    INTEGER IY : Y coordinate of poपूर्णांकer
+ *    (both coordinates are relative to the origin of the root winकरोw)
  */
-void ixqptr( ix, iy )
-int *ix,*iy;
-{
-   Window idg;
+व्योम ixqptr( ix, iy )
+पूर्णांक *ix,*iy;
+अणु
+   Winकरोw idg;
 
-   Window    root_return,child_return;
-   int       win_x_return,win_y_return;
-   int       root_x_return,root_y_return;
-   unsigned int mask_return;
+   Winकरोw    root_वापस,child_वापस;
+   पूर्णांक       win_x_वापस,win_y_वापस;
+   पूर्णांक       root_x_वापस,root_y_वापस;
+   अचिन्हित पूर्णांक mask_वापस;
 
-   XQueryPointer(display,cws->window,&root_return,
-   &child_return,&root_x_return,&root_y_return,&win_x_return,
-   &win_y_return,&mask_return);
+   XQueryPoपूर्णांकer(display,cws->winकरोw,&root_वापस,
+   &child_वापस,&root_x_वापस,&root_y_वापस,&win_x_वापस,
+   &win_y_वापस,&mask_वापस);
 
-   *ix = (int)root_x_return;
-   *iy = (int)root_y_return;
-}
+   *ix = (पूर्णांक)root_x_वापस;
+   *iy = (पूर्णांक)root_y_वापस;
+पूर्ण
 
 
 
@@ -2443,15 +2444,15 @@ int *ix,*iy;
  *
  *    Input parameters:
  *
- *    INTEGER IX : New X coordinate of pointer
- *    INTEGER IY : New Y coordinate of pointer
- *    (both coordinates are relative to the origin of the current window)
+ *    INTEGER IX : New X coordinate of poपूर्णांकer
+ *    INTEGER IY : New Y coordinate of poपूर्णांकer
+ *    (both coordinates are relative to the origin of the current winकरोw)
  */
-void ixwarp( ix, iy )
-int ix,iy;
-{
-   XWarpPointer(display,0,cws->window,0,0,0,0,ix,iy);
-}
+व्योम ixwarp( ix, iy )
+पूर्णांक ix,iy;
+अणु
+   XWarpPoपूर्णांकer(display,0,cws->winकरोw,0,0,0,0,ix,iy);
+पूर्ण
 
 
 /*
@@ -2471,7 +2472,7 @@ int ix,iy;
  *            MODE=1 sample
  *
  *    Request locator:
- *    return button number  1 = left is pressed
+ *    वापस button number  1 = left is pressed
  *                          2 = middle is pressed
  *                          3 = right is pressed
  *         in sample mode:
@@ -2479,166 +2480,166 @@ int ix,iy;
  *                         12 = middle is released
  *                         13 = right is released
  *                         -1 = nothing is pressed or released
- *                         -2 = leave the window
- *                       else = keycode (keyboard is pressed)
+ *                         -2 = leave the winकरोw
+ *                       अन्यथा = keycode (keyboard is pressed)
  */
-int
+पूर्णांक
   ixreqlo( mode, ctyp, x, y )
-int mode, ctyp, *x, *y;
-{
-  static Cursor cursor = (Cursor)LNULL;
+पूर्णांक mode, ctyp, *x, *y;
+अणु
+  अटल Cursor cursor = (Cursor)Lशून्य;
   XEvent event;
-  int button_press;
-  int radius;
+  पूर्णांक button_press;
+  पूर्णांक radius;
 
   setinput(1);
 
 /*
  *   Change the cursor shape
  */
-  if( cursor == (Cursor)NULL && ctyp != 0) {
-     if( ctyp > 1 ) {
-      XDefineCursor( display, cws->window, null_cursor );
+  अगर( cursor == (Cursor)शून्य && ctyp != 0) अणु
+     अगर( ctyp > 1 ) अणु
+      XDefineCursor( display, cws->winकरोw, null_cursor );
       XSetForeground( display, gcecho, colors[0].pixel );
-     } else {
+     पूर्ण अन्यथा अणु
         cursor = XCreateFontCursor( display, XC_crosshair );
-        XDefineCursor( display, cws->window, cursor );
-     }
-  }
+        XDefineCursor( display, cws->winकरोw, cursor );
+     पूर्ण
+  पूर्ण
 
 /*
  *   Event loop
  */
   button_press = 0;
 
-  while ( button_press == 0 ) {
+  जबतक ( button_press == 0 ) अणु
 
-     switch ( ctyp ) {
+     चयन ( ctyp ) अणु
 
-     case 1 : break;
+     हाल 1 : अवरोध;
 
-     case 2 : XDrawLine( display, cws->window, gcecho,
+     हाल 2 : XDrawLine( display, cws->winकरोw, gcecho,
                          xloc, 0, xloc, cws->height);
-              XDrawLine( display, cws->window, gcecho,
+              XDrawLine( display, cws->winकरोw, gcecho,
                          0, yloc, cws->width, yloc);
-              break;
+              अवरोध;
 
-     case 3 : radius = (int) sqrt((double)((xloc-xlocp)*(xloc-xlocp)+
+     हाल 3 : radius = (पूर्णांक) वर्ग_मूल((द्विगुन)((xloc-xlocp)*(xloc-xlocp)+
                                            (yloc-ylocp)*(yloc-ylocp)));
-              XDrawArc( display, cws->window, gcecho,
+              XDrawArc( display, cws->winकरोw, gcecho,
                         xlocp-radius, ylocp-radius,
                         2*radius, 2*radius, 0, 23040);
 
-     case 4 : XDrawLine( display, cws->window, gcecho,
+     हाल 4 : XDrawLine( display, cws->winकरोw, gcecho,
                          xlocp, ylocp, xloc, yloc);
-              break;
+              अवरोध;
 
-     case 5 : XDrawRectangle( display, cws->window, gcecho,
+     हाल 5 : XDrawRectangle( display, cws->winकरोw, gcecho,
                               min(xlocp,xloc), min(ylocp,yloc),
-                              abs(xloc-xlocp), abs(yloc-ylocp));
-              break;
+                              असल(xloc-xlocp), असल(yloc-ylocp));
+              अवरोध;
 
-     default: break;
-     }
+     शेष: अवरोध;
+     पूर्ण
 
-     while ( XEventsQueued( display, QueuedAlready) > 1) {
+     जबतक ( XEventsQueued( display, QueuedAlपढ़ोy) > 1) अणु
         XNextEvent( display, &event);
-     }
-     XWindowEvent( display, cws->window, mouse_mask, &event );
+     पूर्ण
+     XWinकरोwEvent( display, cws->winकरोw, mouse_mask, &event );
 
-     switch ( ctyp ) {
+     चयन ( ctyp ) अणु
 
-     case 1 : break;
+     हाल 1 : अवरोध;
 
-     case 2 : XDrawLine( display, cws->window, gcecho,
+     हाल 2 : XDrawLine( display, cws->winकरोw, gcecho,
                          xloc, 0, xloc, cws->height);
-              XDrawLine( display, cws->window, gcecho,
+              XDrawLine( display, cws->winकरोw, gcecho,
                          0, yloc, cws->width, yloc);
-              break;
+              अवरोध;
 
-     case 3 : radius = (int) sqrt((double)((xloc-xlocp)*(xloc-xlocp)+
+     हाल 3 : radius = (पूर्णांक) वर्ग_मूल((द्विगुन)((xloc-xlocp)*(xloc-xlocp)+
                                            (yloc-ylocp)*(yloc-ylocp)));
-              XDrawArc( display, cws->window, gcecho,
+              XDrawArc( display, cws->winकरोw, gcecho,
                         xlocp-radius, ylocp-radius,
                         2*radius, 2*radius, 0, 23040);
 
-     case 4 : XDrawLine( display, cws->window, gcecho,
+     हाल 4 : XDrawLine( display, cws->winकरोw, gcecho,
                          xlocp, ylocp, xloc, yloc);
-              break;
+              अवरोध;
 
-     case 5 : XDrawRectangle( display, cws->window, gcecho,
+     हाल 5 : XDrawRectangle( display, cws->winकरोw, gcecho,
                               min(xlocp,xloc), min(ylocp,yloc),
-                              abs(xloc-xlocp), abs(yloc-ylocp));
-              break;
+                              असल(xloc-xlocp), असल(yloc-ylocp));
+              अवरोध;
 
-     default: break;
-     }
+     शेष: अवरोध;
+     पूर्ण
 
      xloc = event.xbutton.x;
      yloc = event.xbutton.y;
 
-     switch ( event.type ) {
+     चयन ( event.type ) अणु
 
-     case LeaveNotify :
-           if( mode == 0 ) {
-              forever {
+     हाल LeaveNotअगरy :
+           अगर( mode == 0 ) अणु
+              क्रमever अणु
                  XNextEvent( display, &event);
-                 if( event.type == EnterNotify ) break;
-              }
-           } else {
+                 अगर( event.type == EnterNotअगरy ) अवरोध;
+              पूर्ण
+           पूर्ण अन्यथा अणु
               button_press = -2;
-           }
-           break;
+           पूर्ण
+           अवरोध;
 
-     case ButtonPress :
+     हाल ButtonPress :
           button_press =  event.xbutton.button ;
           xlocp = event.xbutton.x;
           ylocp = event.xbutton.y;
-          if(ctyp != 0) {
-           XUndefineCursor( display, cws->window );
-           cursor = (Cursor)NULL;
-          }
-          break;
+          अगर(ctyp != 0) अणु
+           XUndefineCursor( display, cws->winकरोw );
+           cursor = (Cursor)शून्य;
+          पूर्ण
+          अवरोध;
 
-     case ButtonRelease :
-           if( mode == 1 ) {
+     हाल ButtonRelease :
+           अगर( mode == 1 ) अणु
               button_press =  10+event.xbutton.button ;
               xlocp = event.xbutton.x;
               ylocp = event.xbutton.y;
-           }
-          break;
+           पूर्ण
+          अवरोध;
 
-     case KeyPress :
-           if( mode == 1 ) {
+     हाल KeyPress :
+           अगर( mode == 1 ) अणु
               button_press =  event.xkey.keycode;
               xlocp = event.xbutton.x;
               ylocp = event.xbutton.y;
-           }
-          break;
+           पूर्ण
+          अवरोध;
 
-     case KeyRelease :
-           if( mode == 1 ) {
+     हाल KeyRelease :
+           अगर( mode == 1 ) अणु
               button_press =  -event.xkey.keycode;
               xlocp = event.xbutton.x;
               ylocp = event.xbutton.y;
-           }
-          break;
+           पूर्ण
+          अवरोध;
 
-     default : break;
-     }
+     शेष : अवरोध;
+     पूर्ण
 
-     if( mode == 1 ) {
-         if( button_press == 0 )
+     अगर( mode == 1 ) अणु
+         अगर( button_press == 0 )
             button_press = -1;
-         break;
-     }
-  }
+         अवरोध;
+     पूर्ण
+  पूर्ण
   *x = event.xbutton.x;
   *y = event.xbutton.y;
   setinput(0);
   XFlush( display );
-  return( button_press );
-}
+  वापस( button_press );
+पूर्ण
 
 
 /*
@@ -2648,543 +2649,543 @@ int mode, ctyp, *x, *y;
  *
  *    Request string:
  *    text is displayed and can be edited with Emacs-like keybinding
- *    return termination code (0 for ESC, 1 for RETURN)
+ *    वापस termination code (0 क्रम ESC, 1 क्रम RETURN)
  *    Sep 1997, Apr 1998: bugs fixed by Mario Stipcevic
  */
-int
+पूर्णांक
   ixreqst( x, y, text )
-char text[256];
-int x, y;
-{
-  static Cursor cursor = (Cursor)LNULL;
-  static int percent = 0;  /* bell volume */
-  Window focuswindow;
-  int focusrevert;
+अक्षर text[256];
+पूर्णांक x, y;
+अणु
+  अटल Cursor cursor = (Cursor)Lशून्य;
+  अटल पूर्णांक percent = 0;  /* bell volume */
+  Winकरोw focuswinकरोw;
+  पूर्णांक focusrevert;
   XEvent event;
   KeySym keysym;
-  int key = -1;
-  int nt;             /* defined length of text */
-  int pt = 0;         /* cursor position in text */
-  int len_text = 254; /* input text length */
+  पूर्णांक key = -1;
+  पूर्णांक nt;             /* defined length of text */
+  पूर्णांक pt = 0;         /* cursor position in text */
+  पूर्णांक len_text = 254; /* input text length */
 
   setinput(1);
-  nt = strlen(text);
+  nt = म_माप(text);
 
   /* change the cursor shape */
-  if( cursor == (Cursor)NULL ) {
+  अगर( cursor == (Cursor)शून्य ) अणु
     XKeyboardState kbstate;
     cursor = XCreateFontCursor( display, XC_question_arrow );
     XGetKeyboardControl( display, &kbstate );
     percent = kbstate.bell_percent;
-  }
-  if( cursor != (Cursor)NULL )
-    XDefineCursor( display, cws->window, cursor );
+  पूर्ण
+  अगर( cursor != (Cursor)शून्य )
+    XDefineCursor( display, cws->winकरोw, cursor );
 /*
-  for( nt = len_text; nt > 0 && text[nt-1] == ' '; nt-- );
+  क्रम( nt = len_text; nt > 0 && text[nt-1] == ' '; nt-- );
 */
   pt = nt;
-  XGetInputFocus( display, &focuswindow, &focusrevert );
-  XSetInputFocus( display, PointerRoot, focusrevert, CurrentTime );
+  XGetInputFocus( display, &focuswinकरोw, &focusrevert );
+  XSetInputFocus( display, Poपूर्णांकerRoot, focusrevert, CurrentTime );
 /*
-  XSetInputFocus( display, cws->window, focusrevert, CurrentTime );
-  This causes server to crash if executed before window appears (slow network)
+  XSetInputFocus( display, cws->winकरोw, focusrevert, CurrentTime );
+  This causes server to crash अगर executed beक्रमe winकरोw appears (slow network)
 */
-  while( key < 0 ) {
-    char keybuf[8];
-    char nbytes;
-    int dx;
-    int i;
-    XDrawImageString( display, cws->window, *gctext,
+  जबतक( key < 0 ) अणु
+    अक्षर keybuf[8];
+    अक्षर nbytes;
+    पूर्णांक dx;
+    पूर्णांक i;
+    XDrawImageString( display, cws->winकरोw, *gctext,
               x, y, text, nt );
     dx = XTextWidth( text_font, text, nt );
-    XDrawImageString( display, cws->window, *gctext,
+    XDrawImageString( display, cws->winकरोw, *gctext,
               x + dx, y, " ", 1 );
     dx = pt == 0 ? 0 : XTextWidth( text_font, text, pt );
-    XDrawImageString( display, cws->window, *gcinvt,
+    XDrawImageString( display, cws->winकरोw, *gcinvt,
               x + dx, y, pt < len_text ? &text[pt] : " ", 1 );
-    XWindowEvent( display, cws->window, keybd_mask, &event );
-    switch( event.type ) {
-    case ButtonPress:
-    case EnterNotify:
-      XSetInputFocus( display, cws->window, focusrevert, CurrentTime );
-      break;
-    case LeaveNotify:
-      XSetInputFocus( display, focuswindow, focusrevert, CurrentTime );
-      break;
-    case KeyPress:
-      nbytes = XLookupString( &event.xkey, keybuf, sizeof( keybuf ),
-                 &keysym, NULL );
-      switch( keysym ) {      /* map cursor keys */
-      case XK_Left:
+    XWinकरोwEvent( display, cws->winकरोw, keybd_mask, &event );
+    चयन( event.type ) अणु
+    हाल ButtonPress:
+    हाल EnterNotअगरy:
+      XSetInputFocus( display, cws->winकरोw, focusrevert, CurrentTime );
+      अवरोध;
+    हाल LeaveNotअगरy:
+      XSetInputFocus( display, focuswinकरोw, focusrevert, CurrentTime );
+      अवरोध;
+    हाल KeyPress:
+      nbytes = XLookupString( &event.xkey, keybuf, माप( keybuf ),
+                 &keysym, शून्य );
+      चयन( keysym ) अणु      /* map cursor keys */
+      हाल XK_Left:
       keybuf[0] = '\002';  /* Control-B */
       nbytes = 1;
-      break;
-      case XK_Right:
+      अवरोध;
+      हाल XK_Right:
       keybuf[0] = '\006';  /* Control-F */
       nbytes = 1;
-      break;
-      }
-      if( nbytes == 1 ) {
-      if( isascii( keybuf[0] ) && isprint( keybuf[0] ) ) {
-        /* insert character */
-        if( nt < len_text )
+      अवरोध;
+      पूर्ण
+      अगर( nbytes == 1 ) अणु
+      अगर( isascii( keybuf[0] ) && है_छाप( keybuf[0] ) ) अणु
+        /* insert अक्षरacter */
+        अगर( nt < len_text )
           nt++;
-        for( i = nt - 0; i > pt; i-- )
+        क्रम( i = nt - 0; i > pt; i-- )
           text[i] = text[i-1];
-        if( pt < len_text ) {
+        अगर( pt < len_text ) अणु
           text[pt] = keybuf[0];
           pt++;
-        }
-      }
-      else
-        switch( keybuf[0] ) {
+        पूर्ण
+      पूर्ण
+      अन्यथा
+        चयन( keybuf[0] ) अणु
           /* Emacs-like editing keys */
 
-        case '\010':    /* backspace */
+        हाल '\010':    /* backspace */
           /* delete backward */
-          if( pt > 0 ) {
+          अगर( pt > 0 ) अणु
             dx = XTextWidth( text_font, text, nt );
-            XDrawImageString( display, cws->window, *gctext, x+dx, y, " ", 1 );
-            for( i = pt; i <= nt; i++ )
+            XDrawImageString( display, cws->winकरोw, *gctext, x+dx, y, " ", 1 );
+            क्रम( i = pt; i <= nt; i++ )
              text[i-1] = text[i];
             nt--;
             pt--;
-          }
-          break;
-        case '\001':    /* ^A */
+          पूर्ण
+          अवरोध;
+        हाल '\001':    /* ^A */
           /* beginning of line */
           pt = 0;
-          break;
-        case '\002':    /* ^B */
+          अवरोध;
+        हाल '\002':    /* ^B */
           /* move backward */
-          if( pt > 0 )
+          अगर( pt > 0 )
             pt--;
-          break;
-        case '\004':    /* ^D */
-        case '\177':    /* delete */
-          /* delete forward */
-          if( pt < nt ) {
-            for( i = pt; i < nt; i++ )
+          अवरोध;
+        हाल '\004':    /* ^D */
+        हाल '\177':    /* delete */
+          /* delete क्रमward */
+          अगर( pt < nt ) अणु
+            क्रम( i = pt; i < nt; i++ )
             text[i] = text[i+1];
             text[nt-1] = ' ';
             nt--;
-          }
-          break;
-        case '\005':    /* ^E */
+          पूर्ण
+          अवरोध;
+        हाल '\005':    /* ^E */
           /* end of line */
           pt = nt;
-          break;
+          अवरोध;
 
-        case '\006':    /* ^F */
-          /* move forward */
-          if( pt < nt )
+        हाल '\006':    /* ^F */
+          /* move क्रमward */
+          अगर( pt < nt )
             pt++;
-          break;
-        case '\013':    /* ^K */
+          अवरोध;
+        हाल '\013':    /* ^K */
           /* delete to end of line */
-          for( i = pt; i < nt; i++ )
+          क्रम( i = pt; i < nt; i++ )
             text[i] = ' ';
-          XDrawImageString( display, cws->window, *gctext, x, y, text, nt);
+          XDrawImageString( display, cws->winकरोw, *gctext, x, y, text, nt);
           nt = pt;
-          break;
-        case '\024':    /* ^T */
+          अवरोध;
+        हाल '\024':    /* ^T */
           /* transpose */
-          if( pt > 0 ) {
-            char c = text[pt];
+          अगर( pt > 0 ) अणु
+            अक्षर c = text[pt];
             text[pt] = text[pt-1];
             text[pt-1] = c;
-          }
-          break;
-        case '\012':    /* newline */
-        case '\015':    /* return */
+          पूर्ण
+          अवरोध;
+        हाल '\012':    /* newline */
+        हाल '\015':    /* वापस */
           key = 1;
-          break;
-        case '\033':    /* escape */
+          अवरोध;
+        हाल '\033':    /* escape */
           key = 0;
-          break;
+          अवरोध;
 
-        default:
+        शेष:
           XBell( display, percent );
-        }
-      }
-    }
-  }
-  XSetInputFocus( display, focuswindow, focusrevert, CurrentTime );
+        पूर्ण
+      पूर्ण
+    पूर्ण
+  पूर्ण
+  XSetInputFocus( display, focuswinकरोw, focusrevert, CurrentTime );
 
-  if( cursor != (Cursor)NULL ) {
-    XUndefineCursor( display, cws->window );
-    cursor = (Cursor)LNULL;
-  }
+  अगर( cursor != (Cursor)शून्य ) अणु
+    XUndefineCursor( display, cws->winकरोw );
+    cursor = (Cursor)Lशून्य;
+  पूर्ण
 
   setinput(0);
 
   /* Make sure there are no trailing spaces */
-  nt = strlen(text);
-  while(text[nt-1] == ' ') nt--;
+  nt = म_माप(text);
+  जबतक(text[nt-1] == ' ') nt--;
   text[nt] = '\0';
 
   XSync( display, 1 );
-  return( key );
-}
+  वापस( key );
+पूर्ण
 
-#define MAX_SEGMENT 20
-void ixput_image(offset,itran,x0,y0,nx,ny,xmin,ymin,xmax,ymax,image,ipal)
-  int offset,itran,x0,y0,nx,ny,xmin,ymin,xmax,ymax,ipal;
-  unsigned char *image;
-{
-  int           i, n, x, y, xcur, x1, x2, y1, y2;
-  unsigned char *jimg, *jbase, icol;
-  int           nlines[256];
+#घोषणा MAX_SEGMENT 20
+व्योम ixput_image(offset,itran,x0,y0,nx,ny,xmin,ymin,xmax,ymax,image,ipal)
+  पूर्णांक offset,itran,x0,y0,nx,ny,xmin,ymin,xmax,ymax,ipal;
+  अचिन्हित अक्षर *image;
+अणु
+  पूर्णांक           i, n, x, y, xcur, x1, x2, y1, y2;
+  अचिन्हित अक्षर *jimg, *jbase, icol;
+  पूर्णांक           nlines[256];
   XSegment      lines[256][MAX_SEGMENT];
   Drawable d;
 
-  if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+  अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
-  for (i=0; i<256; i++) nlines[i] = 0;
+  क्रम (i=0; i<256; i++) nlines[i] = 0;
 
   x1 = x0 + xmin; y1 = y0 + ny - ymax - 1;
   x2 = x0 + xmax; y2 = y0 + ny - ymin - 1;
   jbase = image + (ymin-1)*nx + xmin;
 
-  for (y=y2; y>=y1; y--) {
+  क्रम (y=y2; y>=y1; y--) अणु
     xcur   = x1; jbase += nx;
-    for (jimg = jbase, icol = *jimg++, x=x1+1; x<=x2; jimg++, x++) {
-      if (icol != *jimg) {
-        if (icol != itran) {
+    क्रम (jimg = jbase, icol = *jimg++, x=x1+1; x<=x2; jimg++, x++) अणु
+      अगर (icol != *jimg) अणु
+        अगर (icol != itran) अणु
           n = nlines[icol]++;
           lines[icol][n].x1 = xcur; lines[icol][n].y1 = y;
           lines[icol][n].x2 = x-1;  lines[icol][n].y2 = y;
-          if (nlines[icol] == MAX_SEGMENT) {
-            if(!ipal) { setcolor(*gcline,(int) (icol+offset)); } 
-            else
-                      { setcolor(*gcline,(int) tpal[icol]);    }
+          अगर (nlines[icol] == MAX_SEGMENT) अणु
+            अगर(!ipal) अणु setcolor(*gcline,(पूर्णांक) (icol+offset)); पूर्ण
+            अन्यथा
+                      अणु setcolor(*gcline,(पूर्णांक) tpal[icol]);    पूर्ण
             XDrawSegments(display,d,*gcline,&lines[icol][0],
               MAX_SEGMENT);
             nlines[icol] = 0;
-          }
-        }
+          पूर्ण
+        पूर्ण
         icol = *jimg; xcur = x;
-      }
-    }
-    if (icol != itran) {
+      पूर्ण
+    पूर्ण
+    अगर (icol != itran) अणु
       n = nlines[icol]++;
       lines[icol][n].x1 = xcur; lines[icol][n].y1 = y;
       lines[icol][n].x2 = x-1;  lines[icol][n].y2 = y;
-      if (nlines[icol] == MAX_SEGMENT) {
-        if(!ipal) { setcolor(*gcline,(int) (icol+offset)); }
-        else
-                  { setcolor(*gcline,(int) tpal[icol]);    }
+      अगर (nlines[icol] == MAX_SEGMENT) अणु
+        अगर(!ipal) अणु setcolor(*gcline,(पूर्णांक) (icol+offset)); पूर्ण
+        अन्यथा
+                  अणु setcolor(*gcline,(पूर्णांक) tpal[icol]);    पूर्ण
         XDrawSegments(display,d,*gcline,&lines[icol][0],
           MAX_SEGMENT);
         nlines[icol] = 0;
-      }
-    }
-  }
+      पूर्ण
+    पूर्ण
+  पूर्ण
 
-  for (i=0; i<256; i++) {
-    if (nlines[i] != 0) {
-    if(!ipal) { setcolor(*gcline,(int) (i+offset)); }
-    else
-              { setcolor(*gcline,(int) tpal[i]);    }
+  क्रम (i=0; i<256; i++) अणु
+    अगर (nlines[i] != 0) अणु
+    अगर(!ipal) अणु setcolor(*gcline,(पूर्णांक) (i+offset)); पूर्ण
+    अन्यथा
+              अणु setcolor(*gcline,(पूर्णांक) tpal[i]);    पूर्ण
      XDrawSegments(display,d,*gcline,&lines[i][0],nlines[i]);
-    }
-  }
-}
+    पूर्ण
+  पूर्ण
+पूर्ण
 
 /*
  *    SUBROUTINE STDPAL()
  *    Created by: Mario Stipcevic 07.01.1997
  *    Install Standard 6x6x6 Palette
  */
-int stdpal()
-{
- int j, pofset, r, g, b;
+पूर्णांक stdpal()
+अणु
+ पूर्णांक j, pofset, r, g, b;
 
  pofset = 32;
  j = pofset;
- for(r=0; r<=5; r++) {
-  for(g=0; g<=5; g++) {
-   for(b=0; b<=5; b++) {
+ क्रम(r=0; r<=5; r++) अणु
+  क्रम(g=0; g<=5; g++) अणु
+   क्रम(b=0; b<=5; b++) अणु
     ixsetco(j,r*51,g*51,b*51);
     j++;
-   }}}
- return 0;
-}
+   पूर्णपूर्णपूर्ण
+ वापस 0;
+पूर्ण
 
 /*
- *    SUBROUTINE GIFINFO(FILE, GInf)
+ *    SUBROUTINE GIFINFO(खाता, GInf)
  *    Created by: Mario Stipcevic 07.01.1997
- C    CHAR    FILE: filename
- *    INTEGER GInf: output information: width, height, ncolors 
+ C    CHAR    खाता: filename
+ *    INTEGER GInf: output inक्रमmation: width, height, ncolors
  *
  */
-void gifinfo (file, GInf__)
-char file[128];
-short *GInf__;
-{
-  FILE  *fd;
-  long  filesize;
-  unsigned char *GIFarr;
-  int   width, height, ncolor;
+व्योम gअगरinfo (file, GInf__)
+अक्षर file[128];
+लघु *GInf__;
+अणु
+  खाता  *fd;
+  दीर्घ  filesize;
+  अचिन्हित अक्षर *GIFarr;
+  पूर्णांक   width, height, ncolor;
 
   GInf__[0] = 0; GInf__[1] = 0; GInf__[2] = 0;
-  fd = fopen(file, "r");
-  if (!fd) {
-    fprintf(stderr,"gifinfo: Unable to open GIF file '%s'\n", file);
-    return;
-  }
+  fd = ख_खोलो(file, "r");
+  अगर (!fd) अणु
+    ख_लिखो(मानक_त्रुटि,"gifinfo: Unable to open GIF file '%s'\n", file);
+    वापस;
+  पूर्ण
 
-  fseek(fd, 0L, 2);
-  filesize = ftell(fd);
-  fseek(fd, 0L, 0);
+  ख_जाओ(fd, 0L, 2);
+  filesize = ख_बताओ(fd);
+  ख_जाओ(fd, 0L, 0);
 
-  if (!(GIFarr = (unsigned char *) calloc(filesize+256,1))) {
-    fprintf(stderr,"gifinfo: unable to allocate array for gif\n");
-    return;
-  }
+  अगर (!(GIFarr = (अचिन्हित अक्षर *) सुस्मृति(filesize+256,1))) अणु
+    ख_लिखो(मानक_त्रुटि,"gifinfo: unable to allocate array for gif\n");
+    वापस;
+  पूर्ण
 
-  if (fread(GIFarr, filesize, 1, fd) != 1) {
-    fprintf(stderr,"gifinfo: GIF file read failed\n");
-    return;
-  }
+  अगर (ख_पढ़ो(GIFarr, filesize, 1, fd) != 1) अणु
+    ख_लिखो(मानक_त्रुटि,"gifinfo: GIF file read failed\n");
+    वापस;
+  पूर्ण
 
   GIFinfo(GIFarr, &width, &height, &ncolor);
   *GInf__++ = width; *GInf__++ = height; *GInf__ = ncolor; /* Save GIF Info */
 
-  fclose(fd);
-  return;
-}
+  ख_बंद(fd);
+  वापस;
+पूर्ण
 
 /*
- *    SUBROUTINE IXLDGIF(X0, Y0, FILE, IPAL, BG)
- *    Modified by: Mario Stipcevic 07.01.1997
- *    CHARACTER*(*) FILE : file name
+ *    SUBROUTINE IXLDGIF(X0, Y0, खाता, IPAL, BG)
+ *    Modअगरied by: Mario Stipcevic 07.01.1997
+ *    CHARACTER*(*) खाता : file name
  *    INTEGER X0 Y0      : position
  *    INTEGER ipal: 0 = use Own palette, 1 = use Std 6x6x6 palette
- *    INTEGER bg   specifies background: bg<0 GIF's own, bg>=0 =colorindex
+ *    INTEGER bg   specअगरies background: bg<0 GIF's own, bg>=0 =colorindex
  *
- *    Load the gif a file in the current active window.
+ *    Load the gअगर a file in the current active winकरोw.
  */
-void ixldgif (x0, y0, file, ipal, bg)
-char file[128];
-int x0,y0, ipal, bg;
-{
-  FILE  *fd;
-  long  filesize;
-  unsigned char *GIFarr, *PIXarr, R[256], G[256], B[256], *j1, *j2, icol;
-  int   i, j, k, width, height, ncolor, irep, offset, pofset;
-  int rr, gg, bb;
+व्योम ixldgअगर (x0, y0, file, ipal, bg)
+अक्षर file[128];
+पूर्णांक x0,y0, ipal, bg;
+अणु
+  खाता  *fd;
+  दीर्घ  filesize;
+  अचिन्हित अक्षर *GIFarr, *PIXarr, R[256], G[256], B[256], *j1, *j2, icol;
+  पूर्णांक   i, j, k, width, height, ncolor, irep, offset, pofset;
+  पूर्णांक rr, gg, bb;
 
-  fd = fopen(file, "r");
-  if (!fd) {
-    fprintf(stderr,"ixldgif: Unable to open GIF file '%s'\n", file);
-    return;
-  }
+  fd = ख_खोलो(file, "r");
+  अगर (!fd) अणु
+    ख_लिखो(मानक_त्रुटि,"ixldgif: Unable to open GIF file '%s'\n", file);
+    वापस;
+  पूर्ण
 
-  /* Set Std. Color Palette if not already set and if needed */
-  if (ipal && !stdset) { stdpal(); }
-  stdset = ipal; 
+  /* Set Std. Color Palette अगर not alपढ़ोy set and अगर needed */
+  अगर (ipal && !stdset) अणु stdpal(); पूर्ण
+  stdset = ipal;
 
-  fseek(fd, 0L, 2);
-  filesize = ftell(fd);
-  fseek(fd, 0L, 0);
+  ख_जाओ(fd, 0L, 2);
+  filesize = ख_बताओ(fd);
+  ख_जाओ(fd, 0L, 0);
 
-  if (!(GIFarr = (unsigned char *) calloc(filesize+256,1))) {
-    fprintf(stderr,"ixldgif: unable to allocate array for gif\n");
-    return;
-  }
+  अगर (!(GIFarr = (अचिन्हित अक्षर *) सुस्मृति(filesize+256,1))) अणु
+    ख_लिखो(मानक_त्रुटि,"ixldgif: unable to allocate array for gif\n");
+    वापस;
+  पूर्ण
 
-  if (fread(GIFarr, filesize, 1, fd) != 1) {
-    fprintf(stderr,"ixldgif: GIF file read failed\n");
-    fclose(fd);
-    return;
-  }
-  fclose(fd);
+  अगर (ख_पढ़ो(GIFarr, filesize, 1, fd) != 1) अणु
+    ख_लिखो(मानक_त्रुटि,"ixldgif: GIF file read failed\n");
+    ख_बंद(fd);
+    वापस;
+  पूर्ण
+  ख_बंद(fd);
 
   irep = GIFinfo(GIFarr, &width, &height, &ncolor);
-  if (irep != 0) return;
+  अगर (irep != 0) वापस;
 
-  if (!(PIXarr = (unsigned char *) calloc((long)(width*height),1))) {
-    fprintf(stderr,"ixldgif: unable to allocate array for image\n");
-    return;
-  }
+  अगर (!(PIXarr = (अचिन्हित अक्षर *) सुस्मृति((दीर्घ)(width*height),1))) अणु
+    ख_लिखो(मानक_त्रुटि,"ixldgif: unable to allocate array for image\n");
+    वापस;
+  पूर्ण
 
   irep = GIFdecode(GIFarr, PIXarr, &width, &height, &ncolor, R, G, B);
-  if (irep != 0) return;
+  अगर (irep != 0) वापस;
 
-/* Debug code: 
-  for (j=0; j<10; j++) {
-   for (i=0; i<10; i++) {
-    printf("%5d", PIXarr[i+j*width]);
-   }
-   printf("\n");
-  }
+/* Debug code:
+  क्रम (j=0; j<10; j++) अणु
+   क्रम (i=0; i<10; i++) अणु
+    म_लिखो("%5d", PIXarr[i+j*width]);
+   पूर्ण
+   म_लिखो("\n");
+  पूर्ण
 */
 
   /*   S E T   P A L E T T E   */
 
   offset = 16;
-  pofset = 32; /* std. palette offset */ 
-  
-  if (ipal == 0) 
-  {
+  pofset = 32; /* std. palette offset */
+
+  अगर (ipal == 0)
+  अणु
    /* use Own colormap */
-   if (ncolor > 256 - offset) { 
-   printf("ixldgif: number of colors in GIF file too large, truncating to %d\n",
-      (ncolor=(256-offset)) ); } 
-   for (i=0; i<ncolor; i++) {
+   अगर (ncolor > 256 - offset) अणु
+   म_लिखो("ixldgif: number of colors in GIF file too large, truncating to %d\n",
+      (ncolor=(256-offset)) ); पूर्ण
+   क्रम (i=0; i<ncolor; i++) अणु
      rr = R[i];
      gg = G[i];
      bb = B[i];
      j = i+offset;
      ixsetco(j,rr,gg,bb);
-   }
-   if (bg >= 0) ixsetco(offset,colors[bg].red,colors[bg].green,colors[bg].blue);
-  } 
-  else
-  {
+   पूर्ण
+   अगर (bg >= 0) ixsetco(offset,colors[bg].red,colors[bg].green,colors[bg].blue);
+  पूर्ण
+  अन्यथा
+  अणु
    /* use Std. 6x6x6 colormap */
-   for (i=0; i<ncolor; i++) {
+   क्रम (i=0; i<ncolor; i++) अणु
      rr = (R[i] + 26) / 51;
      gg = (G[i] + 26) / 51;
      bb = (B[i] + 26) / 51;
      j = pofset + bb + 6 * (gg + 6 * rr);
-     tpal[i] = j;          
-   }
-  }
+     tpal[i] = j;
+   पूर्ण
+  पूर्ण
 
   /*  O U T P U T   I M A G E  */
 
-  for (i=1; i<=height/2; i++) {
+  क्रम (i=1; i<=height/2; i++) अणु
     j1 = PIXarr + (i-1)*width;
     j2 = PIXarr + (height-i)*width;
-    for (k=0; k<width; k++) {
+    क्रम (k=0; k<width; k++) अणु
       icol = *j1; *j1++ = *j2; *j2++ = icol;
-    }
-  }
+    पूर्ण
+  पूर्ण
   ixput_image(offset,-1,x0,y0,width,height,0,0,width-1,height-1,PIXarr,ipal);
-}
+पूर्ण
 
-typedef unsigned char byte;     /* type used by subroutines to code&decode GIF*/
-XImage *image;                  /* temporary unit for GIFencode()             */
-FILE *out;                      /* output/input file for animation            */
-static int first = 0;           /* MS: ask for image pointer only once (why??)*/
+प्रकार अचिन्हित अक्षर byte;     /* type used by subroutines to code&decode GIF*/
+XImage *image;                  /* temporary unit क्रम GIFencode()             */
+खाता *out;                      /* output/input file क्रम animation            */
+अटल पूर्णांक first = 0;           /* MS: ask क्रम image poपूर्णांकer only once (why??)*/
 
 /*
- * subroutines for GIFencode()
+ * subroutines क्रम GIFencode()
  */
 
-void
+व्योम
   get_scline( y, width, scline )
-  int y, width;
+  पूर्णांक y, width;
   byte scline[];
-{
-int i;
-for(i=0;i< width;i++)
+अणु
+पूर्णांक i;
+क्रम(i=0;i< width;i++)
         scline[i] = XGetPixel( image, i, y);
-}
+पूर्ण
 
 
-void
+व्योम
   put_byte( b)
   byte b;
-{
- if( ferror(out) == 0) fputc( b, out);
-}
+अणु
+ अगर( ख_त्रुटि(out) == 0) ख_अक्षर_दो( b, out);
+पूर्ण
 
 /*
- *    SUBROUTINE IXDOGIF( LEN , FILE)
+ *    SUBROUTINE IXDOGIF( LEN , खाता)
  *    CHARACTER  NAME
  *    INTEGER LEN
  *
- *    Writes the current window into a GIF file
+ *    Writes the current winकरोw पूर्णांकo a GIF file
  *
  */
-void
-  ixdogif( file )
-char file[128];
-{
+व्योम
+  ixकरोgअगर( file )
+अक्षर file[128];
+अणु
 
 byte  scline[5000], r[256], g[256], b[256];
-int R[256], G[256], B[256];
-int ncol, maxcol, i;
-int ln;
-char file_name[100];
-unsigned long z;
+पूर्णांक R[256], G[256], B[256];
+पूर्णांक ncol, maxcol, i;
+पूर्णांक ln;
+अक्षर file_name[100];
+अचिन्हित दीर्घ z;
 
-ImgPickPalette( display ,cws->window, &ncol, R, G, B);
+ImgPickPalette( display ,cws->winकरोw, &ncol, R, G, B);
 
  maxcol = 0;
- for(i=0; i<ncol; i++)
- {
-  if(maxcol < R[i] ) maxcol = R[i];
-  if(maxcol < G[i] ) maxcol = G[i];
-  if(maxcol < B[i] ) maxcol = B[i];
+ क्रम(i=0; i<ncol; i++)
+ अणु
+  अगर(maxcol < R[i] ) maxcol = R[i];
+  अगर(maxcol < G[i] ) maxcol = G[i];
+  अगर(maxcol < B[i] ) maxcol = B[i];
   r[i] = 0;
   g[i] = 0;
   b[i] = 0;
- }
- if( maxcol != 0)
-  {
-  for(i=0; i<ncol; i++)
-  {
+ पूर्ण
+ अगर( maxcol != 0)
+  अणु
+  क्रम(i=0; i<ncol; i++)
+  अणु
    r[i] = (R[i] * 255) / maxcol;
    g[i] = (G[i] * 255) / maxcol;
    b[i] = (B[i] * 255) / maxcol;
-  }
- }
+  पूर्ण
+ पूर्ण
 
- if (first == 0 ) {
+ अगर (first == 0 ) अणु
   image = XGetImage( display, cws->drawing, 0, 0,
                      cws->width, cws->height,
                      AllPlanes, ZPixmap);
 /* first = 1;  Commented by Mario: strange effect (subimages ?) */
- } else {
+ पूर्ण अन्यथा अणु
   image = XGetSubImage(display, cws->drawing, 0, 0,
                        cws->width, cws->height,
                        AllPlanes, ZPixmap, image, 0, 0);
- }
+ पूर्ण
 
- sprintf( file_name, "%s", file);
+ प्र_लिखो( file_name, "%s", file);
 
- out = fopen ( file_name, "w+");
+ out = ख_खोलो ( file_name, "w+");
 
  GIFencode( cws->width, cws->height,
             ncol, r, g, b, scline, get_scline, put_byte);
 
- fclose( out );
-}
- 
+ ख_बंद( out );
+पूर्ण
+
 /*   answ = IXWPTRQ (x, y, rootx, rooty, win, mode, ctyp)
      Generalized ixreqlo() function
-     *win    window the pointer is logically on
-     *x      x location of the pointer relative to the window origin
-     *y      y location of the pointer relative to the window origin
+     *win    winकरोw the poपूर्णांकer is logically on
+     *x      x location of the poपूर्णांकer relative to the winकरोw origin
+     *y      y location of the poपूर्णांकer relative to the winकरोw origin
      mode, ctyp, answ - see ixreqlo(...)
      Author: Mario Stipcevic Jul, 1997
 */
-int ixwptrq( x, y, win, mode, ctyp, mask )
-int *x, *y, *win, mode, ctyp, mask;
-{
+पूर्णांक ixwptrq( x, y, win, mode, ctyp, mask )
+पूर्णांक *x, *y, *win, mode, ctyp, mask;
+अणु
 
-   static Cursor cursor = (Cursor)LNULL;
+   अटल Cursor cursor = (Cursor)Lशून्य;
    XEvent event;
-   XSetWindowAttributes attributes;
-   unsigned long attr_mask = 0;
-   int button_press, radius, wid;
-   int i, n, u;
-   
-   /* Set all inputs on */
+   XSetWinकरोwAttributes attributes;
+   अचिन्हित दीर्घ attr_mask = 0;
+   पूर्णांक button_press, radius, wid;
+   पूर्णांक i, n, u;
+
+   /* Set all inमाला_दो on */
    attributes.event_mask = mouse_mask | keybd_mask;
    attr_mask |= CWEventMask;
-   for ( i = 0; i < MAXWN; i++ ) {
-    ttws = &windows[i];
-    if ( ttws->open ) {
+   क्रम ( i = 0; i < MAXWN; i++ ) अणु
+    ttws = &winकरोws[i];
+    अगर ( ttws->खोलो ) अणु
      attributes.event_mask = mouse_mask | keybd_mask;
      attr_mask |= CWEventMask;
-     XChangeWindowAttributes ( display, ttws->window, attr_mask, &attributes);
-    }
-   }
+     XChangeWinकरोwAttributes ( display, ttws->winकरोw, attr_mask, &attributes);
+    पूर्ण
+   पूर्ण
 
 
   /*
@@ -3193,272 +3194,272 @@ int *x, *y, *win, mode, ctyp, mask;
    button_press = 0;
    n = 0;
 /*
-   while ( button_press == 0 ) {
+   जबतक ( button_press == 0 ) अणु
 */
-   while ( n == 0 ) {
+   जबतक ( n == 0 ) अणु
    n = 1;
 
 /*
-   u=XEventsQueued(display,QueuedAlready);
-   printf("ixwptrq ulaz: u = %d\n",u);
+   u=XEventsQueued(display,QueuedAlपढ़ोy);
+   म_लिखो("ixwptrq ulaz: u = %d\n",u);
    XNextEvent( display, &event);
 */
 
    XMaskEvent( display, mouse_mask, &event);
-   for (wid = 0; wid < MAXWN; wid++) {
-    ttws = &windows[wid];
-    if ( ttws->open && ttws->window == event.xbutton.window ) {
+   क्रम (wid = 0; wid < MAXWN; wid++) अणु
+    ttws = &winकरोws[wid];
+    अगर ( ttws->खोलो && ttws->winकरोw == event.xbutton.winकरोw ) अणु
       *win = wid;
-      goto Lab_001;
-    }
-   }
+      जाओ Lab_001;
+    पूर्ण
+   पूर्ण
    *win = -1;
-   return( button_press );
+   वापस( button_press );
 Lab_001:;
 
 /*
-printf("Here 1\n");
-    XWindowEvent( display, event.xbutton.window, mouse_mask, &event );
-    XWindowEvent( display, ttws->window, mouse_mask, &event );
-printf("Here 2\n");
+म_लिखो("Here 1\n");
+    XWinकरोwEvent( display, event.xbutton.winकरोw, mouse_mask, &event );
+    XWinकरोwEvent( display, ttws->winकरोw, mouse_mask, &event );
+म_लिखो("Here 2\n");
 */
 
     xloc = event.xbutton.x;
     yloc = event.xbutton.y;
 
-    switch ( event.type ) {
+    चयन ( event.type ) अणु
 
-     case LeaveNotify :
-           if( mode == 0 ) {
-              forever {
+     हाल LeaveNotअगरy :
+           अगर( mode == 0 ) अणु
+              क्रमever अणु
                  XNextEvent( display, &event);
-                 if( event.type == EnterNotify ) break;
-              }
-           } else {
+                 अगर( event.type == EnterNotअगरy ) अवरोध;
+              पूर्ण
+           पूर्ण अन्यथा अणु
               button_press = -2;
-           }
-           break;
+           पूर्ण
+           अवरोध;
 
-     case ButtonPress :
+     हाल ButtonPress :
           button_press =  event.xbutton.button ;
           xlocp = event.xbutton.x;
           ylocp = event.xbutton.y;
 /*
-          XUndefineCursor( display, ttws->window );
-          cursor = (Cursor)NULL;
+          XUndefineCursor( display, ttws->winकरोw );
+          cursor = (Cursor)शून्य;
 */
-          break;
+          अवरोध;
 
-     case ButtonRelease :
-           if( mode == 1 ) {
+     हाल ButtonRelease :
+           अगर( mode == 1 ) अणु
               button_press =  10+event.xbutton.button ;
               xlocp = event.xbutton.x;
               ylocp = event.xbutton.y;
-           }
-          break;
+           पूर्ण
+          अवरोध;
 
-     case KeyPress :
-           if( mode == 1 ) {
+     हाल KeyPress :
+           अगर( mode == 1 ) अणु
               button_press =  event.xkey.keycode;
               xlocp = event.xbutton.x;
               ylocp = event.xbutton.y;
-           }
-          break;
+           पूर्ण
+          अवरोध;
 
-     case KeyRelease :
-           if( mode == 1 ) {
+     हाल KeyRelease :
+           अगर( mode == 1 ) अणु
               button_press =  -event.xkey.keycode;
               xlocp = event.xbutton.x;
               ylocp = event.xbutton.y;
-           }
-          break;
+           पूर्ण
+          अवरोध;
 
-     default : break;
-    }
+     शेष : अवरोध;
+    पूर्ण
 
-    if( mode == 1 ) {
-        if( button_press == 0 )
+    अगर( mode == 1 ) अणु
+        अगर( button_press == 0 )
            button_press = -1;
-        break;
-    }
-  }
+        अवरोध;
+    पूर्ण
+  पूर्ण
 Lab_99e:
   *x = event.xbutton.x;
   *y = event.xbutton.y;
   setinput(0);
   XFlush( display );
 /*
- printf("ixwptrq: x=%d y=%d win=%d answ=%d\n", *x, *y, *win, button_press);
+ म_लिखो("ixwptrq: x=%d y=%d win=%d answ=%d\n", *x, *y, *win, button_press);
 */
-  return( button_press );
-}
+  वापस( button_press );
+पूर्ण
 
 /*
  *    SUBROUTINE IXCURSOR( ctyp )
- *    int ctyp = Cursor type as defined in <X11/cursorfont.h>
+ *    पूर्णांक ctyp = Cursor type as defined in <X11/cursorfont.h>
  *    Created by: Mario Stipcevic 07.01.1997
  */
- void ixcursor( ctyp )
-int ctyp;
-{
+ व्योम ixcursor( ctyp )
+पूर्णांक ctyp;
+अणु
   Cursor cursor;
 
-  XUndefineCursor( display, cws->window );
+  XUndefineCursor( display, cws->winकरोw );
   cursor = XCreateFontCursor( display, ctyp );
-  XDefineCursor( display, cws->window, cursor);
-}
+  XDefineCursor( display, cws->winकरोw, cursor);
+पूर्ण
 
- void ixclrque()
+ व्योम ixclrque()
 /* Author: M.S. */
 /* Flush and delete the X queue, leaving no events */
-{
+अणु
  XFlush( display );
  XSync( display , 1);
-}
+पूर्ण
 
- void ixtitle( title, wid )
-/* Set title of an existing window wid, if wid=-1 then current window */
-int wid;
-char title[200];
-{
-  char long_title[256];
-  char host_name[64];
+ व्योम ixtitle( title, wid )
+/* Set title of an existing winकरोw wid, अगर wid=-1 then current winकरोw */
+पूर्णांक wid;
+अक्षर title[200];
+अणु
+  अक्षर दीर्घ_title[256];
+  अक्षर host_name[64];
 
-  tws = &windows[wid];
-  if (wid < 0) tws = cws;
-  if (tws->open) {
-   strcpy(long_title, title);
-   if (long_title[0] != '-') {
-      strcat( long_title, " @ " );
-      gethostname( host_name, sizeof( host_name ) );
-      strcat( long_title, host_name );
-   } else {
-      long_title[0] = ' ';
-   }
-   XStoreName( display, tws->window, long_title );
-   XSetIconName( display, tws->window, long_title );
-  }
-}
+  tws = &winकरोws[wid];
+  अगर (wid < 0) tws = cws;
+  अगर (tws->खोलो) अणु
+   म_नकल(दीर्घ_title, title);
+   अगर (दीर्घ_title[0] != '-') अणु
+      म_जोड़ो( दीर्घ_title, " @ " );
+      gethostname( host_name, माप( host_name ) );
+      म_जोड़ो( दीर्घ_title, host_name );
+   पूर्ण अन्यथा अणु
+      दीर्घ_title[0] = ' ';
+   पूर्ण
+   XStoreName( display, tws->winकरोw, दीर्घ_title );
+   XSetIconName( display, tws->winकरोw, दीर्घ_title );
+  पूर्ण
+पूर्ण
 
 /* PIXEL and IMAGE manipulation routines, Auth. Mario Stipcevic, Apr. 1998 */
 
-long 
-   ixpget (int x, int y)
+दीर्घ
+   ixpget (पूर्णांक x, पूर्णांक y)
 /* Get one pixel */
-{
+अणु
  XImage *image;
- long pixel, icol = 0;
+ दीर्घ pixel, icol = 0;
 /*
  image = XGetImage( display, cws->drawing, 0, 0,
                    cws->width, cws->height,
                    AllPlanes, ZPixmap);
 
- pixel = ((long) XGetPixel( image, x, y ));
- for (icol=0; icol<255; icol++) {
-  if (colors[icol].defined && colors[icol].pixel==pixel) break;
- }
+ pixel = ((दीर्घ) XGetPixel( image, x, y ));
+ क्रम (icol=0; icol<255; icol++) अणु
+  अगर (colors[icol].defined && colors[icol].pixel==pixel) अवरोध;
+ पूर्ण
  XDestroyImage(image);
 */
- return ( icol );
-}
+ वापस ( icol );
+पूर्ण
 
 
-void
-   ixpset (int Rx, int Ry, int cindex )
+व्योम
+   ixpset (पूर्णांक Rx, पूर्णांक Ry, पूर्णांक cindex )
 /* Draw one pixel of a given color (faster than through ixline !) */
-/* if cindex = -1 then keep old foreground */
-{
- int x, y;
+/* अगर cindex = -1 then keep old क्रमeground */
+अणु
+ पूर्णांक x, y;
  Drawable d;
 
- if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+ अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
- if (rotate_fl || scale_fl || trans_fl) {
+ अगर (rotate_fl || scale_fl || trans_fl) अणु
   x = xOrig + Rco * scalex * (Rx - xRO) + Rsi * scaley * (Ry - yRO)+.5;
   y = yOrig - Rsi * scalex * (Rx - xRO) + Rco * scaley * (Ry - yRO)+.5;
- } else {
+ पूर्ण अन्यथा अणु
   x = Rx;
   y = Ry;
- }
+ पूर्ण
 
- if (cindex != -1)
+ अगर (cindex != -1)
   XSetForeground( display, *gcline, colors[cindex].pixel );
- XDrawPoint(display, d, *gcline, x, y);
-}
+ XDrawPoपूर्णांक(display, d, *gcline, x, y);
+पूर्ण
 
-void 
+व्योम
    ixpicget (x, y, w, h, array)
-int x, y;   /* Position of Picture in the window */
-int w, h;   /* width and height */
-unsigned char *array; /* output array */
-/* Get portion of the X-winwow in an (unsigned short int (2b)) array */
-{
+पूर्णांक x, y;   /* Position of Picture in the winकरोw */
+पूर्णांक w, h;   /* width and height */
+अचिन्हित अक्षर *array; /* output array */
+/* Get portion of the X-winwow in an (अचिन्हित लघु पूर्णांक (2b)) array */
+अणु
  XImage *image;
- int i, j;
- unsigned short int *table;
- unsigned long u, k;
+ पूर्णांक i, j;
+ अचिन्हित लघु पूर्णांक *table;
+ अचिन्हित दीर्घ u, k;
 
  image = XGetImage( display, cws->drawing, 0, 0,
                    cws->width, cws->height,
                    AllPlanes , ZPixmap);
- 
- table = (unsigned short int *)calloc(65536, sizeof(unsigned short int));
+
+ table = (अचिन्हित लघु पूर्णांक *)सुस्मृति(65536, माप(अचिन्हित लघु पूर्णांक));
  /* Create pixel/color table */
- for (i = 0; i < 256; i++) {
-  if (colors[i].defined) {
-   if ((u = colors[i].pixel) < 65536) {
+ क्रम (i = 0; i < 256; i++) अणु
+  अगर (colors[i].defined) अणु
+   अगर ((u = colors[i].pixel) < 65536) अणु
     table[u] = i;
-   } else {
-    printf("ixgetpal: Colordepth > 16 bits unsupported !!\n");
-   }
-  } else { table[u] = 0; }
- }
+   पूर्ण अन्यथा अणु
+    म_लिखो("ixgetpal: Colordepth > 16 bits unsupported !!\n");
+   पूर्ण
+  पूर्ण अन्यथा अणु table[u] = 0; पूर्ण
+ पूर्ण
 
  /* Output array of colors */
  k = 0;
- for (j = 0; j < h; j++) {
-  for (i = 0; i < w; i++) {
+ क्रम (j = 0; j < h; j++) अणु
+  क्रम (i = 0; i < w; i++) अणु
    array[k++] = table[ XGetPixel( image, i + x, j + y )];
-  }
- }
+  पूर्ण
+ पूर्ण
 
  XDestroyImage(image);
-}
+पूर्ण
 
-void
+व्योम
  ixpicput(x, y, data, w, h, xoff, yoff, ws, hs)
-/* Put picture stored in an (unsigned short int (2b)) array into a portion
+/* Put picture stored in an (अचिन्हित लघु पूर्णांक (2b)) array पूर्णांकo a portion
  * of the X-winwow (inverse of ixpicget) */
-int x, y;       /* Position where to put the image */
-int xoff, yoff; /* Offset in the source image */
-int ws, hs;     /* Dimensions of the rectangle of the source to be copied */
-unsigned int w, h; /* Picture dimension in data */
-unsigned char *data; /* input color array */
-{
+पूर्णांक x, y;       /* Position where to put the image */
+पूर्णांक xoff, yoff; /* Offset in the source image */
+पूर्णांक ws, hs;     /* Dimensions of the rectangle of the source to be copied */
+अचिन्हित पूर्णांक w, h; /* Picture dimension in data */
+अचिन्हित अक्षर *data; /* input color array */
+अणु
  XImage *image;
- Visual *visual=(Visual *)NULL;
- int i, j, k, depth;
- unsigned char *pxls8;
- unsigned short int *pxls16;
- void *pxls;
+ Visual *visual=(Visual *)शून्य;
+ पूर्णांक i, j, k, depth;
+ अचिन्हित अक्षर *pxls8;
+ अचिन्हित लघु पूर्णांक *pxls16;
+ व्योम *pxls;
  Drawable d;
 
- if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+ अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
- /* Convert (input) color array into pixel array */
- depth = 1; if (DefaultDepth(display,screen_number) > 8) depth = 2;
- if (depth==1) pxls = pxls8  = malloc(w * h);
- if (depth==2) pxls = pxls16 = malloc((w * h) * 2);
- if (pxls)
- {
+ /* Convert (input) color array पूर्णांकo pixel array */
+ depth = 1; अगर (DefaultDepth(display,screen_number) > 8) depth = 2;
+ अगर (depth==1) pxls = pxls8  = दो_स्मृति(w * h);
+ अगर (depth==2) pxls = pxls16 = दो_स्मृति((w * h) * 2);
+ अगर (pxls)
+ अणु
   k = 0;
-  for (j = 0; j < h; j++) {
-   for (i = 0; i < w; i++) {
-    if (depth==1) *(pxls8 + k) = (unsigned char *) colors[data[k]].pixel;
-    if (depth==2) *(pxls16 + k) = (unsigned short int *) colors[data[k]].pixel;
+  क्रम (j = 0; j < h; j++) अणु
+   क्रम (i = 0; i < w; i++) अणु
+    अगर (depth==1) *(pxls8 + k) = (अचिन्हित अक्षर *) colors[data[k]].pixel;
+    अगर (depth==2) *(pxls16 + k) = (अचिन्हित लघु पूर्णांक *) colors[data[k]].pixel;
     k++;
-   }
-  }
+   पूर्ण
+  पूर्ण
 
   image = XCreateImage(display, visual, DefaultDepth(display,screen_number), ZPixmap, 0, pxls, w, h, 16, 0);
   /* XInitImage(image); ??? */
@@ -3467,107 +3468,107 @@ unsigned char *data; /* input color array */
   XDestroyImage( image );
   /* Empty the event queue: */
   XSync( display, 1 );
- }
-}
+ पूर्ण
+पूर्ण
 
-static int first_img = 1;  /* Animation flags */
-static int  last_img = 0;
+अटल पूर्णांक first_img = 1;  /* Animation flags */
+अटल पूर्णांक  last_img = 0;
 
-void
+व्योम
  ixpicanim(x, y, data, w, h, xoff, yoff, ws, hs)
-/* Put picture stored in an (unsigned short int (2b)) array into a portion
+/* Put picture stored in an (अचिन्हित लघु पूर्णांक (2b)) array पूर्णांकo a portion
  * of the X-winwow (inverse of ixpicget) */
-int x, y;       /* Position where to put the image */
-int xoff, yoff; /* Offset in the source image */
-int ws, hs;     /* Dimensions of the rectangle of the source to be copied */
-unsigned int w, h; /* Picture dimension in data */
-unsigned char *data; /* input color array */
-{
- static XImage *image;
- static XImage *image_old;
- Visual *visual=(Visual *)NULL;
- int i, j, k;
- static unsigned short int *pxls16 = NULL;
- static unsigned char *pxls8 = NULL;
- static void *pxls = NULL;
- static int xt, yt, xofft, yofft, wst, hst, wt, ht, depth;
+पूर्णांक x, y;       /* Position where to put the image */
+पूर्णांक xoff, yoff; /* Offset in the source image */
+पूर्णांक ws, hs;     /* Dimensions of the rectangle of the source to be copied */
+अचिन्हित पूर्णांक w, h; /* Picture dimension in data */
+अचिन्हित अक्षर *data; /* input color array */
+अणु
+ अटल XImage *image;
+ अटल XImage *image_old;
+ Visual *visual=(Visual *)शून्य;
+ पूर्णांक i, j, k;
+ अटल अचिन्हित लघु पूर्णांक *pxls16 = शून्य;
+ अटल अचिन्हित अक्षर *pxls8 = शून्य;
+ अटल व्योम *pxls = शून्य;
+ अटल पूर्णांक xt, yt, xofft, yofft, wst, hst, wt, ht, depth;
  Drawable d;
 
- if(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
+ अगर(!(d=cws->buffer)) d = cws->drawing; /* Handle buffer ixcrbuff() */
 
- if (!data) {
-  /* Check what to do with the last clip */
-  if (draw_mode > 0)
+ अगर (!data) अणु
+  /* Check what to करो with the last clip */
+  अगर (draw_mode > 0)
    XPutImage(display, d, *gcpxmp, image_old, xofft, yofft, xt, yt, wst, hst);
   /* Free memory and reset flags */
   XDestroyImage( image_old );
-  first_img = 1; last_img = 0; wt=0; ht=0; 
-  return ;
- }
+  first_img = 1; last_img = 0; wt=0; ht=0;
+  वापस ;
+ पूर्ण
 
- if(w * h != wt * ht || !pxls) {
-  if (pxls) XDestroyImage(image); /* Memory still leaks a bit ?? */
-  depth = 1; if (DefaultDepth(display,screen_number) > 8) depth = 2;
-  if (depth==1) pxls = pxls8  = malloc(w * h);
-  if (depth==2) pxls = pxls16 = malloc((w * h) * 2);
- }
+ अगर(w * h != wt * ht || !pxls) अणु
+  अगर (pxls) XDestroyImage(image); /* Memory still leaks a bit ?? */
+  depth = 1; अगर (DefaultDepth(display,screen_number) > 8) depth = 2;
+  अगर (depth==1) pxls = pxls8  = दो_स्मृति(w * h);
+  अगर (depth==2) pxls = pxls16 = दो_स्मृति((w * h) * 2);
+ पूर्ण
 
- /* Convert (input) color array into pixel array */
+ /* Convert (input) color array पूर्णांकo pixel array */
  k = 0;
- for (j = 0; j < h; j++) {
-  for (i = 0; i < w; i++) {
-   if (depth==1) *(pxls8 + k) = (unsigned char *) colors[data[k]].pixel;
-   if (depth==2) *(pxls16 + k) = (unsigned short int *) colors[data[k]].pixel;
+ क्रम (j = 0; j < h; j++) अणु
+  क्रम (i = 0; i < w; i++) अणु
+   अगर (depth==1) *(pxls8 + k) = (अचिन्हित अक्षर *) colors[data[k]].pixel;
+   अगर (depth==2) *(pxls16 + k) = (अचिन्हित लघु पूर्णांक *) colors[data[k]].pixel;
    k++;
-  }
- }
+  पूर्ण
+ पूर्ण
  image = XCreateImage(display, visual, DefaultDepth(display,screen_number), ZPixmap, 0, pxls, w, h, 16, 0);
   /* XInitImage( image ); */
 
- if (!first_img) {
+ अगर (!first_img) अणु
   XPutImage(display, d, *gcpxmp, image_old, xofft, yofft, xt, yt, wst, hst);
- }
- if (!last_img) {
+ पूर्ण
+ अगर (!last_img) अणु
   XPutImage(display, d, *gcpxmp, image, xoff, yoff, x, y, ws, hs);
- }
+ पूर्ण
 
  xofft = xoff; yofft = yoff; xt = x; yt = y; wst = ws; hst = hs; wt = w; ht = h;
  image_old = image;
- if (first_img) first_img = 0;
+ अगर (first_img) first_img = 0;
  /* Empty the event queue: */
  XSync( display, 1 );
-}
+पूर्ण
 
 
-void
+व्योम
  xtest(w, h)
-unsigned int w, h;
-{
-  int i;
-     
+अचिन्हित पूर्णांक w, h;
+अणु
+  पूर्णांक i;
+
 /*
-     pixmp = XCreatePixmap(display, RootWindow( display, screen_number),
+     pixmp = XCreatePixmap(display, RootWinकरोw( display, screen_number),
                 100, 100, DefaultDepth(display, screen_number));
      XCopyArea( display, cws->drawing, pixmp,
                 *gcbuff, 0, 0, 100, 100, 0, 0 );
      XCopyArea( display, pixmp, cws->drawing,
                 *gcbuff, 0, 0, 100, 100, 120, 80  );
 */
-     pixmp = XCreatePixmap(display, RootWindow( display, screen_number), 
+     pixmp = XCreatePixmap(display, RootWinकरोw( display, screen_number),
                 100, 100, 1);
      XFillRectangle(display, pixmp, *gcline, 0, 0, 100, 100);
-     for( i = 0; i < 6; i++ ) { XSetClipMask( display, gclist[i], pixmp );
-     XSetClipOrigin(display, gclist[i], 0, 0); }
+     क्रम( i = 0; i < 6; i++ ) अणु XSetClipMask( display, gclist[i], pixmp );
+     XSetClipOrigin(display, gclist[i], 0, 0); पूर्ण
 
-printf("depth=%d\n", DefaultDepth(display, screen_number));
+म_लिखो("depth=%d\n", DefaultDepth(display, screen_number));
 /*
-     for( i = 0; i < MAXGC; i++ ) { XSetClipMask( display, gclist[i], pixmp );
-     XSetClipOrigin(display, gclist[i], 0, 0); }
+     क्रम( i = 0; i < MAXGC; i++ ) अणु XSetClipMask( display, gclist[i], pixmp );
+     XSetClipOrigin(display, gclist[i], 0, 0); पूर्ण
      XSetClipOrigin(display, *gcline, 0, 0);
-     for( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], pixmp );
+     क्रम( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], pixmp );
      cws->clip  = 1;
      XFreePixmap(display, pixmp);
-     for( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], pixmp );
+     क्रम( i = 0; i < MAXGC; i++ ) XSetClipMask( display, gclist[i], pixmp );
 */
      XFlush( display );
-}
+पूर्ण

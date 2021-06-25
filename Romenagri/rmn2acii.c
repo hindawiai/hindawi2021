@@ -1,475 +1,476 @@
+<शैली गुरु>
 /*
 Copyright (C) 2003,2004,2005,2006 Abhishek Choudhary
 This file is part of the Romenagri Transliteration System.
 
-The Romenagri Transliteration System is free software; 
-you can redistribute it and/or modify it under the terms of the 
-GNU General Public License as published by the 
-Free Software Foundation; either version 2 of the License, or 
+The Romenagri Transliteration System is मुक्त software;
+you can redistribute it and/or modअगरy it under the terms of the
+GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
-The Romenagri Transliteration System is distributed in the hope 
-that it will be useful, but WITHOUT ANY WARRANTY; without 
-even the implied warranty of MERCHANTABILITY or FITNESS FOR 
-A PARTICULAR PURPOSE. See the GNU General Public License for 
+The Romenagri Transliteration System is distributed in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License क्रम
 more details.
 
 You should have received a copy of the GNU General Public
-License along with this file; see the file COPYING. If
-not, write to the Free Software Foundation,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+License aदीर्घ with this file; see the file COPYING. If
+not, ग_लिखो to the Free Software Foundation,
+51 Franklin Street, Fअगरth Floor, Boston, MA 02110-1301 USA
 */
 
 /*
-Modifications: (Please maintain reverse chronological order)
+Modअगरications: (Please मुख्यtain reverse chronological order)
 
-	dd-mmm-yyyy, Nature of modification,
-                        Name of modifier <alias>,
-			email adress of modifier
+	dd-mmm-yyyy, Nature of modअगरication,
+                        Name of modअगरier <alias>,
+			email adress of modअगरier
 
-	19-Jan-2006, Added the modifications section,
+	19-Jan-2006, Added the modअगरications section,
                         Abhishek Choudhary <hi_pedler>,
 			choudhary@indicybers.net
 
-End of modifications.
+End of modअगरications.
 */
 
-#include "rmn2acii.h"
-char tst2[2];
-char *tst = tst2;
-char *lev1 = "|kgcjtdnpbmyrlwsxh_^";
+#समावेश "rmn2acii.h"
+अक्षर tst2[2];
+अक्षर *tst = tst2;
+अक्षर *lev1 = "|kgcjtdnpbmyrlwsxh_^";
 
-char *
-c2s (char t)
-{
+अक्षर *
+c2s (अक्षर t)
+अणु
   tst[0] = t;
   tst[1] = '\0';
-  return tst;
-}
+  वापस tst;
+पूर्ण
 
-char *
-lookup (char *key)
-{
-  int i;
-  for (i = 0; i < 74; i++)
-    {
-      if (strcmp (acii_chrt[i][0], key) == 0)
-	return acii_chrt[i][1];
-    }
-  return NULL;
-}
+अक्षर *
+lookup (अक्षर *key)
+अणु
+  पूर्णांक i;
+  क्रम (i = 0; i < 74; i++)
+    अणु
+      अगर (म_भेद (acii_chrt[i][0], key) == 0)
+	वापस acii_chrt[i][1];
+    पूर्ण
+  वापस शून्य;
+पूर्ण
 
-int
-matra (char *tok)
-{
-  if (strlen (tok) < 1)
-    {
-      strcat (msg, lookup ("^"));	/*terminating 'halant' */
-      return 1;
-    }
-  switch (tok[0])
-    {
-    case 'i':
-      strcat (msg, lookup ("^i"));
+पूर्णांक
+matra (अक्षर *tok)
+अणु
+  अगर (म_माप (tok) < 1)
+    अणु
+      म_जोड़ो (msg, lookup ("^"));	/*terminating 'halant' */
+      वापस 1;
+    पूर्ण
+  चयन (tok[0])
+    अणु
+    हाल 'i':
+      म_जोड़ो (msg, lookup ("^i"));
       tok++;
       level1 (tok);
-      break;
-    case 'u':
-      strcat (msg, lookup ("^u"));
+      अवरोध;
+    हाल 'u':
+      म_जोड़ो (msg, lookup ("^u"));
       tok++;
       level1 (tok);
-      break;
-    case 'e':
-      strcat (msg, lookup ("^ee"));
+      अवरोध;
+    हाल 'e':
+      म_जोड़ो (msg, lookup ("^ee"));
       tok += 2;
       level1 (tok);
-      break;
-    case 'z':
-      strcat (msg, lookup ("^za"));
+      अवरोध;
+    हाल 'z':
+      म_जोड़ो (msg, lookup ("^za"));
       level2a (++tok);
-      break;
-    case '_':			/*redundant */
-      strcat (msg, lookup ("^_ri"));
+      अवरोध;
+    हाल '_':			/*redundant */
+      म_जोड़ो (msg, lookup ("^_ri"));
       tok += 3;
       level1 (tok);
-      break;
-    case 'o':
+      अवरोध;
+    हाल 'o':
       tok++;
-      switch (tok[0])
-	{
-	case 'o':
-	  strcat (msg, lookup ("^oo"));
+      चयन (tok[0])
+	अणु
+	हाल 'o':
+	  म_जोड़ो (msg, lookup ("^oo"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	case 'a':
-	  strcat (msg, lookup ("^oa"));
+	  अवरोध;
+	हाल 'a':
+	  म_जोड़ो (msg, lookup ("^oa"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	case 'u':
-	  strcat (msg, lookup ("^ou"));
+	  अवरोध;
+	हाल 'u':
+	  म_जोड़ो (msg, lookup ("^ou"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	default:
-	  strcat (msg, c2s (tok[0]));
+	  अवरोध;
+	शेष:
+	  म_जोड़ो (msg, c2s (tok[0]));
 	  level1 (++tok);
-	};
-      break;
-    case 'a':
+	पूर्ण;
+      अवरोध;
+    हाल 'a':
       tok++;
-      if (strstr (lev1, c2s (tok[0])) != NULL)
+      अगर (म_माला (lev1, c2s (tok[0])) != शून्य)
 	level1 (tok);
-      else
-	switch (tok[0])
-	  {
-	  case 'a':
-	    strcat (msg, lookup ("^aa"));
+      अन्यथा
+	चयन (tok[0])
+	  अणु
+	  हाल 'a':
+	    म_जोड़ो (msg, lookup ("^aa"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'e':
-	    strcat (msg, lookup ("^ae"));
+	    अवरोध;
+	  हाल 'e':
+	    म_जोड़ो (msg, lookup ("^ae"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'i':
-	    strcat (msg, lookup ("^ai"));
+	    अवरोध;
+	  हाल 'i':
+	    म_जोड़ो (msg, lookup ("^ai"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'o':
-	    strcat (msg, lookup ("^ao"));
+	    अवरोध;
+	  हाल 'o':
+	    म_जोड़ो (msg, lookup ("^ao"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'u':
-	    strcat (msg, lookup ("^au"));
+	    अवरोध;
+	  हाल 'u':
+	    म_जोड़ो (msg, lookup ("^au"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  default:
-	    strcat (msg, c2s (tok[0]));
+	    अवरोध;
+	  शेष:
+	    म_जोड़ो (msg, c2s (tok[0]));
 	    level1 (++tok);
-	  };
-      break;
-    default:
-      strcat (msg, c2s (tok[0]));
+	  पूर्ण;
+      अवरोध;
+    शेष:
+      म_जोड़ो (msg, c2s (tok[0]));
       level1 (++tok);
-    };
-  return 1;
-}
+    पूर्ण;
+  वापस 1;
+पूर्ण
 
-int
-level2a (char *tok)
-{
-  if (strlen (tok) < 1)
-    {
-      strcat (msg, lookup ("^"));
-      return 1;
-    }
-  if (strstr (lev1, c2s (tok[0])) != NULL)
-    {
-      strcat (msg, lookup ("^"));
+पूर्णांक
+level2a (अक्षर *tok)
+अणु
+  अगर (म_माप (tok) < 1)
+    अणु
+      म_जोड़ो (msg, lookup ("^"));
+      वापस 1;
+    पूर्ण
+  अगर (म_माला (lev1, c2s (tok[0])) != शून्य)
+    अणु
+      म_जोड़ो (msg, lookup ("^"));
       level1 (tok);
-    }
-  else
+    पूर्ण
+  अन्यथा
     matra (tok);
-  return 1;
-}
+  वापस 1;
+पूर्ण
 
-int
-level2b (char *tok, char *lk)
-{
-  char lup[7];
-  strcpy (lup, lk);
-  if (strlen (tok) < 1)
-    {
-      strcat (lup, "a");
-      strcat (msg, lookup (lup));
-      strcat (msg, lookup ("^"));
-      return 1;
-    }
-  if (tok[0] == 'h')
-    {
-      strcat (lup, "ha");
-      strcat (msg, lookup (lup));
+पूर्णांक
+level2b (अक्षर *tok, अक्षर *lk)
+अणु
+  अक्षर lup[7];
+  म_नकल (lup, lk);
+  अगर (म_माप (tok) < 1)
+    अणु
+      म_जोड़ो (lup, "a");
+      म_जोड़ो (msg, lookup (lup));
+      म_जोड़ो (msg, lookup ("^"));
+      वापस 1;
+    पूर्ण
+  अगर (tok[0] == 'h')
+    अणु
+      म_जोड़ो (lup, "ha");
+      म_जोड़ो (msg, lookup (lup));
       level2a (++tok);
-    }
-  else if (tok[0] == 'v')	/*lvra-case */
-    {
-      strcat (lup, "vra");
-      strcat (msg, lookup (lup));
+    पूर्ण
+  अन्यथा अगर (tok[0] == 'v')	/*lvra-हाल */
+    अणु
+      म_जोड़ो (lup, "vra");
+      म_जोड़ो (msg, lookup (lup));
       level2a ((tok + 2));
-    }
-  else
-    {
-      strcat (lup, "a");
-      strcat (msg, lookup (lup));
+    पूर्ण
+  अन्यथा
+    अणु
+      म_जोड़ो (lup, "a");
+      म_जोड़ो (msg, lookup (lup));
       level2a (tok);
-    }
-  return 1;
-}
+    पूर्ण
+  वापस 1;
+पूर्ण
 
-int
-level2c (char *tok)
-{
-  if (strlen (tok) < 1)
-    {
-      strcat (msg, lookup ("^"));
-      return 1;
-    }
-  switch (tok[0])
-    {
-    case 'u':
-      strcat (msg, lookup ("_u"));
+पूर्णांक
+level2c (अक्षर *tok)
+अणु
+  अगर (म_माप (tok) < 1)
+    अणु
+      म_जोड़ो (msg, lookup ("^"));
+      वापस 1;
+    पूर्ण
+  चयन (tok[0])
+    अणु
+    हाल 'u':
+      म_जोड़ो (msg, lookup ("_u"));
       tok++;
       level1 (tok);
-      break;
-    case 'm':
-      strcat (msg, lookup ("_m"));
+      अवरोध;
+    हाल 'm':
+      म_जोड़ो (msg, lookup ("_m"));
       tok++;
       level1 (tok);
-      break;
-    case 'i':
-      strcat (msg, lookup ("_i"));
+      अवरोध;
+    हाल 'i':
+      म_जोड़ो (msg, lookup ("_i"));
       tok++;
       level1 (tok);
-      break;
-    case 'e':
-      strcat (msg, lookup ("_ee"));
+      अवरोध;
+    हाल 'e':
+      म_जोड़ो (msg, lookup ("_ee"));
       tok += 2;
       level1 (tok);
-      break;
-    case 'y':
-      strcat (msg, lookup ("_yna"));
+      अवरोध;
+    हाल 'y':
+      म_जोड़ो (msg, lookup ("_yna"));
       tok++;
       level2a (++tok);
-      break;
-    case 't':
+      अवरोध;
+    हाल 't':
       level2b (++tok, "_t");
-      break;
-    case 'd':
+      अवरोध;
+    हाल 'd':
       level2b (++tok, "_d");
-      break;
-    case 'h':
-      if (tok[1] == 'h')
-	{
-	  strcat (msg, lookup ("_hh"));
+      अवरोध;
+    हाल 'h':
+      अगर (tok[1] == 'h')
+	अणु
+	  म_जोड़ो (msg, lookup ("_hh"));
 	  tok++;
 	  level1 (++tok);
-	}
-      else
-	{
-	  strcat (msg, lookup ("_ha"));
+	पूर्ण
+      अन्यथा
+	अणु
+	  म_जोड़ो (msg, lookup ("_ha"));
 	  level2a (++tok);
-	}
-      break;
-    case 'o':
+	पूर्ण
+      अवरोध;
+    हाल 'o':
       tok++;
-      switch (tok[0])
-	{
-	case 'o':
-	  strcat (msg, lookup ("_oo"));
+      चयन (tok[0])
+	अणु
+	हाल 'o':
+	  म_जोड़ो (msg, lookup ("_oo"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	case 'a':
-	  strcat (msg, lookup ("_oa"));
+	  अवरोध;
+	हाल 'a':
+	  म_जोड़ो (msg, lookup ("_oa"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	case 'u':
-	  strcat (msg, lookup ("_ou"));
+	  अवरोध;
+	हाल 'u':
+	  म_जोड़ो (msg, lookup ("_ou"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	default:
-	  strcat (msg, c2s (tok[0]));
+	  अवरोध;
+	शेष:
+	  म_जोड़ो (msg, c2s (tok[0]));
 	  level1 (++tok);
-	};
-      break;
-    case 'n':
+	पूर्ण;
+      अवरोध;
+    हाल 'n':
       tok++;
-      switch (tok[0])
-	{
-	case 'a':
-	  strcat (msg, lookup ("_na"));
+      चयन (tok[0])
+	अणु
+	हाल 'a':
+	  म_जोड़ो (msg, lookup ("_na"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	case 'n':
-	  strcat (msg, lookup ("_nna"));
+	  अवरोध;
+	हाल 'n':
+	  म_जोड़ो (msg, lookup ("_nna"));
 	  level2a (++tok);
-	  break;
-	case 'g':
-	  strcat (msg, lookup ("_nga"));
+	  अवरोध;
+	हाल 'g':
+	  म_जोड़ो (msg, lookup ("_nga"));
 	  level2a (++tok);
-	  break;
-	default:
-	  strcat (msg, c2s (tok[0]));
+	  अवरोध;
+	शेष:
+	  म_जोड़ो (msg, c2s (tok[0]));
 	  level1 (++tok);
-	};
-      break;
-    case 'r':
+	पूर्ण;
+      अवरोध;
+    हाल 'r':
       tok++;
-      switch (tok[0])
-	{
-	case 'i':/*_ri*/
-	  if (strlen (msg) > 0 && msg[strlen (msg) - 1] == *lookup ("^"))	/*push-pop */
-	    {
-	      msg[strlen (msg) - 1] = '\0';
-	      strcat (msg, lookup ("^_ri"));
-	    }
-	  else
-	    strcat (msg, lookup ("_ri"));
+      चयन (tok[0])
+	अणु
+	हाल 'i':/*_ri*/
+	  अगर (म_माप (msg) > 0 && msg[म_माप (msg) - 1] == *lookup ("^"))	/*push-pop */
+	    अणु
+	      msg[म_माप (msg) - 1] = '\0';
+	      म_जोड़ो (msg, lookup ("^_ri"));
+	    पूर्ण
+	  अन्यथा
+	    म_जोड़ो (msg, lookup ("_ri"));
 	  tok++;
 	  level1 (tok);
-	  break;
-	case 'd':
+	  अवरोध;
+	हाल 'd':
 	  level2b (++tok, "_rd");
-	  break;
-	default:
-	  strcat (msg, c2s (tok[0]));
+	  अवरोध;
+	शेष:
+	  म_जोड़ो (msg, c2s (tok[0]));
 	  level1 (++tok);
-	};
-      break;
-    case 'a':
+	पूर्ण;
+      अवरोध;
+    हाल 'a':
       tok++;
-      if (strstr (lev1, c2s (tok[0])) != NULL)
-	{
-	  strcat (msg, lookup ("_a"));
+      अगर (म_माला (lev1, c2s (tok[0])) != शून्य)
+	अणु
+	  म_जोड़ो (msg, lookup ("_a"));
 	  level1 (tok);
-	}
-      else
-	switch (tok[0])
-	  {
-	  case 'a':
-	    strcat (msg, lookup ("_aa"));
+	पूर्ण
+      अन्यथा
+	चयन (tok[0])
+	  अणु
+	  हाल 'a':
+	    म_जोड़ो (msg, lookup ("_aa"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'e':
-	    strcat (msg, lookup ("_ae"));
+	    अवरोध;
+	  हाल 'e':
+	    म_जोड़ो (msg, lookup ("_ae"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'i':
-	    strcat (msg, lookup ("_ai"));
+	    अवरोध;
+	  हाल 'i':
+	    म_जोड़ो (msg, lookup ("_ai"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'o':
-	    strcat (msg, lookup ("_ao"));
+	    अवरोध;
+	  हाल 'o':
+	    म_जोड़ो (msg, lookup ("_ao"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  case 'u':
-	    strcat (msg, lookup ("_au"));
+	    अवरोध;
+	  हाल 'u':
+	    म_जोड़ो (msg, lookup ("_au"));
 	    tok++;
 	    level1 (tok);
-	    break;
-	  default:
-	    strcat (msg, c2s (tok[0]));
+	    अवरोध;
+	  शेष:
+	    म_जोड़ो (msg, c2s (tok[0]));
 	    level1 (++tok);
-	  };
-      break;
-    default:
-      strcat (msg, c2s (tok[0]));
+	  पूर्ण;
+      अवरोध;
+    शेष:
+      म_जोड़ो (msg, c2s (tok[0]));
       level1 (++tok);
-    }
-  return 1;
-}
+    पूर्ण
+  वापस 1;
+पूर्ण
 
-int
-level1 (char *tok)
-{
-  if (strlen (tok) < 1)
-    return 1;
-  switch (tok[0])
-    {
-    case '|':
-      strcat (msg, lookup ("|"));
+पूर्णांक
+level1 (अक्षर *tok)
+अणु
+  अगर (म_माप (tok) < 1)
+    वापस 1;
+  चयन (tok[0])
+    अणु
+    हाल '|':
+      म_जोड़ो (msg, lookup ("|"));
       tok++;
       level1 (tok);
-      break;
-    case 'n':
-      strcat (msg, lookup ("na"));
+      अवरोध;
+    हाल 'n':
+      म_जोड़ो (msg, lookup ("na"));
       level2a (++tok);
-      break;
-    case 'm':
-      strcat (msg, lookup ("ma"));
+      अवरोध;
+    हाल 'm':
+      म_जोड़ो (msg, lookup ("ma"));
       level2a (++tok);
-      break;
-    case 'y':
-      strcat (msg, lookup ("ya"));
+      अवरोध;
+    हाल 'y':
+      म_जोड़ो (msg, lookup ("ya"));
       level2a (++tok);
-      break;
-    case 'w':
-      strcat (msg, lookup ("wa"));
+      अवरोध;
+    हाल 'w':
+      म_जोड़ो (msg, lookup ("wa"));
       level2a (++tok);
-      break;
-    case 'x':
-      strcat (msg, lookup ("xa"));
+      अवरोध;
+    हाल 'x':
+      म_जोड़ो (msg, lookup ("xa"));
       level2a (++tok);
-      break;
-      /*case 'h':
-         strcat(msg,lookup("ha"));
+      अवरोध;
+      /*हाल 'h':
+         म_जोड़ो(msg,lookup("ha"));
          level2a(++tok);
-         break; */
-    case 'r':
-      strcat (msg, lookup ("ra"));
+         अवरोध; */
+    हाल 'r':
+      म_जोड़ो (msg, lookup ("ra"));
       level2a (++tok);
-      break;
-    case 'g':
+      अवरोध;
+    हाल 'g':
       level2b (++tok, "g");
-      break;
-    case 'c':
+      अवरोध;
+    हाल 'c':
       tok++;
       level2b (++tok, "ch");
-      break;
-    case 't':
+      अवरोध;
+    हाल 't':
       level2b (++tok, "t");
-      break;
-    case 'd':
+      अवरोध;
+    हाल 'd':
       level2b (++tok, "d");
-      break;
-    case 'p':
+      अवरोध;
+    हाल 'p':
       level2b (++tok, "p");
-      break;
-    case 'b':
+      अवरोध;
+    हाल 'b':
       level2b (++tok, "b");
-      break;
-    case 's':
+      अवरोध;
+    हाल 's':
       level2b (++tok, "s");
-      break;
-    case 'l':
+      अवरोध;
+    हाल 'l':
       level2b (++tok, "l");
-      break;
-    case 'k':
+      अवरोध;
+    हाल 'k':
       level2b (++tok, "k");
-      break;
-    case 'j':
+      अवरोध;
+    हाल 'j':
       level2b (++tok, "j");
-      break;
-    case '_':
+      अवरोध;
+    हाल '_':
       level2c (++tok);
-      break;
-    case '^':			/*discrete 'matra' */
+      अवरोध;
+    हाल '^':			/*discrete 'matra' */
       matra (++tok);
-      break;
-    default:
-      strcat (msg, c2s (tok[0]));
+      अवरोध;
+    शेष:
+      म_जोड़ो (msg, c2s (tok[0]));
       level1 (++tok);
-    };
-  return 1;
-}
+    पूर्ण;
+  वापस 1;
+पूर्ण
 
-char *
-rmn2acii (char *tok)
-{
+अक्षर *
+rmn2acii (अक्षर *tok)
+अणु
   *msg = '\0';
   level1 (tok);
-  return msg;
-}
+  वापस msg;
+पूर्ण

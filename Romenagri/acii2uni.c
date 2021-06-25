@@ -1,120 +1,121 @@
+<शैली गुरु>
 /*
 Copyright (C) 2003,2004,2005,2006 Abhishek Choudhary
 This file is part of the Romenagri Transliteration System.
 
-The Romenagri Transliteration System is free software; 
-you can redistribute it and/or modify it under the terms of the 
-GNU General Public License as published by the 
-Free Software Foundation; either version 2 of the License, or 
+The Romenagri Transliteration System is मुक्त software;
+you can redistribute it and/or modअगरy it under the terms of the
+GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
-The Romenagri Transliteration System is distributed in the hope 
-that it will be useful, but WITHOUT ANY WARRANTY; without 
-even the implied warranty of MERCHANTABILITY or FITNESS FOR 
-A PARTICULAR PURPOSE. See the GNU General Public License for 
+The Romenagri Transliteration System is distributed in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License क्रम
 more details.
 
 You should have received a copy of the GNU General Public
-License along with this file; see the file COPYING. If
-not, write to the Free Software Foundation,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+License aदीर्घ with this file; see the file COPYING. If
+not, ग_लिखो to the Free Software Foundation,
+51 Franklin Street, Fअगरth Floor, Boston, MA 02110-1301 USA
 */
 
 /*
-Modifications: (Please maintain reverse chronological order)
+Modअगरications: (Please मुख्यtain reverse chronological order)
 
-	dd-mmm-yyyy, Nature of modification,
-                        Name of modifier <alias>,
-			email adress of modifier
+	dd-mmm-yyyy, Nature of modअगरication,
+                        Name of modअगरier <alias>,
+			email adress of modअगरier
 
-	19-Jan-2006, Added the modifications section,
+	19-Jan-2006, Added the modअगरications section,
                         Abhishek Choudhary <hi_pedler>,
 			choudhary@indicybers.net
 
-End of modifications.
+End of modअगरications.
 */
 
-#include <stdio.h>
-#include <fcntl.h>
+#समावेश <मानकपन.स>
+#समावेश <fcntl.h>
 
-#include "unicode.h"
+#समावेश "unicode.h"
 
-int
-main (int argc, char *argv[])
-{
-  FILE *fin, *fout;
-  unsigned char t;
-  int i = 0, flag = 0;
+पूर्णांक
+मुख्य (पूर्णांक argc, अक्षर *argv[])
+अणु
+  खाता *fin, *fout;
+  अचिन्हित अक्षर t;
+  पूर्णांक i = 0, flag = 0;
 
-#ifdef __DJGPP
-  _fmode = O_BINARY;
-#endif
+#अगर_घोषित __DJGPP
+  _भ_शेषe = O_BINARY;
+#पूर्ण_अगर
 
-  if (argc < 2)
-    {
-      fin = stdin;
-      fout = stdout;
-    }
-  else
-    {
-      if (argc < 3)
-	{
-	  printf ("Usage: acii2uni <ISCII_filename> <UNICODE_filename>\n");
-	  return 1;
-	}
+  अगर (argc < 2)
+    अणु
+      fin = मानक_निवेश;
+      fout = मानक_निकास;
+    पूर्ण
+  अन्यथा
+    अणु
+      अगर (argc < 3)
+	अणु
+	  म_लिखो ("Usage: acii2uni <ISCII_filename> <UNICODE_filename>\n");
+	  वापस 1;
+	पूर्ण
 
 
-      if ((fin = fopen (argv[1], "r+")) == NULL)
-	{
-	  fprintf (stderr, "Cannot open input file, using stdin.\n");
-	  fin = stdin;
-	}
+      अगर ((fin = ख_खोलो (argv[1], "r+")) == शून्य)
+	अणु
+	  ख_लिखो (मानक_त्रुटि, "Cannot open input file, using stdin.\n");
+	  fin = मानक_निवेश;
+	पूर्ण
 
-      if ((fout = fopen (argv[2], "w")) == NULL)
-	{
-	  fprintf (stderr, "Cannot open output file, using stdout.\n");
-	  fout = stdout;
-	}
-    }
+      अगर ((fout = ख_खोलो (argv[2], "w")) == शून्य)
+	अणु
+	  ख_लिखो (मानक_त्रुटि, "Cannot open output file, using stdout.\n");
+	  fout = मानक_निकास;
+	पूर्ण
+    पूर्ण
 
-  fputc (255, fout);
-  fputc (254, fout);
-  while (!feof (fin))
-    {
-      t = fgetc (fin);
-      if (feof (fin))
-	break;
-      if (t == '\n')
-	{
-	  fputc (13, fout);
-	  fputc (0, fout);
-	  fputc (10, fout);
-	  fputc (0, fout);
-	  continue;
-	}
+  ख_अक्षर_दो (255, fout);
+  ख_अक्षर_दो (254, fout);
+  जबतक (!ख_पूर्ण (fin))
+    अणु
+      t = ख_अक्षर_लो (fin);
+      अगर (ख_पूर्ण (fin))
+	अवरोध;
+      अगर (t == '\n')
+	अणु
+	  ख_अक्षर_दो (13, fout);
+	  ख_अक्षर_दो (0, fout);
+	  ख_अक्षर_दो (10, fout);
+	  ख_अक्षर_दो (0, fout);
+	  जारी;
+	पूर्ण
       flag = 0;
-      for (i = 0; i < UNI_LEN; i++)
-	{
-	  if (t == unicode_hin[i][2])
-	    {
+      क्रम (i = 0; i < UNI_LEN; i++)
+	अणु
+	  अगर (t == unicode_hin[i][2])
+	    अणु
 	      flag = 1;
-	      break;
-	    }
-	}
-      if (flag == 1)
-	{
-	  fputc (unicode_hin[i][0], fout);
-	  fputc (unicode_hin[i][1], fout);
-	}
-      else
-	{
-	  fputc (t % 128, fout);
-	  fputc (0, fout);
-	}
-    }
+	      अवरोध;
+	    पूर्ण
+	पूर्ण
+      अगर (flag == 1)
+	अणु
+	  ख_अक्षर_दो (unicode_hin[i][0], fout);
+	  ख_अक्षर_दो (unicode_hin[i][1], fout);
+	पूर्ण
+      अन्यथा
+	अणु
+	  ख_अक्षर_दो (t % 128, fout);
+	  ख_अक्षर_दो (0, fout);
+	पूर्ण
+    पूर्ण
 
-  fclose (fin);
-  fclose (fout);
+  ख_बंद (fin);
+  ख_बंद (fout);
 
-  return 0;
-}
+  वापस 0;
+पूर्ण

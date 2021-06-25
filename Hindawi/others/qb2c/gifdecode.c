@@ -1,106 +1,107 @@
+<शैली गुरु>
 /*
- * $Id: gifdecode.c,v 1.1.1.1 1996/02/14 13:10:25 mclareni Exp $
+ * $Id: gअगरdecode.c,v 1.1.1.1 1996/02/14 13:10:25 mclareni Exp $
  *
- * $Log: gifdecode.c,v $
+ * $Log: gअगरdecode.c,v $
  * Revision 1.1.1.1  1996/02/14 13:10:25  mclareni
  * Higz
  *
  */
 /*CMZ :  1.23/06 30/11/95  10.45.47  by  O.Couet*/
 /*-- Author :    O.Couet   30/11/95*/
-#include <stdio.h>
-#include <string.h>
+#समावेश <मानकपन.स>
+#समावेश <माला.स>
 
 
-#define BITS    12                      /* largest code size */
-#define TSIZE   4096                    /* tables size */
+#घोषणा BITS    12                      /* largest code size */
+#घोषणा TSIZE   4096                    /* tables size */
 
-typedef unsigned char byte;
+प्रकार अचिन्हित अक्षर byte;
 
-static int      Prefix[TSIZE];          /* prefix table */
-static byte     Suffix[TSIZE];          /* suffix table */
-static byte     OutCode[TSIZE];         /* output stack */
+अटल पूर्णांक      Prefix[TSIZE];          /* prefix table */
+अटल byte     Suffix[TSIZE];          /* suffix table */
+अटल byte     OutCode[TSIZE];         /* output stack */
 
-static byte     *ptr1,                  /* pointer to GIF array */
-                *ptr2;                  /* pointer to PIX array */
+अटल byte     *ptr1,                  /* poपूर्णांकer to GIF array */
+                *ptr2;                  /* poपूर्णांकer to PIX array */
 
-static int      CurCodeSize,            /* current number of bits per code */
+अटल पूर्णांक      CurCodeSize,            /* current number of bits per code */
                 CurMaxCode;             /* maximum code, given CurCodeSize */
 
-static long     CurBit;                 /* current bit in GIF image data */
+अटल दीर्घ     CurBit;                 /* current bit in GIF image data */
 
 /***************************************************************
  *                                                             *
  ***************************************************************/
-static int ReadCode()
-{
-  static long   b3[3], CurByte;
-  static byte   lblk;
-  int           shift, nbyte;
-  long          OldByte;
+अटल पूर्णांक ReadCode()
+अणु
+  अटल दीर्घ   b3[3], CurByte;
+  अटल byte   lblk;
+  पूर्णांक           shअगरt, nbyte;
+  दीर्घ          OldByte;
 
-  if (CurBit == -1) {
+  अगर (CurBit == -1) अणु
     lblk = 0;
     CurByte = -1;
-  }
+  पूर्ण
 
   CurBit += CurCodeSize;
   OldByte = CurByte;
   CurByte = CurBit/8;
   nbyte   = CurByte - OldByte;
-  shift   = 17 + (CurBit%8) - CurCodeSize;
-  while (nbyte-- > 0) {
-    if (lblk == 0) {
+  shअगरt   = 17 + (CurBit%8) - CurCodeSize;
+  जबतक (nbyte-- > 0) अणु
+    अगर (lblk == 0) अणु
       lblk = *ptr1++;
-      if (lblk == 0) return -1;
-    }
+      अगर (lblk == 0) वापस -1;
+    पूर्ण
     b3[0] = b3[1];
     b3[1] = b3[2];
     b3[2] = *ptr1++;
     lblk--;
-  }
-  return (((b3[0]+0x100*b3[1]+0x10000*b3[2])>>shift) & (CurMaxCode-1));
-}
+  पूर्ण
+  वापस (((b3[0]+0x100*b3[1]+0x10000*b3[2])>>shअगरt) & (CurMaxCode-1));
+पूर्ण
 
 /***************************************************************
  *                                                             *
  ***************************************************************/
-static void OutPixel(pix)
+अटल व्योम OutPixel(pix)
                 byte pix;
-{
+अणु
   *ptr2++ = pix;
-}
+पूर्ण
 
 /***************************************************************
  *                                                             *
  * Name: GIFinfo                                Date: 03.10.94 *
  *                                                             *
- * Function: Get information on GIF image                      *
+ * Function: Get inक्रमmation on GIF image                      *
  *                                                             *
- * Input: GIFarr[] - compressed image in GIF format            *
+ * Input: GIFarr[] - compressed image in GIF क्रमmat            *
  *                                                             *
  * Output: Width    - image width                              *
  *         Height   - image height                             *
  *         Ncols    - number of colors                         *
- *         return   - 0 - if O.K.                              *
- *                    1 - if error                             *
+ *         वापस   - 0 - अगर O.K.                              *
+ *                    1 - अगर error                             *
  *                                                             *
  ***************************************************************/
-int GIFinfo(GIFarr, Width, Height, Ncols)
+पूर्णांक GIFinfo(GIFarr, Width, Height, Ncols)
       byte *GIFarr;
-       int *Width,*Height,*Ncols;
-{
+       पूर्णांक *Width,*Height,*Ncols;
+अणु
   byte          b;
 
   ptr1 = GIFarr;
 
   /*   R E A D   H E A D E R   */
 
-  if (strncmp((char *)GIFarr,"GIF87a",6) && strncmp((char *)GIFarr,"GIF89a",6))
-  {
-    fprintf(stderr,"\nGIFinfo: not a valid GIF file !\n");
-    return 1;
-  }
+  अगर (म_भेदन((अक्षर *)GIFarr,"GIF87a",6) && म_भेदन((अक्षर *)GIFarr,"GIF89a",6))
+  अणु
+    ख_लिखो(मानक_त्रुटि,"\nGIFinfo: not a valid GIF file !\n");
+    वापस 1;
+  पूर्ण
 
   ptr1 += 6;
 
@@ -109,26 +110,26 @@ int GIFinfo(GIFarr, Width, Height, Ncols)
 
   b         = *ptr1++;
   *Ncols    = 1 << ((b & 7) + 1);
-  if ((b & 0x80) == 0) {                /* is there color map? */
-    fprintf(stderr,"\nGIFinfo: warning! no color map\n");
+  अगर ((b & 0x80) == 0) अणु                /* is there color map? */
+    ख_लिखो(मानक_त्रुटि,"\nGIFinfo: warning! no color map\n");
     *Ncols = 0;
-  }
+  पूर्ण
 
   ++ptr1;                               /* background color ... ignore */
-  b      = *ptr1++;                     /* supposed to be NULL */
-  if (b) {
-    fprintf(stderr,"\nGIFdecode: bad screen descriptor\n");
-    return 1;
-  }
+  b      = *ptr1++;                     /* supposed to be शून्य */
+  अगर (b) अणु
+    ख_लिखो(मानक_त्रुटि,"\nGIFdecode: bad screen descriptor\n");
+    वापस 1;
+  पूर्ण
 
   ptr1 += (*Ncols) * 3;                 /* skip color map */
 
   b      = *ptr1++;                     /* image separator */
-  if (b != ',') {
-/*  fprintf(stderr,"\nGIFinfo: no image separator, it will be found...\n"); */
-    while ((b = *ptr1++) != ',');       /* find image separator */
-    /* return 1; */
-  }
+  अगर (b != ',') अणु
+/*  ख_लिखो(मानक_त्रुटि,"\nGIFinfo: no image separator, it will be found...\n"); */
+    जबतक ((b = *ptr1++) != ',');       /* find image separator */
+    /* वापस 1; */
+  पूर्ण
 
   ptr1   += 2;                          /* left offset ... ignore */
   ptr1   += 2;                          /* top offset ... ignore */
@@ -136,8 +137,8 @@ int GIFinfo(GIFarr, Width, Height, Ncols)
   *Width  = b + 0x100*(*ptr1++);
   b       = *ptr1++;                    /* image height */
   *Height = b + 0x100*(*ptr1++);
-  return 0;
-}
+  वापस 0;
+पूर्ण
 
 /***************************************************************
  *                                                             *
@@ -145,7 +146,7 @@ int GIFinfo(GIFarr, Width, Height, Ncols)
  *                                                             *
  * Function: Decode image from GIF array                       *
  *                                                             *
- * Input: GIFarr[] - compressed image in GIF format            *
+ * Input: GIFarr[] - compressed image in GIF क्रमmat            *
  *                                                             *
  * Output: PIXarr[] - image (byte per pixel)                   *
  *         Width    - image width                              *
@@ -154,40 +155,40 @@ int GIFinfo(GIFarr, Width, Height, Ncols)
  *         R[]      - red components                           *
  *         G[]      - green components                         *
  *         B[]      - blue components                          *
- *         return   - 0 - if O.K.                              *
- *                    1 - if error                             *
+ *         वापस   - 0 - अगर O.K.                              *
+ *                    1 - अगर error                             *
  *                                                             *
  ***************************************************************/
-int GIFdecode(GIFarr, PIXarr, Width, Height, Ncols, R, G, B)
+पूर्णांक GIFdecode(GIFarr, PIXarr, Width, Height, Ncols, R, G, B)
         byte *GIFarr,*PIXarr,*R,*G,*B;
-         int *Width,*Height,*Ncols;
-{
+         पूर्णांक *Width,*Height,*Ncols;
+अणु
   byte          b,                      /* working variable */
-                FinChar;                /* final character */
+                FinChar;                /* final अक्षरacter */
 
-  int           i,                      /* working variable for loops */
+  पूर्णांक           i,                      /* working variable क्रम loops */
                 BitsPixel,              /* number of bits per pixel */
                 IniCodeSize,            /* initial number of bits per code */
                 ClearCode,              /* reset code */
-                EOFCode,                /* end of file code */
+                खातापूर्णCode,                /* end of file code */
                 FreeCode,               /* first unused entry */
                 CurCode,                /* current code */
                 InCode,                 /* input code */
                 OldCode,                /* previous code */
-                PixMask,                /* mask for pixel */
+                PixMask,                /* mask क्रम pixel */
                 OutCount;               /* output stack counter */
 
-  long          Npix;                   /* number of pixels */
+  दीर्घ          Npix;                   /* number of pixels */
 
   ptr1 = GIFarr;
   ptr2 = PIXarr;
 
   /*   R E A D   H E A D E R   */
-  if (strncmp((char *)GIFarr,"GIF87a",6) && strncmp((char *)GIFarr,"GIF89a",6))
-  {
-    fprintf(stderr,"\nGIFinfo: not a GIF\n");
-    return 1;
-  }
+  अगर (म_भेदन((अक्षर *)GIFarr,"GIF87a",6) && म_भेदन((अक्षर *)GIFarr,"GIF89a",6))
+  अणु
+    ख_लिखो(मानक_त्रुटि,"\nGIFinfo: not a GIF\n");
+    वापस 1;
+  पूर्ण
 
   ptr1 += 6;
 
@@ -197,31 +198,31 @@ int GIFdecode(GIFarr, PIXarr, Width, Height, Ncols, R, G, B)
   b         = *ptr1++;
   BitsPixel = (b & 7) + 1;              /* # of bits per pixel */
   *Ncols    = 1 << BitsPixel;
-  PixMask   = (*Ncols) - 1;             /* mask for pixel code */
-  if ((b & 0x80) == 0) {                /* is there color map? */
-    fprintf(stderr,"\nGIFdecode: warning! no color map\n");
+  PixMask   = (*Ncols) - 1;             /* mask क्रम pixel code */
+  अगर ((b & 0x80) == 0) अणु                /* is there color map? */
+    ख_लिखो(मानक_त्रुटि,"\nGIFdecode: warning! no color map\n");
     *Ncols = 0;
-  }
+  पूर्ण
 
   ++ptr1;                               /* background color ... ignore */
-  b      = *ptr1++;                     /* supposed to be NULL */
-  if (b) {
-    fprintf(stderr,"\nGIFdecode: bad screen descriptor\n");
-    return 1;
-  }
+  b      = *ptr1++;                     /* supposed to be शून्य */
+  अगर (b) अणु
+    ख_लिखो(मानक_त्रुटि,"\nGIFdecode: bad screen descriptor\n");
+    वापस 1;
+  पूर्ण
 
-  for (i=0; i<(*Ncols); i++) {          /* global color map */
+  क्रम (i=0; i<(*Ncols); i++) अणु          /* global color map */
     R[i] = *ptr1++;
     G[i] = *ptr1++;
     B[i] = *ptr1++;
-  }
+  पूर्ण
 
   b      = *ptr1++;                     /* image separator */
-  if (b != ',') {
-/*  fprintf(stderr,"\nGIFdecode: no image separator, it will be found...\n");*/
-    while ((b = *ptr1++) != ',');       /* find image separator */
-    /* return 1; */
-  }
+  अगर (b != ',') अणु
+/*  ख_लिखो(मानक_त्रुटि,"\nGIFdecode: no image separator, it will be found...\n");*/
+    जबतक ((b = *ptr1++) != ',');       /* find image separator */
+    /* वापस 1; */
+  पूर्ण
 
   ptr1   += 2;                          /* left offset ... ignore */
   ptr1   += 2;                          /* top offset ... ignore */
@@ -230,39 +231,39 @@ int GIFdecode(GIFarr, PIXarr, Width, Height, Ncols, R, G, B)
   b       = *ptr1++;                    /* image height */
   *Height = b + 0x100*(*ptr1++);
 
-  b       = *ptr1++;                    /* local colors, interlace */
-  if ((b & 0xc0) != 0) {
-    fprintf(stderr,
+  b       = *ptr1++;                    /* local colors, पूर्णांकerlace */
+  अगर ((b & 0xc0) != 0) अणु
+    ख_लिखो(मानक_त्रुटि,
             "\nGIFdecode: unexpected item (local colors or interlace)\n");
-    /* return 1; */
-  }
+    /* वापस 1; */
+  पूर्ण
 
   IniCodeSize = *ptr1++;
   CurCodeSize = ++IniCodeSize;
   CurMaxCode  = (1 << IniCodeSize);
   ClearCode   = (1 << (IniCodeSize - 1));
-  EOFCode     = ClearCode + 1;
+  खातापूर्णCode     = ClearCode + 1;
   FreeCode    = ClearCode + 2;
 
   /*   D E C O D E    I M A G E   */
 
-  Npix     =(long) (*Width) * (*Height);
+  Npix     =(दीर्घ) (*Width) * (*Height);
   OutCount = 0;
   CurBit   = -1;
   CurCode  = ReadCode();
-  while (Npix > 0) {
+  जबतक (Npix > 0) अणु
 
-    if (CurCode < 0) {
-      fprintf(stderr,"\nGIFdecode: corrupted GIF (zero block length)\n");
-      return 1;
-    }
+    अगर (CurCode < 0) अणु
+      ख_लिखो(मानक_त्रुटि,"\nGIFdecode: corrupted GIF (zero block length)\n");
+      वापस 1;
+    पूर्ण
 
-    if (CurCode == EOFCode) {
-      fprintf(stderr,"\nGIFdecode: corrupted GIF (unexpected EOF)\n");
-      return 1;
-    }
+    अगर (CurCode == खातापूर्णCode) अणु
+      ख_लिखो(मानक_त्रुटि,"\nGIFdecode: corrupted GIF (unexpected EOF)\n");
+      वापस 1;
+    पूर्ण
 
-    if (CurCode == ClearCode) {         /* clear code ... reset */
+    अगर (CurCode == ClearCode) अणु         /* clear code ... reset */
 
       CurCodeSize = IniCodeSize;
       CurMaxCode  = (1 << IniCodeSize);
@@ -272,43 +273,43 @@ int GIFdecode(GIFarr, PIXarr, Width, Height, Ncols, R, G, B)
       OutPixel(FinChar);
       Npix--;
 
-    } else {                            /* image code */
+    पूर्ण अन्यथा अणु                            /* image code */
 
       InCode = CurCode;
-      if (CurCode >= FreeCode) {
+      अगर (CurCode >= FreeCode) अणु
         CurCode = OldCode;
         OutCode[OutCount++] = FinChar;
-      }
-      while (CurCode > PixMask) {       /* build output pixel chain */
-        if (OutCount >= TSIZE) {
-          fprintf(stderr,"\nGIFdecode: corrupted GIF (big output count)\n");
-          return 1;
-        }
+      पूर्ण
+      जबतक (CurCode > PixMask) अणु       /* build output pixel chain */
+        अगर (OutCount >= TSIZE) अणु
+          ख_लिखो(मानक_त्रुटि,"\nGIFdecode: corrupted GIF (big output count)\n");
+          वापस 1;
+        पूर्ण
       OutCode[OutCount++] = Suffix[CurCode];
       CurCode = Prefix[CurCode];
-      }
+      पूर्ण
       FinChar = CurCode;
       OutCode[OutCount++] = FinChar;
 
-      for (i=OutCount-1; i>=0; i--) {   /* put out pixel chain */
+      क्रम (i=OutCount-1; i>=0; i--) अणु   /* put out pixel chain */
         OutPixel(OutCode[i]);
         Npix--;
-      }
+      पूर्ण
       OutCount = 0;
 
       Prefix[FreeCode] = OldCode;       /* build the tables */
       Suffix[FreeCode] = FinChar;
       OldCode = InCode;
 
-      FreeCode++;                       /* move pointer */
-      if (FreeCode >= CurMaxCode) {
-        if (CurCodeSize < BITS) {
+      FreeCode++;                       /* move poपूर्णांकer */
+      अगर (FreeCode >= CurMaxCode) अणु
+        अगर (CurCodeSize < BITS) अणु
           CurCodeSize++;
           CurMaxCode *= 2;
-        }
-      }
-    }
+        पूर्ण
+      पूर्ण
+    पूर्ण
     CurCode = ReadCode();
-  }
-  return 0;
-}
+  पूर्ण
+  वापस 0;
+पूर्ण

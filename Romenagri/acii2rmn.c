@@ -1,104 +1,105 @@
+<शैली गुरु>
 /*
 Copyright (C) 2003,2004,2005,2006 Abhishek Choudhary
 This file is part of the Romenagri Transliteration System.
 
-The Romenagri Transliteration System is free software; 
-you can redistribute it and/or modify it under the terms of the 
-GNU General Public License as published by the 
-Free Software Foundation; either version 2 of the License, or 
+The Romenagri Transliteration System is मुक्त software;
+you can redistribute it and/or modअगरy it under the terms of the
+GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
-The Romenagri Transliteration System is distributed in the hope 
-that it will be useful, but WITHOUT ANY WARRANTY; without 
-even the implied warranty of MERCHANTABILITY or FITNESS FOR 
-A PARTICULAR PURPOSE. See the GNU General Public License for 
+The Romenagri Transliteration System is distributed in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License क्रम
 more details.
 
 You should have received a copy of the GNU General Public
-License along with this file; see the file COPYING. If
-not, write to the Free Software Foundation,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+License aदीर्घ with this file; see the file COPYING. If
+not, ग_लिखो to the Free Software Foundation,
+51 Franklin Street, Fअगरth Floor, Boston, MA 02110-1301 USA
 */
 
 /*
-Modifications: (Please maintain reverse chronological order)
+Modअगरications: (Please मुख्यtain reverse chronological order)
 
-	dd-mmm-yyyy, Nature of modification,
-                        Name of modifier <alias>,
-			email adress of modifier
+	dd-mmm-yyyy, Nature of modअगरication,
+                        Name of modअगरier <alias>,
+			email adress of modअगरier
 
-	19-Jan-2006, Added the modifications section,
+	19-Jan-2006, Added the modअगरications section,
                         Abhishek Choudhary <hi_pedler>,
 			choudhary@indicybers.net
 
-End of modifications.
+End of modअगरications.
 */
 
-#include "acii2rmn.h"
+#समावेश "acii2rmn.h"
 
-char *
-acii2rmn (char *tok)
-{
-  char t1, t2, tpush[2];
-  int i, j, fnd;
+अक्षर *
+acii2rmn (अक्षर *tok)
+अणु
+  अक्षर t1, t2, tpush[2];
+  पूर्णांक i, j, fnd;
   stack_reset ();
-  for (i = 0; i < strlen (tok); i++)
-    {
+  क्रम (i = 0; i < म_माप (tok); i++)
+    अणु
       fnd = 0;
-      for (j = 0; j < 76; j++)
-	{
-	  if (tok[i] == *(acii_chrt[j][1]))
-	    {
-	      if (*acii_chrt[j][0] == '^' && stack_len () > 0)	/*matra */
-		{
+      क्रम (j = 0; j < 76; j++)
+	अणु
+	  अगर (tok[i] == *(acii_chrt[j][1]))
+	    अणु
+	      अगर (*acii_chrt[j][0] == '^' && stack_len () > 0)	/*matra */
+		अणु
 		  pop (1);
-		  if (*(acii_chrt[j][0] + 1) == 'z')
-		    {
+		  अगर (*(acii_chrt[j][0] + 1) == 'z')
+		    अणु
 		      t1 = *pop (1);
-		      if (t1 == 'h')
-			{
+		      अगर (t1 == 'h')
+			अणु
 			  t2 = *pop (1);
-			  if (t2 == 'd')
-			    push ((char *) "_rdha");
-			  else
-			    {
+			  अगर (t2 == 'd')
+			    push ((अक्षर *) "_rdha");
+			  अन्यथा
+			    अणु
 			      tpush[0] = t2;
 			      tpush[1] = '\0';
-			      push ((char *) tpush);
-			      push ((char *) "hza");
-			    }
-			}
-		      else
-			{
-			  if (t1 == 'd')
-			    push ((char *) "_rda");
-			  else
-			    {
+			      push ((अक्षर *) tpush);
+			      push ((अक्षर *) "hza");
+			    पूर्ण
+			पूर्ण
+		      अन्यथा
+			अणु
+			  अगर (t1 == 'd')
+			    push ((अक्षर *) "_rda");
+			  अन्यथा
+			    अणु
 			      tpush[0] = t1;
 			      tpush[1] = '\0';
-			      push ((char *) tpush);
-			      push ((char *) "za");
-			    }
-			}
-		    }
-		  else
-		    {
-		      push ((char *) (acii_chrt[j][0] + 1));
-		    }
-		}
-	      else
+			      push ((अक्षर *) tpush);
+			      push ((अक्षर *) "za");
+			    पूर्ण
+			पूर्ण
+		    पूर्ण
+		  अन्यथा
+		    अणु
+		      push ((अक्षर *) (acii_chrt[j][0] + 1));
+		    पूर्ण
+		पूर्ण
+	      अन्यथा
 		push (acii_chrt[j][0]);
 	      fnd = 1;
-	      break;
-	    }
-	}
-      if (fnd == 0 && tok[i - 1] != acii_chrt[0][1][0])
-	{
+	      अवरोध;
+	    पूर्ण
+	पूर्ण
+      अगर (fnd == 0 && tok[i - 1] != acii_chrt[0][1][0])
+	अणु
 	  tpush[0] = tok[i];
 	  tpush[1] = '\0';
 	  push (tpush);
-	}
-    }
-  strcpy (msg, pop (stack_len ()));
-  return msg;
-}
+	पूर्ण
+    पूर्ण
+  म_नकल (msg, pop (stack_len ()));
+  वापस msg;
+पूर्ण
